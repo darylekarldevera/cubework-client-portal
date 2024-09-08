@@ -1,4 +1,5 @@
 import NAVIGATION_ITEMS from "@/constants/navigationItem";
+import { Link } from "react-router-dom";
 
 function SidebarNavigation() {
   return (
@@ -13,7 +14,7 @@ function SidebarNavigation() {
       <div className="flex-grow-3 border-t-2 border-grey-500">
         {NAVIGATION_ITEMS.map((item, index) => (
           <div key={index} className="p-3 text-center cursor-pointer">
-            <p>{item}</p>
+            <Link to={item.path}>{item.name}</Link>
           </div>
         ))}
       </div>

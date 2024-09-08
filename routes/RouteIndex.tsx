@@ -14,6 +14,7 @@ import PrivateRoute from './PrivateRoute';
 import PaymentsRoute from './PaymentsRoute';
 import LeaseProfileRoute from './LeaseProfileRoute';
 import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
+import ServicesRoute from './ServicesRoute';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
 const isAuthenticated = true;
@@ -55,6 +56,7 @@ const router = createBrowserRouter(
           <Route path="/lease-profile/*" element={<LeaseProfileRoute />} />
           <Route path="/payments/*" element={<PaymentsRoute />} />
           <Route path="/lease-documents/*" element={<LeaseDocumentsRoutes />} />
+          <Route path="/services/*" element={<ServicesRoute />} />
         </Route>
       </Route>
 

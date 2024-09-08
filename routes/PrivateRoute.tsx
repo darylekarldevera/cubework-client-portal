@@ -1,4 +1,4 @@
-import { UNAUTHENTICATED_ROUTES } from '@/constant/restrictedRoute';
+import { UNAUTHENTICATED_ROUTES } from '@/constants/restrictedRoute';
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
 interface IPrivateRouteProps {

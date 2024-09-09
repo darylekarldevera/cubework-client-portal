@@ -32,7 +32,7 @@ function CWForm() {
         <label htmlFor="apply-promo">Apply promo balance: $100</label>
       </div>
 
-      <div className="flex flex-row gap-4 px-8">
+      <div className="flex flex-col md:flex-row gap-4 px-8">
         <div className="w-full">
           <div className="flex flex-col gap-4">
             <div>
@@ -62,7 +62,7 @@ function CWForm() {
             </div>
           </div>
         </div>
-        <div className="w-full bg-slate-300 p-4">
+        <div className="w-full bg-slate-100 p-4">
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
               <div>Summary</div>
@@ -89,7 +89,7 @@ function CWForm() {
 
 function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
   return (
-    <Card className="w-10/12">
+    <Card className="w-full">
       <CardContent className="p-2">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">

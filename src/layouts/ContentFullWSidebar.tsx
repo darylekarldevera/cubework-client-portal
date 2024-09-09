@@ -10,7 +10,7 @@ export default function ContentFullWidthWSidebar({ sidebar, content }: IContentF
   return (
     <div className="layout--full-width-w-sidebar flex flex-col md:flex-row h-[100%] overflow-hidden">
       <div className="w-full md:w-60">{sidebar ?? <SidebarNavigation />}</div>
-      <div className="flex-grow-0 md:flex-grow ">{content ?? 'Content Full Width w/ Sidebar'}</div>
+      <div className="px-8 flex-grow-0 md:flex-grow ">{content ?? 'Content Full Width w/ Sidebar'}</div>
     </div>
   );
 }

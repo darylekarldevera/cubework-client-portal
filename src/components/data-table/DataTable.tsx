@@ -33,6 +33,8 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
         canPreviousPage={table.getCanPreviousPage()}
         previousPage={table.previousPage}
         nextPage={table.nextPage}
+        paginationNumbers={table.getPageOptions()}
+        setPage={table.setPageIndex}
       />
     </div>
   );

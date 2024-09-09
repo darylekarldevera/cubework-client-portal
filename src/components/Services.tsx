@@ -38,8 +38,8 @@ function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
 }
 
 export default function Services() {
-  const servicesQ = servicesQuery(1, 5);
-  const myServicesQ = myServicesQuery(1, 5);
+  const servicesQ = servicesQuery('services', 1, 5);
+  const myServicesQ = servicesQuery('my_services', 1, 5);
 
   if (servicesQ.isFetched) {
     console.log(servicesQ.data);
@@ -48,6 +48,10 @@ export default function Services() {
   return (<>
     <Heading1 text="Services" />
     <Heading2 text="Cubework Services Offered" className="mb-4" />
+    {servicesQ.isFetching && (<>Loading...</>)}
+    {(servicesQ.isError || servicesQ.isLoadingError) && (
+      <div>Error fetching data</div>
+    )}
     {servicesQ.isFetched && servicesQ.data?.data?.map(i => (
       <div
         className="mb-0"
@@ -67,6 +71,10 @@ export default function Services() {
     ))}
 
     <Heading2 text="My Services" className="mb-4" />
+    {myServicesQ.isFetching && (<>Loading...</>)}
+    {(myServicesQ.isError || myServicesQ.isLoadingError) && (
+      <div>Error fetching data</div>
+    )}
     {myServicesQ.isFetched && myServicesQ.data?.data?.map(i => (
       <div
         className="mb-0"

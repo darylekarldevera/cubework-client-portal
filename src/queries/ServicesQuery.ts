@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 interface IItem {
   id: number,
@@ -13,31 +14,21 @@ interface IServices {
   }
 }
 
-function servicesQuery(page: number = 1, perPage: number = 5) {
+function servicesQuery(endpoint: string, page: number = 1, perPage: number = 5) {
   return useQuery<IServices>({
     queryKey: ['services', page, perPage],
     queryFn: async () => {
-      const resp = await fetch(`http://localhost:3000/services?_page=${page}&_per_page=${perPage}`);
-      const data = await resp.json();
+      const resp = await axios
+        .get(`http://localhost:3000/${endpoint}?_page=${page}&_per_page=${perPage}`)
+        .catch(error => {
+          console.log(error);
+          throw new Error('Network response was not ok');
+        });
 
-      return data;
+      return resp.data;
     }
   });
 }
 
-
-function myServicesQuery(page: number = 1, perPage: number = 5) {
-  return useQuery<IServices>({
-    queryKey: ['my-services', page, perPage],
-    queryFn: async () => {
-      const resp = await fetch(`http://localhost:3000/my_services?_page=${page}&_per_page=${perPage}`);
-      const data = await resp.json();
-
-      return data;
-    }
-  });
-}
-
-
-export { servicesQuery, myServicesQuery };
+export { servicesQuery };
 export type { IItem, IServices };

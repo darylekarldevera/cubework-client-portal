@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function SidebarNavigation() {
   return (
-    <div className="border-r-2 border-grey-500 flex flex-col w-[18%]">
+    <div className="border-2 border-grey-500 flex flex-col flex-grow h-[100%]">
       <div className="h-[25%] flex bg-cover bg-center object-contain bg-no-repeat bg-[url('https://placehold.co/600x400')]">
         <div className="bg-white/[.7] mt-auto mb-2 relative z-10 w-full h-[50%]">
           <p>Company Name</p>

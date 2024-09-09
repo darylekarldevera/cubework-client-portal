@@ -122,7 +122,7 @@ function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
     <Card className="w-full">
       <CardContent className="p-2">
         <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
+          <AccordionItem value="item-1" className="border-0">
               <div className="flex flex-row gap-4 items-center">
                 <div>
                   <img src={`https://picsum.photos/80/80?id=${id}`} />
@@ -133,8 +133,8 @@ function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
                   <p>${ formatCurrency(rate) }</p>
                 </div>
                 <div className="flex flex-row gap-4">
-                  <AccordionTrigger>
                   { actions }
+                  <AccordionTrigger>
                   </AccordionTrigger>
                 </div>
               </div>

@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { DatePicker } from "./DatePicker";
 
 
 interface ICardProps {
@@ -37,7 +38,7 @@ function CWForm() {
       <hr />
       <div className="px-8 py-4 flex flex-row items-center justify-end gap-1">
         <Checkbox id="apply-promo" />
-        <label htmlFor="apply-promo">Apply promo balance: $100</label>
+        <label htmlFor="apply-promo">Apply promo balance: $100.00</label>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 px-8">
@@ -45,7 +46,7 @@ function CWForm() {
           <div className="flex flex-col gap-4">
             <div>
               <img
-                src="https://freepngimg.com/thumb/credit_card/26016-3-major-credit-card-logo-clipart.png"
+                src="/26016-3-major-credit-card-logo-clipart.png"
                 width="200"
               />
             </div>
@@ -79,7 +80,7 @@ function CWForm() {
               <div>
                 <Select>
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Hours" />
+                    <SelectValue placeholder="Pick hour range" />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
                     <SelectItem value="2-3">2:00 PM - 3:00 PM</SelectItem>
@@ -88,14 +89,18 @@ function CWForm() {
                   </SelectContent>
                 </Select>
               </div>
-              <div><Input type="time" /></div>
+
+              <div><DatePicker /></div>
 
               <div>Summary</div>
               <div>8/21/2024<br />1 hour (2:00 PM)</div>
+
               <div>Promo Code</div>
-              <div>ABCD</div>
+              <div><Input type="text" /></div>
+
               <div>Amount</div>
               <div>$1000.00</div>
+
               <div>Total Amount</div>
               <div>$1200.00</div>
             </div>

@@ -2,11 +2,13 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
+import PaginationItemLink from './PaginationItemLink';
+import EllipsisIndicator from './EllipsisIndicator';
+import UsePaginationHook from '@/customHook/usePaginationHook';
 
 interface IDataTablePaginationControllersProps {
   canPreviousPage: boolean;
@@ -26,83 +28,69 @@ function DataTablePaginationControllers({
   setPage,
 }: IDataTablePaginationControllersProps) {
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [paginationOptions, setPaginationOptions] = useState<number[]>([]);
+  const [previousPageNumber, setPreviousPageNumber] = useState<number>(0);
 
-  const handlePageChange = (index: number) => {
-    setCurrentPage(index);
-    setPage(index);
+  const handlePageChange = useCallback((page: number) => {
+    setPage(page);
+    setPreviousPageNumber(currentPage);
+    setCurrentPage(page);
+  }, [currentPage, setPage]);
+  
+  const handleNextPage = () => {
+    nextPage();
+    setCurrentPage(currentPage + 1);
   };
+
+  const handlePreviousPage = () => {
+    previousPage();
+    setCurrentPage(currentPage - 1);
+  }
 
   const conditionalClassName = useCallback((value: number | boolean) => {
     return value ? 'pointer-events-none opacity-50' : 'cursor-pointer';
   }, []);
 
-  useEffect(() => {
-    const endPageNumber = currentPage + 4;
-    const maxStartPageNumber = paginationNumbers.length - 5;
-    const startPageNumber = maxStartPageNumber < currentPage ? maxStartPageNumber : currentPage;
-    const visiblePaginationNumbers = paginationNumbers?.slice(startPageNumber, endPageNumber);
-    setPaginationOptions(visiblePaginationNumbers);
-  }, [currentPage, paginationNumbers]);
-
-  useEffect(() => {
-
-  }, []);
+  const { paginationOptions } = UsePaginationHook({ currentPage, paginationNumbers, previousPageNumber });
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious
-            className={conditionalClassName(!canPreviousPage)}
-            onClick={() => {
-              previousPage();
-              setCurrentPage(currentPage - 1);
-            }}
-          />
+          <PaginationPrevious className={conditionalClassName(!canPreviousPage)} onClick={() => handlePreviousPage()} />
         </PaginationItem>
 
-        {paginationNumbers.length ? (
-          <PaginationItem>
-            <PaginationLink className={conditionalClassName(currentPage === 0)} onClick={() => handlePageChange(0)}>
-              1
-            </PaginationLink>
-          </PaginationItem>
-        ) : null}
+        <PaginationItemLink
+          key={0}
+          pageNumber={1}
+          onClick={() => handlePageChange(0)}
+          isVisible={paginationNumbers.length > 1}
+          className={conditionalClassName(currentPage === 0)}
+        />
 
-        {paginationOptions.map((number) => {
-          if (number === 0 || number === paginationNumbers.length - 1) return null;
-          return (
-            <PaginationItem key={number}>
-              <PaginationLink
-                className={conditionalClassName(currentPage === number)}
-                onClick={() => handlePageChange(number)}
-              >
-                {number + 1}
-              </PaginationLink>
-            </PaginationItem>
-          );
-        })}
+        <EllipsisIndicator isVisible={currentPage > 2} />
 
-        {paginationNumbers.length ? (
-          <PaginationItem>
-            <PaginationLink
-              className={conditionalClassName(currentPage === paginationNumbers.length - 1)}
-              onClick={() => handlePageChange(paginationNumbers.length - 1)}
-            >
-              {paginationNumbers.length}
-            </PaginationLink>
-          </PaginationItem>
-        ) : null}
+        {paginationOptions.map((number) => (
+          <PaginationItemLink
+            key={number}
+            pageNumber={number + 1}
+            isVisible={number !== 0 && number !== paginationNumbers.length - 1}
+            onClick={() => handlePageChange(number)}
+            className={conditionalClassName(currentPage === number)}
+          />
+        ))}
+
+        <EllipsisIndicator isVisible={currentPage < paginationNumbers.length - 5} />
+
+        <PaginationItemLink
+          key={paginationNumbers.length}
+          pageNumber={paginationNumbers.length}
+          onClick={() => handlePageChange(paginationNumbers.length - 1)}
+          isVisible={paginationNumbers.length > 1}
+          className={conditionalClassName(currentPage === paginationNumbers.length - 1)}
+        />
 
         <PaginationItem>
-          <PaginationNext
-            className={conditionalClassName(!canNextPage)}
-            onClick={() => {
-              nextPage();
-              setCurrentPage(currentPage + 1);
-            }}
-          />
+          <PaginationNext className={conditionalClassName(!canNextPage)} onClick={() => handleNextPage()} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

@@ -1,5 +1,5 @@
-import NAVIGATION_ITEMS from "@/constants/navigationItem";
 import { Link } from "react-router-dom";
+import NAVIGATION_ITEMS from "@/constants/navigationItem";
 
 function SidebarNavigation() {
   return (

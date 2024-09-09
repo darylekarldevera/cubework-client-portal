@@ -14,6 +14,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "./ui/label";
 import { Checkbox } from "./ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 
 interface ICardProps {
   id?: number,
@@ -65,8 +73,25 @@ function CWForm() {
         <div className="w-full bg-slate-100 p-4">
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
+              <div>Hours</div>
+              <div>Date</div>
+
+              <div>
+                <Select>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Hours" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="2-3">2:00 PM - 3:00 PM</SelectItem>
+                    <SelectItem value="3-4">3:00 PM - 4:00 PM</SelectItem>
+                    <SelectItem value="4-5">4:00 PM - 5:00 PM</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div><Input type="time" /></div>
+
               <div>Summary</div>
-              <div>lksjfdf</div>
+              <div>8/21/2024<br />1 hour (2:00 PM)</div>
               <div>Promo Code</div>
               <div>ABCD</div>
               <div>Amount</div>

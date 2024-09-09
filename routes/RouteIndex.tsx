@@ -1,20 +1,17 @@
-import { 
-  Navigate,
-  Route, 
-  createBrowserRouter, 
-  createRoutesFromElements 
-} from 'react-router-dom';
+import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import React from 'react';
 
 import MainLayout from '@/layouts/MainLayout';
 import DummyComponent from '@/components/DummyComponent';
 
-import PublicRoute  from './PublicRoute';
+import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import PaymentsRoute from './PaymentsRoute';
 import LeaseProfileRoute from './LeaseProfileRoute';
 import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
 import ServicesRoute from './ServicesRoute';
+
+import Home from '@/components/Home';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
 const isAuthenticated = true;
@@ -25,7 +22,7 @@ const isAuthenticated = true;
  *
  * Route Configuration:
  * - Public routes:
- *   - These are public routes wrapped in the 'PublicRoute' component, which handles logic for redirecting and 
+ *   - These are public routes wrapped in the 'PublicRoute' component, which handles logic for redirecting and
  *   preventing access if the user is authenticated.
  *
  * - Private routes:
@@ -52,7 +49,7 @@ const router = createBrowserRouter(
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<DummyComponent text="Home" />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/lease-profile/*" element={<LeaseProfileRoute />} />
           <Route path="/payments/*" element={<PaymentsRoute />} />
           <Route path="/lease-documents/*" element={<LeaseDocumentsRoutes />} />

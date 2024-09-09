@@ -1,4 +1,9 @@
-import { ColumnDef, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
+import { 
+  ColumnDef, 
+  getCoreRowModel, 
+  getPaginationRowModel, 
+  useReactTable 
+} from '@tanstack/react-table';
 import { Table } from '@/components/ui/table';
 import DataTableBody from './DataTableBody';
 import DataTableHeader from './DataTableHeader';
@@ -7,9 +12,23 @@ import DataTablePaginationControllers from './DataTablePaginationControllers';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  pageSize?: number;
 }
 
-function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+/**
+ * Renders a data table component and displays data with pagination controllers.
+ *
+ * @template TData - The type of data in the table.
+ * @template TValue - The type of values in the table.
+ *
+ * @param {ColumnDef<TData, TValue>[]} columns - The column definitions for the table.
+ * @param {TData[]} data - The data to be displayed in the table.
+ * @param {number} [pageSize=5] - The number of rows to display per page.
+ *
+ * @returns {JSX.Element} - The rendered data table component.
+ */
+
+function DataTable<TData, TValue>({ columns, data, pageSize = 5 }: DataTableProps<TData, TValue>): JSX.Element {
   const table = useReactTable({
     data,
     columns,
@@ -17,7 +36,7 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
     getCoreRowModel: getCoreRowModel(),
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize,
       },
     },
   });

@@ -5,8 +5,9 @@ import IHomeActivityTable from '@/types/homeActivityTable';
 import DataTable from './data-table/DataTable';
 import HomePaymentDue from './HomePaymentDue';
 
+// placeholder for fetching data
 const getData = async (): Promise<IHomeActivityTable[]> => {
-  const data = [...Array(10).fill(HOME_ACTIVITY_TABLE_MOCK)].flat();
+  const data = [...Array(50).fill(HOME_ACTIVITY_TABLE_MOCK)].flat();
   const newData = data.map((item, index) => {
     return {
       ...item,

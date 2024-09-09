@@ -52,15 +52,18 @@ function CWForm() {
             </div>
             <div><strong>Add card details</strong></div>
             <div>
+              {/* TODO: Add validation */}
               <Label htmlFor="card-number">Card number</Label>
-              <Input name="card-number" type="text" />
+              <Input name="card-number" type="text" pattern="\d{3}" />
             </div>
             <div>
+              {/* TODO: Add validation */}
               <Label htmlFor="card-holder-name">Card Holder Name</Label>
               <Input name="card-holder-name" type="text" />
             </div>
             <div className="flex flex-row gap-4">
               <div>
+                {/* TODO: Add validation */}
                 <Label htmlFor="expiry-date">Expiry date</Label>
                 <Input name="expiry-date" type="text" />
               </div>

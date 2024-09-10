@@ -4,7 +4,7 @@ import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumn
 import IHomeActivityTable from '@/types/homeActivityTable';
 
 import DataTable from './data-table/DataTable';
-import { Heading1 } from './ui/headings';
+import { Heading2 } from './ui/headings';
 import PaymentBalanceCard from './PaymentBalanceCard';
 import WrappedContent from './WrappedContent';
 
@@ -36,13 +36,16 @@ function Home() {
   }, []);
 
   return (
-    <WrappedContent>
-      <Heading1 text="Home" />
+    <WrappedContent className="pb-[5%]">
+      <Heading2 text="Home" className='' />
       <PaymentBalanceCard />
+      <div className="border-b-2 border-solid border-[#59BA56] w-[100%] relative home-activity-bar mb-2 mt-6">
+        <p className="text-sm text-[#59BA56] mb-2 w-[15%] text-center">Activity</p>
+      </div>
       <DataTable 
-        columns={HOME_ACTIVITY_TABLE_COLUMNS} 
-        data={activityTableData} 
         pageSize={5} 
+        data={activityTableData} 
+        columns={HOME_ACTIVITY_TABLE_COLUMNS} 
       />
     </WrappedContent>
   );

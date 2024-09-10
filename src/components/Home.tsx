@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { HOME_ACTIVITY_TABLE_MOCK } from '@/__mocks__/homeActivityTableMock';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
 import IHomeActivityTable from '@/types/homeActivityTable';
+
 import DataTable from './data-table/DataTable';
+import { Heading1 } from './ui/headings';
 import HomePaymentDue from './HomePaymentDue';
+import WrappedContent from './WrappedContent';
 
 // placeholder for fetching data
 const getData = async (): Promise<IHomeActivityTable[]> => {
@@ -33,13 +36,11 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex-grow h-[100%] flex justify-center overflow-y-auto">
-      <div className="flex flex-col  justify-around ">
-        <p>Home</p>
-        <HomePaymentDue />
-        <DataTable columns={HOME_ACTIVITY_TABLE_COLUMNS} data={activityTableData} />
-      </div>
-    </div>
+    <WrappedContent>
+      <Heading1 text="Home" />
+      <HomePaymentDue />
+      <DataTable columns={HOME_ACTIVITY_TABLE_COLUMNS} data={activityTableData} pageSize={5} />
+    </WrappedContent>
   );
 }
 

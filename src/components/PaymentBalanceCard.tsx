@@ -1,6 +1,6 @@
-import manageAutoPayIcon from '@/assets/icons/manage-auto-pay-icon.svg';
+import manageAutoPayIcon from '@/assets/icons/manage-auto-pay.svg';
 
-function HomePaymentDue() {
+function PaymentBalanceCard() {
   return (
     <div
       className="xxs:h-[20%] md:h-[20%] bg-gradient-to-r from-[#4EB951] to-[#FFFFFF] m-auto flex flex-col w-full justify-center items-start rounded-t-[2vh] rounded-b-[4vh]"
@@ -23,4 +23,4 @@ function HomePaymentDue() {
   );
 }
 
-export default HomePaymentDue;
+export default PaymentBalanceCard;

@@ -5,7 +5,7 @@ import IHomeActivityTable from '@/types/homeActivityTable';
 
 import DataTable from './data-table/DataTable';
 import { Heading1 } from './ui/headings';
-import HomePaymentDue from './HomePaymentDue';
+import PaymentBalanceCard from './PaymentBalanceCard';
 import WrappedContent from './WrappedContent';
 
 // placeholder for fetching data
@@ -38,8 +38,12 @@ function Home() {
   return (
     <WrappedContent>
       <Heading1 text="Home" />
-      <HomePaymentDue />
-      <DataTable columns={HOME_ACTIVITY_TABLE_COLUMNS} data={activityTableData} pageSize={5} />
+      <PaymentBalanceCard />
+      <DataTable 
+        columns={HOME_ACTIVITY_TABLE_COLUMNS} 
+        data={activityTableData} 
+        pageSize={5} 
+      />
     </WrappedContent>
   );
 }

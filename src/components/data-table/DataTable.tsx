@@ -1,3 +1,5 @@
+import './DataTable.css';
+
 import { 
   ColumnDef, 
   getCoreRowModel, 
@@ -13,6 +15,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pageSize?: number;
+  cwStyle?: boolean;
 }
 
 /**
@@ -28,7 +31,7 @@ interface DataTableProps<TData, TValue> {
  * @returns {JSX.Element} - The rendered data table component.
  */
 
-function DataTable<TData, TValue>({ columns, data, pageSize = 5 }: DataTableProps<TData, TValue>): JSX.Element {
+function DataTable<TData, TValue>({ columns, data, pageSize = 5, cwStyle = false }: DataTableProps<TData, TValue>): JSX.Element {
   const table = useReactTable({
     data,
     columns,
@@ -42,19 +45,22 @@ function DataTable<TData, TValue>({ columns, data, pageSize = 5 }: DataTableProp
   });
 
   return (
-    <div className="rounded-md border">
+    <div className={cwStyle ? `cw-table-wrapper` : ''} >
       <Table>
         <DataTableHeader table={table} />
         <DataTableBody table={table} columnsLength={columns.length} />
       </Table>
-      <DataTablePaginationControllers
-        canNextPage={table.getCanNextPage()}
-        canPreviousPage={table.getCanPreviousPage()}
-        previousPage={table.previousPage}
-        nextPage={table.nextPage}
-        paginationNumbers={table.getPageOptions()}
-        setPage={table.setPageIndex}
-      />
+      <div className={ cwStyle ? `py-6` : '' }>
+        <DataTablePaginationControllers
+          cwStyle={cwStyle}
+          canNextPage={table.getCanNextPage()}
+          canPreviousPage={table.getCanPreviousPage()}
+          previousPage={table.previousPage}
+          nextPage={table.nextPage}
+          paginationNumbers={table.getPageOptions()}
+          setPage={table.setPageIndex}
+        />
+      </div>
     </div>
   );
 }

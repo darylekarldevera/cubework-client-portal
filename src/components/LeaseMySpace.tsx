@@ -37,11 +37,8 @@ export default function LeaseMySpace() {
   const q = leaseQuery<ILeaseMySpaceItems>('lease_profile', 1, 50);
 
   if (q.isSuccess) {
-    console.log(q.data?.data);
     data = q?.data?.data;
   }
-
-  console.log(q.data?.data);
 
   return (<>
     <WrappedContent className="pb-[5%]">
@@ -62,11 +59,20 @@ export default function LeaseMySpace() {
         },
       ]} />
 
-      <DataTable
-        columns={ACTIVITY_TABLE_COLUMNS}
-        data={data}
-        cwStyle={true}
-      />
+      {q.isFetching && (<>Loading...</>)}
+
+      {(q.isError || q.isLoadingError) && (
+        <div>Error fetching data</div>
+      )}
+
+      {q.isSuccess &&  (
+        <DataTable
+          columns={ACTIVITY_TABLE_COLUMNS}
+          data={data}
+          cwStyle={true}
+        />
+      )}
+
     </WrappedContent>
   </>);
 }

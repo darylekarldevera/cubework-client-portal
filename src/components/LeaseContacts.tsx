@@ -38,11 +38,8 @@ export default function LeaseContacts() {
   const q = leaseQuery<ILeaseItems>('lease', 1, 50);
 
   if (q.isSuccess) {
-    console.log(q.data?.data);
     data = q?.data?.data;
   }
-
-  console.log(q.data?.data);
 
   return (<>
     <WrappedContent className="pb-[5%]">
@@ -63,11 +60,19 @@ export default function LeaseContacts() {
         },
       ]} />
 
-      <DataTable
-        columns={ACTIVITY_TABLE_COLUMNS}
-        data={data}
-        cwStyle={true}
-      />
+      {q.isFetching && (<>Loading...</>)}
+
+      {(q.isError || q.isLoadingError) && (
+        <div>Error fetching data</div>
+      )}
+
+      {q.isSuccess &&  (
+        <DataTable
+          columns={ACTIVITY_TABLE_COLUMNS}
+          data={data}
+          cwStyle={true}
+        />
+      )}
     </WrappedContent>
   </>);
 }

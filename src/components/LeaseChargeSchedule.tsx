@@ -41,7 +41,6 @@ export default function LeaseChargeSchedule() {
   const q = leaseQuery<ILeaseChargeScheduleItems>('lease_charge_schedule', 1, 50);
 
   if (q.isSuccess) {
-    console.log(q.data?.data);
     data = q?.data?.data.map(i => {
       return {
         ...i,
@@ -50,8 +49,6 @@ export default function LeaseChargeSchedule() {
       }
     });
   }
-
-  console.log(q.data?.data);
 
   return (<>
     <WrappedContent className="pb-[5%]">
@@ -72,11 +69,20 @@ export default function LeaseChargeSchedule() {
         },
       ]} />
 
-      <DataTable
-        columns={ACTIVITY_TABLE_COLUMNS}
-        data={data}
-        cwStyle={true}
-      />
+      {q.isFetching && (<>Loading...</>)}
+
+      {(q.isError || q.isLoadingError) && (
+        <div>Error fetching data</div>
+      )}
+
+      {q.isSuccess &&  (
+        <DataTable
+          columns={ACTIVITY_TABLE_COLUMNS}
+          data={data}
+          cwStyle={true}
+        />
+      )}
+
     </WrappedContent>
   </>);
 }

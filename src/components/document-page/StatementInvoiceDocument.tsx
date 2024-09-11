@@ -34,7 +34,7 @@ function StatementInvoiceDocument() {
       });
   }, []);
 
-  return <DocumentListTable data={data} />;
+  return <DocumentListTable data={data} fileType="PDF" documentType="Statement/Invoice" />;
 }
 
 export default StatementInvoiceDocument;

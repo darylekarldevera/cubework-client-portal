@@ -7,9 +7,11 @@ import DocumentList from './DocumentList';
 
 interface IDocumentListTableTableProps {
   data: IDocument[];
+  fileType: string;
+  documentType: string;
 }
 
-function DocumentListTable({ data }: IDocumentListTableTableProps): JSX.Element {
+function DocumentListTable({ data, fileType, documentType }: IDocumentListTableTableProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const { paginationNumbers, canNextPage, canPreviousPage } = useDataListPagination({ data, currentPage });
 
@@ -28,6 +30,8 @@ function DocumentListTable({ data }: IDocumentListTableTableProps): JSX.Element 
         <DocumentList
           data={data}
           currentPage={currentPage}
+          fileType={fileType}
+          documentType={documentType}
         />
       </div>
 

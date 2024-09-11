@@ -7,9 +7,11 @@ interface IDocumentDetailsCardProps {
   key: number | string;
   isVisible: boolean;
   item: IDocument;
+  fileType: string;
+  documentType: string;
 }
 
-function DocumentDetailsCard({ isVisible, key, item }: IDocumentDetailsCardProps): JSX.Element | null {
+function DocumentDetailsCard({ isVisible, key, item, fileType, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
   const formatDate = (date: Date) => {
     return moment(date.toString()).add(10, 'days').calendar();
   };
@@ -40,7 +42,7 @@ function DocumentDetailsCard({ isVisible, key, item }: IDocumentDetailsCardProps
     <div key={key} className="flex items-center justify-between p-2">
       <div className="flex flex-col mx-1">
         <p className="text-[#59BA56]">{item.file.filename}</p>
-        <p>PDF • {formatDate(item.date)} • Statement/Invoice</p>
+        <p>{fileType} • {formatDate(item.date)} • {documentType}</p>
       </div>
       <img 
         alt="download_icon" 

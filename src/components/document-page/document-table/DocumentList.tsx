@@ -5,9 +5,11 @@ import { IDocument } from '@/types/invoiceDocuments';
 interface IDocumentListTableProps {
   data: IDocument[];
   currentPage: number;
+  fileType: string;
+  documentType: string;
 }
 
-function DocumentList({ data, currentPage }: IDocumentListTableProps): JSX.Element {
+function DocumentList({ data, currentPage, fileType, documentType }: IDocumentListTableProps): JSX.Element {
   const VISIBLE_DATA = 5;
   const dataStartIndex = currentPage * VISIBLE_DATA;
   const dataEndIndex = dataStartIndex + VISIBLE_DATA;
@@ -19,6 +21,8 @@ function DocumentList({ data, currentPage }: IDocumentListTableProps): JSX.Eleme
           key={item.id}
           item={item}
           isVisible={index < dataStartIndex || index > dataEndIndex}
+          fileType={fileType}
+          documentType={documentType}
         />
       ))}
     </React.Fragment>

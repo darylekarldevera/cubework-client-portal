@@ -42,7 +42,7 @@ function DataTable<TData, TValue>({ columns, data, pageSize = 5 }: DataTableProp
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border relative flex flex-col">
       <Table>
         <DataTableHeader table={table} />
         <DataTableBody table={table} columnsLength={columns.length} />

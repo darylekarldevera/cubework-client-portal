@@ -5,6 +5,7 @@ import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseItem, ILeaseItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
+import WrappedContent from "./WrappedContent";
 
 
 interface ILeastTable {
@@ -44,27 +45,29 @@ export default function LeaseContacts() {
   console.log(q.data?.data);
 
   return (<>
-    <Heading1 text="Lease" className="mb-6" />
+    <WrappedContent className="pb-[5%]">
+      <Heading1 text="Lease" className="mb-6" />
 
-    <Tabs links={[
-      {
-        label: 'Contacts',
-        path: '/lease-profile/contacts',
-      },
-      {
-        label: 'My Space(s)',
-        path: '/lease-profile/my-space',
-      },
-      {
-        label: 'Charge Schedule',
-        path: '/lease-profile/charge-schedule',
-      },
-    ]} />
+      <Tabs links={[
+        {
+          label: 'Contacts',
+          path: '/lease-profile/contacts',
+        },
+        {
+          label: 'My Space(s)',
+          path: '/lease-profile/my-space',
+        },
+        {
+          label: 'Charge Schedule',
+          path: '/lease-profile/charge-schedule',
+        },
+      ]} />
 
-    <DataTable
-      columns={ACTIVITY_TABLE_COLUMNS}
-      data={data}
-      cwStyle={true}
-    />
+      <DataTable
+        columns={ACTIVITY_TABLE_COLUMNS}
+        data={data}
+        cwStyle={true}
+      />
+    </WrappedContent>
   </>);
 }

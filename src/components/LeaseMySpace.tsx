@@ -31,7 +31,7 @@ const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
 ];
 
 
-export default function Lease() {
+export default function LeaseMySpace() {
   let data: ILeaseItem[] = [];
 
   const q = leaseQuery('lease', 1, 50);
@@ -44,8 +44,23 @@ export default function Lease() {
   console.log(q.data?.data);
 
   return (<>
-    <Heading1 text="Lease" className="mb-6" />
-    <Tabs />
+    <Heading1 text="Lease My Space" className="mb-6" />
+
+    <Tabs links={[
+      {
+        label: 'Contacts',
+        path: '/lease-profile/contacts',
+      },
+      {
+        label: 'My Space(s)',
+        path: '/lease-profile/my-space',
+      },
+      {
+        label: 'Charge Schedule',
+        path: '/lease-profile/charge-schedule',
+      },
+    ]} />
+
     <DataTable
       columns={ACTIVITY_TABLE_COLUMNS}
       data={data}

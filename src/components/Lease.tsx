@@ -4,6 +4,7 @@ import DataTable from "./data-table/DataTable";
 import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseItem, leaseQuery } from "@/queries/LeaseQuery";
+import Tabs from "./Tabs";
 
 
 interface ILeastTable {
@@ -44,6 +45,7 @@ export default function Lease() {
 
   return (<>
     <Heading1 text="Lease" className="mb-6" />
+    <Tabs />
     <DataTable
       columns={ACTIVITY_TABLE_COLUMNS}
       data={data}

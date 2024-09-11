@@ -161,7 +161,6 @@ export default function Services() {
   }
 
   return (<>
-    <WrappedContent className="pb-[5%]">
       <Heading1 text="Services" />
 
       <Heading2 text="Cubework Services Offered" className="mb-4" />
@@ -219,6 +218,5 @@ export default function Services() {
         </div>
       ))}
 
-    </WrappedContent>
   </>)
 }

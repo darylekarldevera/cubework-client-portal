@@ -35,20 +35,19 @@ function Home() {
       });
   }, []);
 
-  return (
-    <WrappedContent className="pb-[5%]">
-      <Heading2 text="Home" className='' />
-      <PaymentBalanceCard />
-      <div className="border-b-2 border-solid border-[#59BA56] w-[100%] relative home-activity-bar mb-2 mt-6">
-        <p className="text-sm text-[#59BA56] mb-2 w-[15%] text-center">Activity</p>
-      </div>
-      <DataTable 
-        pageSize={5} 
-        data={activityTableData} 
-        columns={HOME_ACTIVITY_TABLE_COLUMNS} 
-      />
-    </WrappedContent>
-  );
+  return (<>
+    <Heading2 text="Home" className='' />
+    <PaymentBalanceCard />
+    <div className="border-b-2 border-solid border-[#59BA56] w-[100%] relative home-activity-bar mb-2 mt-6">
+      <p className="text-sm text-[#59BA56] mb-2 w-[15%] text-center">Activity</p>
+    </div>
+    <DataTable 
+      pageSize={5} 
+      data={activityTableData} 
+      columns={HOME_ACTIVITY_TABLE_COLUMNS} 
+      cwStyle={true}
+    />
+  </>);
 }
 
 export default Home;

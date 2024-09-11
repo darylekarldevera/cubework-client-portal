@@ -3,38 +3,37 @@ import DataTable from "./data-table/DataTable";
 
 import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
-import { ILeaseItem, leaseQuery } from "@/queries/LeaseQuery";
+import { ILeaseItem, ILeaseMySpaceItem, ILeaseMySpaceItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
 
 
 interface ILeastTable {
   id: number,
-  first_name: string,
-  last_name: string,
-  phone: string,
-  email: string,
+  start_date: string,
+  end_date: string,
+  move_in_date: string,
 }
 
 const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
   {
-    header: 'Name',
-    accessorKey: 'first_name',
+    header: 'Start Date',
+    accessorKey: 'start_date',
   },
   {
-    header: 'Billing Phone Number',
-    accessorKey: 'phone',
+    header: 'End Date',
+    accessorKey: 'end_date',
   },
   {
-    header: 'Email',
-    accessorKey: 'email',
+    header: 'Move in Date',
+    accessorKey: 'move_in_date',
   },
 ];
 
 
 export default function LeaseMySpace() {
-  let data: ILeaseItem[] = [];
+  let data: ILeaseMySpaceItem[] = [];
 
-  const q = leaseQuery('lease', 1, 50);
+  const q = leaseQuery<ILeaseMySpaceItems>('lease_profile', 1, 50);
 
   if (q.isSuccess) {
     console.log(q.data?.data);

@@ -15,7 +15,7 @@ interface ILeaseItems {
   data: ILeaseItem[],
 }
 
-interface ILeaseMySpace {
+interface ILeaseMySpaceItem {
   id: number,
   start_date: string,
   end_date: string,
@@ -23,10 +23,10 @@ interface ILeaseMySpace {
 }
 
 interface ILeaseMySpaceItems {
-  data: ILeaseMySpace[],
+  data: ILeaseMySpaceItem[],
 }
 
-interface ILeaseChargeSchedule {
+interface ILeaseChargeScheduleItem {
   id: number,
   description: string,
   period: string,
@@ -36,11 +36,11 @@ interface ILeaseChargeSchedule {
 }
 
 interface ILeaseChargeScheduleItems {
-  data: ILeaseChargeSchedule[];
+  data: ILeaseChargeScheduleItem[];
 }
 
-function leaseQuery(endpoint: string, page: number = 1, perPage: number = 5) {
-  return useQuery<ILeaseItems>({
+function leaseQuery<T extends ILeaseItems | ILeaseMySpaceItems | ILeaseChargeScheduleItems>(endpoint: string, page: number = 1, perPage: number = 5) {
+  return useQuery<T>({
     queryKey: [endpoint, page, perPage],
     queryFn: async () => {
       const resp = await axios
@@ -55,37 +55,12 @@ function leaseQuery(endpoint: string, page: number = 1, perPage: number = 5) {
   });
 }
 
-function leaseMySpaceQuery(endpoint: string, page: number = 1, perPage: number = 5) {
-  return useQuery<ILeaseItems>({
-    queryKey: [endpoint, page, perPage],
-    queryFn: async () => {
-      const resp = await axios
-        .get(`${API_SOURCE}/${endpoint}?_page=${page}&_per_page=${perPage}`)
-        .catch(error => {
-          console.log(error);
-          throw new Error('Network response was not ok');
-        });
-
-      return resp.data;
-    }
-  });
-}
-
-function leaseChargeScheduleQuery(endpoint: string, page: number = 1, perPage: number = 5) {
-  return useQuery<ILeaseItems>({
-    queryKey: [endpoint, page, perPage],
-    queryFn: async () => {
-      const resp = await axios
-        .get(`${API_SOURCE}/${endpoint}?_page=${page}&_per_page=${perPage}`)
-        .catch(error => {
-          console.log(error);
-          throw new Error('Network response was not ok');
-        });
-
-      return resp.data;
-    }
-  });
-}
-
-export { leaseQuery, leaseMySpaceQuery, leaseChargeScheduleQuery };
-export type { ILeaseItem, ILeaseItems, ILeaseMySpaceItems, ILeaseChargeScheduleItems, };
+export { leaseQuery, };
+export type {
+  ILeaseItem,
+  ILeaseItems,
+  ILeaseMySpaceItem,
+  ILeaseMySpaceItems,
+  ILeaseChargeScheduleItem,
+  ILeaseChargeScheduleItems,
+};

@@ -3,7 +3,7 @@ import DataTable from "./data-table/DataTable";
 
 import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
-import { ILeaseItem, leaseQuery } from "@/queries/LeaseQuery";
+import { ILeaseItem, ILeaseItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
 
 
@@ -34,7 +34,7 @@ const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
 export default function LeaseContacts() {
   let data: ILeaseItem[] = [];
 
-  const q = leaseQuery('lease', 1, 50);
+  const q = leaseQuery<ILeaseItems>('lease', 1, 50);
 
   if (q.isSuccess) {
     console.log(q.data?.data);

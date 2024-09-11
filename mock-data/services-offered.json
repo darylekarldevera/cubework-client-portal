@@ -12107,7 +12107,7 @@
       "move_in_date": "8/1/2024"
     }
   ],
-  "charge_schedule": [
+  "lease_charge_schedule": [
     {
       "id": 1,
       "description": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",

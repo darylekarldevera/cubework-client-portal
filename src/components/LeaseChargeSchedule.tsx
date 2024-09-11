@@ -3,42 +3,51 @@ import DataTable from "./data-table/DataTable";
 
 import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
-import { ILeaseItem, leaseQuery } from "@/queries/LeaseQuery";
+import { ILeaseChargeScheduleItem, ILeaseChargeScheduleItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
 
 
 interface ILeastTable {
-  id: number,
-  first_name: string,
-  last_name: string,
-  phone: string,
-  email: string,
+  description: string,
+  period: string,
+  billing_frequency: string,
+  units: string,
 }
 
 const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
   {
-    header: 'Name',
-    accessorKey: 'first_name',
+    header: 'Description',
+    accessorKey: 'description',
   },
   {
-    header: 'Billing Phone Number',
-    accessorKey: 'phone',
+    header: 'Period',
+    accessorKey: 'period',
   },
   {
-    header: 'Email',
-    accessorKey: 'email',
+    header: 'Billing Frequency',
+    accessorKey: 'billing_frequency',
+  },
+  {
+    header: 'Units',
+    accessorKey: 'units',
   },
 ];
 
 
 export default function LeaseChargeSchedule() {
-  let data: ILeaseItem[] = [];
+  let data: ILeaseChargeScheduleItem[] = [];
 
-  const q = leaseQuery('lease', 1, 50);
+  const q = leaseQuery<ILeaseChargeScheduleItems>('lease_charge_schedule', 1, 50);
 
   if (q.isSuccess) {
     console.log(q.data?.data);
-    data = q?.data?.data;
+    data = q?.data?.data.map(i => {
+      return {
+        ...i,
+        description: i.description.split('.')[0],
+        units: i.units.toUpperCase(),
+      }
+    });
   }
 
   console.log(q.data?.data);

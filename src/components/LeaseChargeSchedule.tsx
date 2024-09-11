@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseChargeScheduleItem, ILeaseChargeScheduleItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
 import WrappedContent from "./WrappedContent";
+import { LEASE_TABS } from "@/constants/tabs";
 
 
 interface ILeastTable {
@@ -54,20 +55,7 @@ export default function LeaseChargeSchedule() {
     <WrappedContent className="pb-[5%]">
       <Heading1 text="Lease" className="mb-6" />
 
-      <Tabs links={[
-        {
-          label: 'Contacts',
-          path: '/lease-profile/contacts',
-        },
-        {
-          label: 'My Space(s)',
-          path: '/lease-profile/my-space',
-        },
-        {
-          label: 'Charge Schedule',
-          path: '/lease-profile/charge-schedule',
-        },
-      ]} />
+      <Tabs links={LEASE_TABS} />
 
       {q.isFetching && (<>Loading...</>)}
 

@@ -38,6 +38,7 @@ function DocumentListTable({ data }: IDocumentListTableTableProps): JSX.Element 
         nextPage={() => handleChangePage(currentPage + 1)}
         paginationNumbers={paginationNumbers}
         setPage={() => handleChangePage(currentPage)}
+        cwStyle={false}
       />
     </div>
   );

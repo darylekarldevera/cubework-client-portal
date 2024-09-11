@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DatePicker } from "./DatePicker";
+import WrappedContent from "./WrappedContent";
 
 
 interface ICardProps {
@@ -155,61 +156,69 @@ export default function Services() {
   const servicesQ = servicesQuery('services', 1, 5);
   const myServicesQ = servicesQuery('my_services', 1, 5);
 
-  if (servicesQ.isFetched) {
+  if (servicesQ.isSuccess) {
     console.log(servicesQ.data);
   }
 
   return (<>
-    <Heading1 text="Services" />
+    <WrappedContent className="pb-[5%]">
+      <Heading1 text="Services" />
 
-    <Heading2 text="Cubework Services Offered" className="mb-4" />
-    {servicesQ.isFetching && (<>Loading...</>)}
-    {(servicesQ.isError || servicesQ.isLoadingError) && (
-      <div>Error fetching data</div>
-    )}
-    {servicesQ.isFetched && servicesQ.data?.data?.map(i => (
-      <div
-        className="mb-0"
-        key={ i.id }
-      >
-        <CWCard
-          id={ i.id }
-          serviceName={ i.service_name }
-          description={ i.description }
-          rate={ i.rate }
-          actions={
-            <Button variant="outline">Checkout</Button>
-          }
-        />
+      <Heading2 text="Cubework Services Offered" className="mb-4" />
 
-      </div>
-    ))}
+      {servicesQ.isFetching && (<>Loading...</>)}
 
-    <Heading2 text="My Services" className="mb-4" />
-    {myServicesQ.isFetching && (<>Loading...</>)}
-    {(myServicesQ.isError || myServicesQ.isLoadingError) && (
-      <div>Error fetching data</div>
-    )}
-    {myServicesQ.isFetched && myServicesQ.data?.data?.map(i => (
-      <div
-        className="mb-0"
-        key={ i.id }
-      >
-        <CWCard
-          id={ i.id }
-          serviceName={ i.service_name }
-          description={ i.description }
-          rate={ i.rate }
-          actions={<>
-            <Button variant="outline">Checkout</Button>
-            <Button
-              variant="outline"
-              onClick={() => alert(i.id + ':' + i.service_name)}
-            >Reschedule</Button>
-          </>}
-        />
+      {(servicesQ.isError || servicesQ.isLoadingError) && (
+        <div>Error fetching data</div>
+      )}
 
-      </div>
-    ))}
+      {servicesQ.isSuccess && servicesQ.data?.data?.map(i => (
+        <div
+          className="mb-0"
+          key={ i.id }
+        >
+          <CWCard
+            id={ i.id }
+            serviceName={ i.service_name }
+            description={ i.description }
+            rate={ i.rate }
+            actions={
+              <Button variant="outline">Checkout</Button>
+            }
+          />
+
+        </div>
+      ))}
+
+      <Heading2 text="My Services" className="mb-4" />
+
+      {myServicesQ.isFetching && (<>Loading...</>)}
+
+      {(myServicesQ.isError || myServicesQ.isLoadingError) && (
+        <div>Error fetching data</div>
+      )}
+
+      {myServicesQ.isSuccess && myServicesQ.data?.data?.map(i => (
+        <div
+          className="mb-0"
+          key={ i.id }
+        >
+          <CWCard
+            id={ i.id }
+            serviceName={ i.service_name }
+            description={ i.description }
+            rate={ i.rate }
+            actions={<>
+              <Button variant="outline">Checkout</Button>
+              <Button
+                variant="outline"
+                onClick={() => alert(i.id + ':' + i.service_name)}
+              >Reschedule</Button>
+            </>}
+          />
+        </div>
+      ))}
+
+    </WrappedContent>
   </>)
 }

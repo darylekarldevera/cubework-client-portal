@@ -20,20 +20,13 @@ function DocumentListTable({ data, fileType, documentType }: IDocumentListTableT
   };
 
   return (
-    <div>
-      <div
-        className="flex flex-col overflow-auto rounded-t-[2vh] rounded-b-[4vh] p-5"
-        style={{
-          boxShadow: '0px 4px 12px 0px #00000040',
-        }}
-      >
-        <DocumentList
-          data={data}
-          currentPage={currentPage}
-          fileType={fileType}
-          documentType={documentType}
-        />
-      </div>
+    <div
+      className="flex flex-col overflow-auto rounded-t-[2vh] rounded-b-[4vh] p-5 max-h-[100%]"
+      style={{
+        boxShadow: '0px 4px 12px 0px #00000040',
+      }}
+    >
+      <DocumentList data={data} currentPage={currentPage} fileType={fileType} documentType={documentType} />
 
       <DataTablePaginationControllers
         canNextPage={canNextPage}
@@ -42,7 +35,7 @@ function DocumentListTable({ data, fileType, documentType }: IDocumentListTableT
         nextPage={() => handleChangePage(currentPage + 1)}
         paginationNumbers={paginationNumbers}
         setPage={() => handleChangePage(currentPage)}
-        cwStyle={false}
+        cwStyle={true}
       />
     </div>
   );

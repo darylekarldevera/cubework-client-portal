@@ -12,3 +12,14 @@ export const LEASE_TABS = [
     path: '/lease-profile/charge-schedule',
   },
 ];
+
+export const LEASE_DOCUMENTS_TABS = [
+  {
+    label: 'Statement/Invoices',
+    path: '/lease-documents/invoice',
+  },
+  {
+    label: 'Lease Documents',
+    path: '/lease-documents/overview',
+  },
+];

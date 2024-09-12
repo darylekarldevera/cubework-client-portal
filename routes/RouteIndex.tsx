@@ -12,6 +12,7 @@ import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
 import ServicesRoute from './ServicesRoute';
 
 import Home from '@/components/Home';
+import Login from '@/components/Login';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
 const isAuthenticated = true;
@@ -39,8 +40,8 @@ const router = createBrowserRouter(
     <React.Fragment>
       {/* Public Routes */}
       <Route path="/" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<DummyComponent text="Login" />} />
-        <Route path="/login" element={<DummyComponent text="Login" />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<DummyComponent text="Forgot Password" />} />
         <Route path="/reset-password" element={<DummyComponent text="Reset Password" />} />
       </Route>

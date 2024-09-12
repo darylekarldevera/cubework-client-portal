@@ -4,9 +4,8 @@ import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumn
 import IHomeActivityTable from '@/types/homeActivityTable';
 
 import DataTable from './data-table/DataTable';
-import { Heading2 } from './ui/headings';
+import { Heading1 } from './ui/headings';
 import PaymentBalanceCard from './PaymentBalanceCard';
-import WrappedContent from './WrappedContent';
 
 // placeholder for fetching data
 const getData = async (): Promise<IHomeActivityTable[]> => {
@@ -36,8 +35,10 @@ function Home() {
   }, []);
 
   return (<>
-    <Heading2 text="Home" className='' />
+    <Heading1 text="Home" />
+
     <PaymentBalanceCard />
+
     <div className="border-b-2 border-solid border-[#59BA56] w-[100%] relative home-activity-bar mb-2 mt-6">
       <p className="text-sm text-[#59BA56] mb-2 w-[15%] text-center">Activity</p>
     </div>

@@ -52,7 +52,7 @@ export default function LeaseChargeSchedule() {
   }
 
   return (<>
-    <Heading1 text="Lease" className="mb-6" />
+    <Heading1 text="Lease" />
 
     <Tabs links={LEASE_TABS} />
 

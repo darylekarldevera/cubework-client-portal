@@ -18,7 +18,7 @@ export default function ContentFullWidthWSidebar({ sidebar, content }: IContentF
       <div className="w-sidebar xxs:hidden md:block">
         {sidebar ?? <SidebarNavigation />}
       </div>
-      <div className="x--h-[100%]">
+      <div>
         <WrappedContent className="py-8">
           {content}
         </WrappedContent>

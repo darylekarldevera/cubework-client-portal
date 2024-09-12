@@ -21,7 +21,7 @@ function DocumentListTable({ data, fileType, documentType }: IDocumentListTableT
 
   return (
     <div
-      className="flex flex-col overflow-auto rounded-t-[2vh] rounded-b-[4vh] p-5 max-h-[100%]"
+      className="flex flex-col overflow-auto rounded-t-[2vh] rounded-b-[4vh] p-5 max-h-full"
       style={{
         boxShadow: '0px 4px 12px 0px #00000040',
       }}

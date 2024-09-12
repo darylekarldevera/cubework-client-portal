@@ -7,7 +7,11 @@
 
 .cw-table-wrapper [role=navigation] {
   li a {
-    @apply border border-slate-600 rounded-xl;
+    @apply border border-slate-600 rounded-xl w-8 h-8;
+  }
+
+  li a.page-prev, li a.page-next {
+    @apply w-auto;
   }
 
   li a.active {

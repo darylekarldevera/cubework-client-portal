@@ -7,6 +7,7 @@ import { ILeaseChargeScheduleItem, ILeaseChargeScheduleItems, leaseQuery } from 
 import Tabs from "./Tabs";
 import WrappedContent from "./WrappedContent";
 import { LEASE_TABS } from "@/constants/tabs";
+import CWCard from "./CWCard";
 
 
 interface ILeastTable {
@@ -63,11 +64,13 @@ export default function LeaseChargeSchedule() {
     )}
 
     {q.isSuccess &&  (
-      <DataTable
-        columns={ACTIVITY_TABLE_COLUMNS}
-        data={data}
-        cwStyle={true}
-      />
+      <CWCard>
+        <DataTable
+          columns={ACTIVITY_TABLE_COLUMNS}
+          data={data}
+          cwStyle={true}
+        />
+      </CWCard>
     )}
   </>);
 }

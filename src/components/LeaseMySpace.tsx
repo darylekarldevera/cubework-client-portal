@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseMySpaceItem, ILeaseMySpaceItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
 import { LEASE_TABS } from "@/constants/tabs";
+import CWCard from "./CWCard";
 
 
 interface ILeastTable {
@@ -52,11 +53,13 @@ export default function LeaseMySpace() {
     )}
 
     {q.isSuccess &&  (
-      <DataTable
-        columns={ACTIVITY_TABLE_COLUMNS}
-        data={data}
-        cwStyle={true}
-      />
+      <CWCard>
+        <DataTable
+          columns={ACTIVITY_TABLE_COLUMNS}
+          data={data}
+          cwStyle={true}
+        />
+      </CWCard>
     )}
   </>);
 }

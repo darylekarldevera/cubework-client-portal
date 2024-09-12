@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import ContentFullWidthWSidebar from './ContentFullWSidebar';
 
 function MainLayout() {
-  return (<div className="main grid h-full">
+  return (<div className="main grid">
     <section>
       <Header />
     </section>

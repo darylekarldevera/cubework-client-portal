@@ -11,7 +11,9 @@ function Documents() {
     <WrappedContent>
       <Heading1 text="Documents" />
       <Tabs links={LEASE_DOCUMENTS_TABS} />
-      <Outlet />
+      <div className='h-[100%] flex flex-col justify-center'>
+        <Outlet />
+      </div>
     </WrappedContent>
   );
 }

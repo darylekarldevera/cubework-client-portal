@@ -34,3 +34,15 @@
         @apply absolute left-2 bottom-3 bg-red-500 w-[14px] h-[14px] rounded-full text-[10px] text-white flex justify-center items-center;
     }
 }
+
+:root {
+    --radius: 16px;
+}
+
+.home-activity-bar::after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid black;
+    width: 85%;
+    right: 0;
+}

@@ -15,7 +15,7 @@ export default function Tabs({ links, className = '' }: ITabsProps) {
   const location = useLocation();
 
   return (
-    <div className={`flex flex-row gap-6 border-b border-b-green-600 ${className}`}>
+    <div className={`flex flex-row gap-6 border-b border-b-green-600 mb-2 ${className}`}>
       {links.map((i) => (
         <div key={i.path}>
           <Link

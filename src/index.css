@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --radius: 24px;
+  --radius: 16px;
 }
 
 .home-activity-bar::after {

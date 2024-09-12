@@ -5,7 +5,8 @@
     }
 }
 
-.cw-table-wrapper [role=navigation] {
+.cw-table-wrapper [role=navigation],
+.cw-style {
   li a {
     @apply border border-slate-600 rounded-xl w-8 h-8;
   }

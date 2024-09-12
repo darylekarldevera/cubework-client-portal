@@ -46,3 +46,7 @@
     width: 85%;
     right: 0;
 }
+
+body {
+    font-family: Inter, serif;
+}

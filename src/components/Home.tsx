@@ -39,8 +39,8 @@ function Home() {
 
     <PaymentBalanceCard />
 
-    <div className="border-b-2 border-solid border-[#59BA56] w-[100%] relative home-activity-bar mb-2 mt-6">
-      <p className="text-sm text-[#59BA56] mb-2 w-[15%] text-center">Activity</p>
+    <div className="border-b-2 border-solid border-cw-green w-[100%] relative home-activity-bar mb-2 mt-6">
+      <p className="text-sm text-cw-green mb-2 w-[15%] text-center">Activity</p>
     </div>
     <DataTable 
       pageSize={5} 

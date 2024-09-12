@@ -15,6 +15,6 @@
   }
 
   li a.active {
-    @apply bg-[#59BA56] opacity-100 text-white border-0;
+    @apply bg-cw-green opacity-100 text-white border-0;
   }
 }

@@ -11,9 +11,9 @@ function PaymentBalanceCard() {
           <p>Balance</p>
           <p className="text-2xl">$ 8000.88</p>
         </div>
-        <button className="w-[142px] h-[44px] bg-[#59BA56] font-bold text-white rounded-3xl text-sm`">Pay Now</button>
+        <button className="w-[142px] h-[44px] bg-cw-green font-bold text-white rounded-3xl text-sm`">Pay Now</button>
       </div>
-      <div className="bg-white text-[#59BA56] font-bold flex text-xs flex-grow w-full items-center py-2 px-7">
+      <div className="bg-white text-cw-green font-bold flex text-xs flex-grow w-full items-center py-4 px-7">
         <div className="flex cursor-pointer">
           <img alt="manage_auto_pay" src={manageAutoPayIcon} width="18px" className="mr-1" />
           <p>

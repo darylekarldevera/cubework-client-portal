@@ -9,10 +9,17 @@ interface IContentFullWidthWSidebarProps {
 
 export default function ContentFullWidthWSidebar({ sidebar, content }: IContentFullWidthWSidebarProps) {
   return (
-    <div className="layout--full-width-w-sidebar flex flex-col md:flex-row h-[100%] overflow-hidden">
-      <div className="w-sidebar">{sidebar ?? <SidebarNavigation />}</div>
-      <div className="flex-grow-0 md:flex-grow h-[100%]">
-        <WrappedContent className="pb-[5%]">
+    <div
+      className="layout--full-width-w-sidebar grid grid-cols-2 overflow-hidden"
+      style={{
+        gridTemplateColumns: '240px 1fr',
+      }}
+    >
+      <div className="w-sidebar xxs:hidden md:block">
+        {sidebar ?? <SidebarNavigation />}
+      </div>
+      <div className="x--h-[100%]">
+        <WrappedContent className="py-8">
           {content}
         </WrappedContent>
       </div>

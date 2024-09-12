@@ -8,7 +8,7 @@ function SidebarNavigation() {
   const { pathname } = useLocation();
 
   return (
-    <div className="xxs:hidden md:flex border-r border-grey-500 flex-col w-full h-full">
+    <div className="border-r border-grey-500 flex-col w-full h-full">
       <div
         className={`h-logoHeight flex bg-cover bg-center object-contain bg-no-repeat`}
         style={{ 'backgroundImage': `url(${DEFAULT_IMAGE})` }}

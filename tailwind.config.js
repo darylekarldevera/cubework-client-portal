@@ -81,6 +81,13 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      spacing: {
+        sidebar: '256px',
+        logoHeight: '220px',
+      },
+      colors: {
+        'cw-green': '#59BA56',
+      }
     },
   },
   plugins: [require('tailwindcss-animate')],

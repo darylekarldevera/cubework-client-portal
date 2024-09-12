@@ -3,11 +3,11 @@ import Header from '@/components/Header';
 import ContentFullWidthWSidebar from './ContentFullWSidebar';
 
 function MainLayout() {
-  return (<div className="main flex flex-col h-full">
-    <section className="h-12">
+  return (<div className="main grid">
+    <section>
       <Header />
     </section>
-    <section className="flex-grow">
+    <section>
       <ContentFullWidthWSidebar content={
         <Outlet />
       } />

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --radius: 16px;
+}
+
 .home-activity-bar::after {
   content: '';
   position: absolute;

@@ -5,8 +5,8 @@ import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseMySpaceItem, ILeaseMySpaceItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
-import WrappedContent from "./WrappedContent";
 import { LEASE_TABS } from "@/constants/tabs";
+import CWCard from "./CWCard";
 
 
 interface ILeastTable {
@@ -42,25 +42,24 @@ export default function LeaseMySpace() {
   }
 
   return (<>
-    <WrappedContent className="pb-[5%]">
-      <Heading1 text="Lease" className="mb-6" />
+    <Heading1 text="Lease" />
 
-      <Tabs links={LEASE_TABS} />
+    <Tabs links={LEASE_TABS} />
 
-      {q.isFetching && (<>Loading...</>)}
+    {q.isFetching && (<>Loading...</>)}
 
-      {(q.isError || q.isLoadingError) && (
-        <div>Error fetching data</div>
-      )}
+    {(q.isError || q.isLoadingError) && (
+      <div>Error fetching data</div>
+    )}
 
-      {q.isSuccess &&  (
+    {q.isSuccess &&  (
+      <CWCard>
         <DataTable
           columns={ACTIVITY_TABLE_COLUMNS}
           data={data}
           cwStyle={true}
         />
-      )}
-
-    </WrappedContent>
+      </CWCard>
+    )}
   </>);
 }

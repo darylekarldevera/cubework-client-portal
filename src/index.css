@@ -2,14 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    /*.sample-template {*/
+    /*    @apply
+    /*}*/
+    .element-viewer {
+        @apply border border-red-500;
+    }
+
+    .header {
+        @apply flex flex-row px-4 items-center h-[70px];
+    }
+
+    .notif-icon-wrapper {
+        @apply relative;
+    }
+
+    .notif-icon {
+        @apply w-[16px] h-[20px];
+    }
+
+    .profile-wrapper {
+        @apply flex flex-row;
+    }
+
+    .arrow-down-wrapper {
+        @apply px-[10px] py-[12px];
+    }
+
+    .badge-component {
+        @apply absolute left-2 bottom-3 bg-red-500 w-[14px] h-[14px] rounded-full text-[10px] text-white flex justify-center items-center;
+    }
+}
+
 :root {
-  --radius: 16px;
+    --radius: 16px;
 }
 
 .home-activity-bar::after {
-  content: '';
-  position: absolute;
-  border-bottom: 2px solid black;
-  width: 85%;
-  right: 0;
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid black;
+    width: 85%;
+    right: 0;
 }

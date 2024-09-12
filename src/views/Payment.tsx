@@ -3,9 +3,9 @@ import { Tabs, TabsContent } from '@/components/ui/tabs';
 import TabsButtonWrapper from '@/components/shared/TabsButtonWrapper.tsx';
 import TabsButton from '@/components/shared/TabsButton.tsx';
 import Account from '@/views/payments/Account.tsx';
-import MakePaymentDashboard from '@/views/payments/MakePaymentDashboard.tsx';
+import MakePaymentTable from '@/views/payments/MakePaymentTable.tsx';
 
-type PaymentProps = {};
+type PaymentProps = object;
 
 const Payment = ({}: PaymentProps) => {
   return (
@@ -18,7 +18,8 @@ const Payment = ({}: PaymentProps) => {
           <TabsButton link="account">Accounts/Verify Bank</TabsButton>
         </TabsButtonWrapper>
         <TabsContent value="make-payment">
-          <MakePaymentDashboard />
+          {/*<MakePaymentDashboard />*/}
+          <MakePaymentTable />
         </TabsContent>
         <TabsContent value="auto-pay"></TabsContent>
         <TabsContent value="account">

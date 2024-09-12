@@ -13,16 +13,17 @@ type SelectProps = {
 };
 
 const Select = ({ placeholder, items }: SelectProps) => {
+  placeholder = items && items[0];
   return (
     <ShadCNSelect>
-      <SelectTrigger className="w-[204px] rounded-[6px]">
+      <SelectTrigger className="w-[178px] h-[30px] text-[11px] leading-relaxed rounded-[6px] border border-[#717171] text-[#717171]">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className=" rounded-[6px]">
+      <SelectContent className=" bg-white rounded-[6px]">
         <SelectGroup>
           {items &&
             items.map((item) => (
-              <SelectItem className="" value={item.toLowerCase()}>
+              <SelectItem className="text-xs text-[#717171]" value={item.toLowerCase()}>
                 {item}
               </SelectItem>
             ))}

@@ -6,7 +6,10 @@ type InputProps = {
 
 const Input = ({ value }: InputProps) => {
   return (
-    <ShadCNInput className="h-[36px] w-full bg-white border border-[#717171] text-black rounded-[6px]" value={value} />
+    <ShadCNInput
+      className="h-[30px] text-[11px] leading-relaxed w-full bg-white border border-[#717171] text-black rounded-[6px]"
+      value={value}
+    />
   );
 };
 

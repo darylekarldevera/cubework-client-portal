@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
-import { HOME_ACTIVITY_TABLE_MOCK } from '@/__mocks__/homeActivityTableMock';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
 import IHomeActivityTable from '@/types/homeActivityTable';
 import DataTable from './data-table/DataTable';
 import HomePaymentDue from './HomePaymentDue';
-
+import { HOME_ACTIVITY_TABLE_MOCK } from '@/__mocks__/homeActivityTableMock.ts';
+import { useEffect, useState } from 'react';
 // placeholder for fetching data
 const getData = async (): Promise<IHomeActivityTable[]> => {
   const data = [...Array(50).fill(HOME_ACTIVITY_TABLE_MOCK)].flat();
@@ -34,7 +33,7 @@ function Home() {
 
   return (
     <div className="flex-grow h-[100%] flex justify-center overflow-y-auto">
-      <div className="flex flex-col  justify-around ">
+      <div className="flex flex-col justify-around ">
         <p>Home</p>
         <HomePaymentDue />
         <DataTable columns={HOME_ACTIVITY_TABLE_COLUMNS} data={activityTableData} />

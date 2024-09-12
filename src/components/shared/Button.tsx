@@ -33,8 +33,8 @@ const Button = ({ children, variant = 'primary' }: ButtonProps) => {
         : darkObject.primary;
   return (
     <ShadCNButton
-      className={`text-[16px] leading-6 font-bold rounded-[32px] px-[37px] ${darkHover}
-       ${color} ${variant === 'secondary' ? 'border-2 border-black text-black' : ''}`}
+      className={`text-[12px] leading-relaxed  font-bold rounded-[32px]   h-[35px] ${darkHover}
+       ${color} ${variant === 'secondary' ? 'border border-[#717171] text-[#717171]' : 'text-white'} ${children === 'Setup Auto Pay' ? ' w-[120px]' : 'px-[37px] w-[100px]'}`}
     >
       {children}
     </ShadCNButton>

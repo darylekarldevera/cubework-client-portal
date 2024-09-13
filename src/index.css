@@ -37,6 +37,18 @@
     }
 }
 
+:root {
+    --radius: 16px;
+}
+
+.home-activity-bar::after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid black;
+    width: 85%;
+    right: 0;
+}
+
 body {
     font-family: Inter, serif;
 }

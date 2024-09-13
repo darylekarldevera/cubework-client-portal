@@ -1,12 +1,12 @@
 import Label from '@/components/shared/Label.tsx';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { Tabs, TabsContent } from '@/components/ui/tabs.tsx';
 import TabsButtonWrapper from '@/components/shared/TabsButtonWrapper.tsx';
 import TabsButton from '@/components/shared/TabsButton.tsx';
 import Account from '@/views/payments/Account.tsx';
-import MakePaymentDashboard from '@/views/payments/MakePaymentDashboard.tsx';
 import AutoPaySetup from '@/views/payments/AutoPaySetup.tsx';
+import MakePaymentTable from '@/views/payments/MakePaymentTable.tsx';
 
-type PaymentProps = {};
+type PaymentProps = object;
 
 const Payment = ({}: PaymentProps) => {
   return (
@@ -19,7 +19,8 @@ const Payment = ({}: PaymentProps) => {
           <TabsButton link="account">Accounts/Verify Bank</TabsButton>
         </TabsButtonWrapper>
         <TabsContent value="make-payment">
-          <MakePaymentDashboard />
+          {/*<MakePaymentDashboard />*/}
+          <MakePaymentTable />
         </TabsContent>
         <TabsContent value="auto-pay">
           <AutoPaySetup />

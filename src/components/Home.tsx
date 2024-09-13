@@ -1,9 +1,13 @@
+import { useEffect, useState } from 'react';
+import { HOME_ACTIVITY_TABLE_MOCK } from '@/__mocks__/homeActivityTableMock';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
 import IHomeActivityTable from '@/types/homeActivityTable';
+
 import DataTable from './data-table/DataTable';
-import HomePaymentDue from './HomePaymentDue';
-import { HOME_ACTIVITY_TABLE_MOCK } from '@/__mocks__/homeActivityTableMock.ts';
-import { useEffect, useState } from 'react';
+import { Heading1 } from './ui/headings';
+import PaymentBalanceCard from './PaymentBalanceCard';
+import CWCard from './CWCard';
+
 // placeholder for fetching data
 const getData = async (): Promise<IHomeActivityTable[]> => {
   const data = [...Array(50).fill(HOME_ACTIVITY_TABLE_MOCK)].flat();
@@ -32,12 +36,23 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex-grow h-[100%] flex justify-center overflow-y-auto">
-      <div className="flex flex-col justify-around ">
-        <p>Home</p>
-        <HomePaymentDue />
-        <DataTable columns={HOME_ACTIVITY_TABLE_COLUMNS} data={activityTableData} />
+    <div className='pb-[3%]'>
+      <Heading1 text="Home" />
+
+      <PaymentBalanceCard />
+
+      <div className="border-b-2 border-solid border-cw-green w-[100%] relative home-activity-bar mb-2 mt-6">
+        <p className="text-sm text-cw-green mb-2 w-[15%] text-center">Activity</p>
       </div>
+
+      <CWCard>
+        <DataTable 
+          pageSize={5} 
+          data={activityTableData} 
+          columns={HOME_ACTIVITY_TABLE_COLUMNS} 
+          cwStyle={true} 
+        />
+      </CWCard>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import TabsButtonWrapper from '@/components/shared/TabsButtonWrapper.tsx';
 import TabsButton from '@/components/shared/TabsButton.tsx';
 import Account from '@/views/payments/Account.tsx';
 import MakePaymentDashboard from '@/views/payments/MakePaymentDashboard.tsx';
+import AutoPaySetup from '@/views/payments/AutoPaySetup.tsx';
 
 type PaymentProps = {};
 
@@ -20,7 +21,9 @@ const Payment = ({}: PaymentProps) => {
         <TabsContent value="make-payment">
           <MakePaymentDashboard />
         </TabsContent>
-        <TabsContent value="auto-pay"></TabsContent>
+        <TabsContent value="auto-pay">
+          <AutoPaySetup />
+        </TabsContent>
         <TabsContent value="account">
           <Account />
         </TabsContent>

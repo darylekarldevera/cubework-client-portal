@@ -1,40 +1,87 @@
 import { faker } from '@faker-js/faker';
-import { useEffect, useState } from 'react';
+import { Buffer } from 'buffer';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { INVOICE_DOCUMENT } from '@/__mocks__/invoiceDocumentMock';
-import DocumentListTable from './document-table/DocumentListTable';
 import { IDocument } from '@/types/invoiceDocuments';
+import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
+
+import DocumentListTable from './document-table/DocumentListTable';
+import TableUtilities from './document-table/table-utilities/TableUtilities';
 
 const getData = async (): Promise<IDocument[]> => {
-  const data = [...Array(15).fill(INVOICE_DOCUMENT)].flat();
-  const newData = data.map((file, index) => {
+  const data = [...Array(10)].map((file, index) => {
+    const filenames = [faker.system.commonFileName('pdf'), faker.system.commonFileName('csv')];
+    const randomIndex = Math.floor(Math.random() * filenames.length);
+    const filename = filenames[randomIndex];
+    const mimetype = filename.includes("pdf") ? 'application/pdf' : 'text/csv';
+
     return {
       ...file,
       id: index + 1,
       date: faker.date.anytime(),
       file: {
-        ...file,
-        filename: faker.system.fileName(),
+        buffer: Buffer.from(faker.system.filePath()),
+        mimetype: mimetype,
+        originalname: faker.system.fileName(),
+        size: Buffer.byteLength(faker.system.filePath()),
+        filename: filename,
+        destination: faker.system.directoryPath(),
+        fieldname: '',
+        encoding: '',
+        path: faker.system.filePath(),
       },
     };
   });
-  return newData;
+
+  return data;
 };
 
 function StatementInvoiceDocument() {
-  const [data, setData] = useState<IDocument[]>([]);
+  const [originalData, setOriginalData] = useState<IDocument[]>([]);
+  const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
+  const [utility, setUtility] = useState<DocumentTableUtility<IDocument>>(new DocumentTableUtility([]));
+
+  const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
+    return items.filter((item) => {
+      return item.file.filename.toLowerCase().includes(searchData.toLowerCase());
+    });
+  }, []);
 
   useEffect(() => {
     getData()
       .then((data) => {
-        setData(data);
+        const updatedData = new DocumentTableUtility(data).sortData();
+        
+        setDocumentsData(() => updatedData);
+        setOriginalData(() => updatedData);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  return <DocumentListTable data={data} fileType="PDF" documentType="Statement/Invoice" />;
+  useEffect(() => {
+    setUtility(
+      () => new DocumentTableUtility(documentsData)
+    );
+  }, [originalData])
+
+  return (
+    <React.Fragment>
+      <TableUtilities 
+        data={documentsData}
+        originalData={originalData}
+        setData={setDocumentsData}
+        filterCb={filterCb}
+        utilityInstance={utility}
+      />
+      <DocumentListTable 
+        data={documentsData} 
+        fileType="PDF" 
+        documentType="Statement/Invoice" 
+      />
+    </React.Fragment>
+  );
 }
 
 export default StatementInvoiceDocument;

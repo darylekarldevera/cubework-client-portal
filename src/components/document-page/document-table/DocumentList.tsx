@@ -1,6 +1,7 @@
 import React from 'react';
-import DocumentDetailsCard from './DocumentDetailsCard';
 import { IDocument } from '@/types/invoiceDocuments';
+import DocumentDetailsCard from './DocumentDetailsCard';
+import DocumentListNoRecords from './DocumentListNoRecords';
 
 interface IDocumentListTableProps {
   data: IDocument[];
@@ -16,15 +17,21 @@ function DocumentList({ data, currentPage, fileType, documentType }: IDocumentLi
 
   return (
     <React.Fragment>
-      {data.map((item, index) => (
-        <DocumentDetailsCard
-          key={item.id}
-          item={item}
-          isVisible={index < dataStartIndex || index > dataEndIndex}
-          fileType={fileType}
-          documentType={documentType}
-        />
-      ))}
+      {data.length ? (
+        <div className="h-full">
+          {data.map((item, index) => (
+            <DocumentDetailsCard
+              key={item.id}
+              item={item}
+              isVisible={index < dataStartIndex || index > dataEndIndex}
+              fileType={fileType}
+              documentType={documentType}
+            />
+          ))}
+        </div>
+      ) : (
+        <DocumentListNoRecords />
+      )}
     </React.Fragment>
   );
 }

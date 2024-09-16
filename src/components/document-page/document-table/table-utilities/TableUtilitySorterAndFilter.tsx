@@ -7,6 +7,7 @@ import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants/documentsUtilityOption
 
 import { IDocument } from '@/types/invoiceDocuments';
 import TableUtility from '@/lib/documentDataSorterAndFilter';
+
 interface TableUtilitySorterAndFilterProps {
   data: IDocument[];
   originalData: IDocument[];
@@ -14,13 +15,16 @@ interface TableUtilitySorterAndFilterProps {
   setDocumentsData: React.Dispatch<React.SetStateAction<IDocument[]>>;
 }
 
-function DocumentListTableUtility({ originalData, openUtility, setDocumentsData }: TableUtilitySorterAndFilterProps) {
+function TableUtilitySorterAndFilter({
+  originalData,
+  openUtility,
+  setDocumentsData,
+}: TableUtilitySorterAndFilterProps) {
   const [options, setOptions] = useState<string[]>([]);
   const [checkBox, setCheckBox] = useState<ICheckbox>({
     sort: 'date',
     filter: 'all',
   });
-
 
   useEffect(() => {
     if (openUtility === 'sort') {
@@ -77,4 +81,4 @@ function DocumentListTableUtility({ originalData, openUtility, setDocumentsData 
   );
 }
 
-export default DocumentListTableUtility;
+export default TableUtilitySorterAndFilter;

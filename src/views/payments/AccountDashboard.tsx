@@ -1,5 +1,5 @@
 import { Label as ShadCNLabel } from '@/components/ui/label.tsx';
-import { Card, CardContent } from '@/components/ui/card.tsx';
+import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 import TableHeader from '@/components/shared/TableHeader';
 import Button from '@/components/shared/Button.tsx';
 import TableItem from '@/components/shared/TableItem.tsx';
@@ -31,8 +31,16 @@ const AutoPaySetup = () => {
               </div>
             </div>
             <CardContent className="h-full flex flex-row px-[10px] py-[15px] w-full">
-              <div className="w-full ">
-                <TableItem>There are no accounts on file. Select ‘+ Add Bank Account’ to get started. </TableItem>
+              <div className="w-full flex items-center">
+                <div className="w-full  ">
+                  <TableItem>Test</TableItem>
+                </div>
+                <div className="w-full  ">
+                  <TableItem>Checking-****1234</TableItem>
+                </div>
+                <div className="w-full  ">
+                  <Button variant="destructive">Verify Now</Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -63,9 +71,9 @@ const AutoPaySetup = () => {
         </div>
         <div className="mt-[15px] w-1/3">
           <Card className="w-full rounded-[16px]">
-            <div className="py-4 h-[10px] px-[10px] flex flex-row items-center justify-between border-b ">
+            <CardHeader className="h-[15px] border-b border-[#ECECEC] flex justify-center pl-[10px] items-start">
               <TableHeader>How to verify a new bank account</TableHeader>
-            </div>
+            </CardHeader>
             <CardContent className="pt-[10px]">
               <TableItem>
                 <p>1. Add new Bank Account </p>

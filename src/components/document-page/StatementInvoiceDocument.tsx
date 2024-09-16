@@ -3,7 +3,7 @@ import { Buffer } from 'buffer';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
-import TableUtility from '@/lib/documentDataSorterAndFilter';
+import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
@@ -39,6 +39,7 @@ const getData = async (): Promise<IDocument[]> => {
 function StatementInvoiceDocument() {
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
   const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
+  const [utility, setUtility] = useState<DocumentTableUtility<IDocument>>(new DocumentTableUtility([]));
 
   const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
     return items.filter((item) => {
@@ -49,12 +50,7 @@ function StatementInvoiceDocument() {
   useEffect(() => {
     getData()
       .then((data) => {
-        const PLACEHOLDER_ARRAY: IDocument[] = [];
-        
-        const updatedData = new TableUtility(
-          data, 
-          PLACEHOLDER_ARRAY
-        ).sortData();
+        const updatedData = new DocumentTableUtility(data).sortData();
         
         setDocumentsData(() => updatedData);
         setOriginalData(() => updatedData);
@@ -64,6 +60,12 @@ function StatementInvoiceDocument() {
       });
   }, []);
 
+  useEffect(() => {
+    setUtility(
+      () => new DocumentTableUtility(documentsData)
+    );
+  }, [originalData])
+
   return (
     <React.Fragment>
       <TableUtilities 
@@ -71,6 +73,7 @@ function StatementInvoiceDocument() {
         originalData={originalData}
         setData={setDocumentsData}
         filterCb={filterCb}
+        utilityInstance={utility}
       />
       <DocumentListTable 
         data={documentsData} 

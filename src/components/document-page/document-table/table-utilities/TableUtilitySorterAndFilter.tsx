@@ -5,21 +5,20 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 
-import { IDocument } from '@/types/invoiceDocuments';
-import TableUtility from '@/lib/documentDataSorterAndFilter';
+import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 
-interface TableUtilitySorterAndFilterProps {
-  data: IDocument[];
-  originalData: IDocument[];
+interface TableUtilitySorterAndFilterProps<T> {
+  data: T[];
   openUtility: string;
-  setDocumentsData: React.Dispatch<React.SetStateAction<IDocument[]>>;
+  setData: React.Dispatch<React.SetStateAction<T[]>>;
+  utilityInstance: DocumentTableUtility<T>;
 }
 
-function TableUtilitySorterAndFilter({
-  originalData,
+function TableUtilitySorterAndFilter<T>({
   openUtility,
-  setDocumentsData,
-}: TableUtilitySorterAndFilterProps) {
+  setData,
+  utilityInstance,
+}: TableUtilitySorterAndFilterProps<T>) {
   const [options, setOptions] = useState<string[]>([]);
   const [checkBox, setCheckBox] = useState<ICheckbox>({
     sort: 'date',
@@ -35,14 +34,12 @@ function TableUtilitySorterAndFilter({
   }, [openUtility]);
 
   useEffect(() => {
-    setDocumentsData((prevData) => {
-      return new TableUtility(
-        prevData, 
-        originalData, 
-        checkBox
-      ).sortAndFilter();
-    });
-  }, [openUtility, originalData, checkBox]);
+    utilityInstance.setCheckbox(checkBox);
+  }, [checkBox]);
+
+  useEffect(() => {
+    setData(() => utilityInstance.sortAndFilter());
+  }, [openUtility, checkBox, utilityInstance]);
 
   if (openUtility === '') return null;
 

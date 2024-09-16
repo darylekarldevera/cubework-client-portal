@@ -3,6 +3,17 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 import TableHeader from '@/components/shared/TableHeader';
 import Button from '@/components/shared/Button.tsx';
 import TableItem from '@/components/shared/TableItem.tsx';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog.tsx';
+import Select from '@/components/shared/Select.tsx';
+import Input from '@/components/shared/Input.tsx';
+import { Checkbox } from '@/components/ui/checkbox.tsx';
 
 const AutoPaySetup = () => {
   return (
@@ -11,7 +22,45 @@ const AutoPaySetup = () => {
         <div className="w-2/3">
           <div className="py-[14px] pr-[20px] pl-[10px] flex justify-between">
             <ShadCNLabel className="text-xs font-bold text-black">Bank Account(s)</ShadCNLabel>
-            <Button variant="outlined">+ Bank Account</Button>
+            <Dialog>
+              <DialogTrigger>
+                {' '}
+                <Button variant="outlined">+ Bank Account</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px] bg-white">
+                <DialogHeader>
+                  <DialogTitle className="border-b border-black">Add Bank Account</DialogTitle>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-2 items-center gap-4">
+                    <ShadCNLabel className="text-xs text-[#797979]">Account Name</ShadCNLabel>
+                    <Input />
+                  </div>
+                  <div className="grid grid-cols-2 items-center gap-4">
+                    <ShadCNLabel className="text-xs text-[#797979]">Account</ShadCNLabel>
+                    <Input />
+                  </div>
+                  <div className="grid grid-cols-2 items-center gap-4">
+                    <ShadCNLabel className="text-xs text-[#797979]">Routing Number</ShadCNLabel>
+                    <Input />
+                  </div>
+                  <div className="grid grid-cols-2 items-center gap-4">
+                    <ShadCNLabel className="text-xs text-[#797979]">Account Type</ShadCNLabel>
+                    <Select items={['Checking Account']} />
+                  </div>
+                </div>
+                <DialogFooter className="border-t border-black w-full flex gap-[63px]">
+                  <div className=" text-xs leading-relaxed flex items-center gap-2">
+                    <Checkbox />
+                    Set as default
+                  </div>
+                  <div className=" flex">
+                    <Button>Cancel</Button>
+                    <Button>Save</Button>
+                  </div>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
           <div className="pl-[10px]">
             <ShadCNLabel className="text-xs text-[#797979]">

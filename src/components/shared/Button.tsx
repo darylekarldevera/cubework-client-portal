@@ -39,6 +39,7 @@ const Button = ({ children, variant = 'primary' }: ButtonProps) => {
           : darkObject.primary;
   return (
     <ShadCNButton
+      type="submit"
       className={`text-[11px] leading-relaxed   text-white border ${variant === 'outlined' ? 'rounded-[6px]' : 'rounded-[32px] font-bold '}  h-[35px] ${darkHover}
        ${color} ${variant === 'secondary' ? ' border-[#717171] text-[#717171]' : variant === 'outlined' ? ' border-[#59BA56] text-[#59BA56] ' : ''} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : 'px-[37px] w-[100px]'}`}
     >

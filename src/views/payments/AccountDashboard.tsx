@@ -6,6 +6,7 @@ import TableItem from '@/components/shared/TableItem.tsx';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -14,6 +15,7 @@ import {
 import Select from '@/components/shared/Select.tsx';
 import Input from '@/components/shared/Input.tsx';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
+import TermsConditions from '@/__mocks__/termsConditions.ts';
 
 const AutoPaySetup = () => {
   return (
@@ -156,9 +158,21 @@ const AutoPaySetup = () => {
                 </div>
 
                 <div className="border-t border-black w-full flex justify-between pt-3">
-                  <div className="w-full text-xs leading-relaxed flex items-center gap-2">
-                    <Checkbox />I agree to the terms and conditions
-                  </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <div className="w-full text-xs leading-relaxed flex items-center gap-2">
+                        <Checkbox />I agree to the terms and conditions
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[925px] bg-white overflow-auto max-h-[500px]">
+                      <DialogHeader>
+                        <DialogTitle>CUBEWORK TERMS AND CONDITIONS</DialogTitle>
+                        <DialogDescription>Last updated 9/17/2024</DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4">{TermsConditions}</div>
+                      <DialogFooter></DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                   <div className="flex w-full justify-around">
                     <Button variant="outlined-black">Cancel</Button>
                     <Button>Save</Button>

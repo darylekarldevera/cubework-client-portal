@@ -22,7 +22,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DatePicker } from "./DatePicker";
-import WrappedContent from "./WrappedContent";
 
 
 interface ICardProps {
@@ -123,7 +122,7 @@ function CWForm() {
 
 function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
   return (
-    <Card className="w-full">
+    <Card className="w-full rounded-none">
       <CardContent className="p-2">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1" className="border-0">
@@ -161,7 +160,6 @@ export default function Services() {
   }
 
   return (<>
-    <WrappedContent className="pb-[5%]">
       <Heading1 text="Services" />
 
       <Heading2 text="Cubework Services Offered" className="mb-4" />
@@ -219,6 +217,5 @@ export default function Services() {
         </div>
       ))}
 
-    </WrappedContent>
   </>)
 }

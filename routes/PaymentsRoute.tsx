@@ -1,11 +1,13 @@
 import { Navigate, Route } from 'react-router-dom';
 import DummyComponent from '@/components/DummyComponent';
 import WrappedRoute from './WrappedRoute';
+import Payment from '@/views/Payment.tsx';
 
 function PaymentsRoute() {
   return (
     <WrappedRoute>
-      <Route element={<DummyComponent text="Payments" />}>
+      <Route element={<Payment />}>
+        {/*<Route element={<DummyComponent text="Payments" />}>*/}
         {/* Make Payments Routes */}
         <Route index element={<Navigate to="make-payments" replace />} />
         <Route path="make-payments" element={<DummyComponent text="Make Payments" />}>

@@ -45,7 +45,7 @@ function DataTable<TData, TValue>({ columns, data, pageSize = 5, cwStyle = false
   });
 
   return (
-    <div className={`rounded-md border relative flex flex-col ${cwStyle ? `cw-table-wrapper` : ''}`}>
+    <div className={`rounded-lg border relative flex flex-col ${cwStyle ? `cw-table-wrapper` : ''}`}>
       <Table>
         <DataTableHeader table={table} />
         <DataTableBody table={table} columnsLength={columns.length} />

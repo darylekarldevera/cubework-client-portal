@@ -5,33 +5,30 @@ export interface ICheckbox {
   filter: string;
 }
 
-class TableUtility {
+class DocumentTableUtility<T> {
   private data: IDocument[];
-  private origData: IDocument[];
   private checkbox?: ICheckbox;
 
-  constructor(data: IDocument[], origData: IDocument[], checkbox?: ICheckbox){
+  constructor(data: IDocument[], checkbox?: ICheckbox){
     this.data = data;
-    this.origData = origData;
     this.checkbox = checkbox;
   }
 
-  sortAndFilter = () => {
+  sortAndFilter = (): T[] => {
     let toUpdateData = [...this.data];
     toUpdateData = this.sortData();
-    toUpdateData = this.filterData();
-    return toUpdateData;
+    toUpdateData = this.filterData(toUpdateData);
+    return toUpdateData as T[];
   }
 
   sortData = () => {
     const toUpdateData = [...this.data];
-
     if (this?.checkbox?.sort === 'ascending') {
       return toUpdateData.sort((a, b) => {
         return a.file.filename > b.file.filename ? 1 : -1;
       });
     }
-
+    
     if (this?.checkbox?.sort === 'descending') {
       return toUpdateData.sort((a, b) => {
         return a.file.filename < b.file.filename ? 1 : -1;
@@ -43,8 +40,8 @@ class TableUtility {
     });
   };
 
-  filterData = () => {
-    const toUpdateData = [...this.origData];
+  filterData = (data: IDocument[]) => {
+    const toUpdateData = [...data];
 
     if (this?.checkbox?.filter === 'pdf') {
       return toUpdateData.filter((item) => item.file.mimetype.includes('application/pdf'));
@@ -54,8 +51,12 @@ class TableUtility {
       return toUpdateData.filter((item) => item.file.mimetype.includes('text/csv'));
     }
 
-    return this.origData;
+    return toUpdateData;
+  };
+
+  setCheckbox = (checkbox: ICheckbox) => {
+    this.checkbox = checkbox;
   };
 }
 
-export default TableUtility;
+export default DocumentTableUtility;

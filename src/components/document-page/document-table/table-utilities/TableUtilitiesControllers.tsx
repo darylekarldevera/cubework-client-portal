@@ -4,25 +4,25 @@ import { ArrowUpDown, ListFilter } from 'lucide-react';
 import TableSearchBar from './TableSearchBar';
 import useTableSearchUtility from '@/customHook/useTableSearchUtility';
 
-interface TableUtilitiesControllersProps {
-  originalData: any[];
+interface TableUtilitiesControllersProps<T> {
+  originalData: T[];
   openUtility: string;
   setOpenUtility: React.Dispatch<React.SetStateAction<string>>
-  setData: React.Dispatch<React.SetStateAction<any[]>>;
-  filterCb: (items: any[], searchData: string) => any[];
+  setData: React.Dispatch<React.SetStateAction<T[]>>;
+  filterCb: (items: T[], searchData: string) => T[];
 };
 
-function TableUtilitiesControllers({ 
-  originalData, 
-  openUtility, 
-  setOpenUtility, 
-  setData, 
-  filterCb 
-}: TableUtilitiesControllersProps) {
-  const { searchData, setSearchData } = useTableSearchUtility({ 
-    originalData, 
-    setData: setData, 
-    filterCb 
+function TableUtilitiesControllers<T>({
+  originalData,
+  openUtility,
+  setOpenUtility,
+  setData,
+  filterCb,
+}: TableUtilitiesControllersProps<T>) {
+  const { searchData, setSearchData } = useTableSearchUtility({
+    originalData,
+    setData: setData,
+    filterCb,
   });
 
   const handleUtility = (utility: string) => {

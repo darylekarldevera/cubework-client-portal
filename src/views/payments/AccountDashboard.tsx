@@ -95,7 +95,77 @@ const AutoPaySetup = () => {
           </Card>
           <div className="mt-[33px] pr-[20px] pl-[10px] flex justify-between">
             <ShadCNLabel className="text-xs font-bold text-black">Credit Cards</ShadCNLabel>
-            <Button variant="outlined">+ Credit Cards</Button>
+            <Dialog>
+              <DialogTrigger>
+                {' '}
+                <Button variant="outlined">+ Credit Cards</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[825px] bg-white">
+                <DialogHeader>
+                  <DialogTitle className="border-b border-black">Add Credit Card</DialogTitle>
+                </DialogHeader>
+                <div className="grid grid-cols-2 gap-[34px]  ">
+                  <div className="grid grid-rows-2 gap-4 py-4  ">
+                    <div className="grid grid-cols-2 items-center gap-4  ">
+                      <ShadCNLabel className="text-xs text-[#797979]  ">Card Details</ShadCNLabel>
+                      <Input />
+                    </div>
+                    <div className="grid grid-cols-2 items-center gap-4  ">
+                      <ShadCNLabel className="text-xs text-[#797979]">Card Number</ShadCNLabel>
+                      <Input />
+                    </div>
+                    <div className="grid grid-cols-2 items-center gap-4  ">
+                      <ShadCNLabel className="text-xs text-[#797979]">CVC</ShadCNLabel>
+                      <Input />
+                    </div>
+                    <div className="grid grid-cols-2 gap-[23px]">
+                      <div className="grid grid-rows-2 items-center gap-4  ">
+                        <ShadCNLabel className="text-xs text-[#797979]">Expiry Date</ShadCNLabel>
+                        <Input />
+                      </div>
+                      <div className="grid grid-rows-2 items-center gap-4  ">
+                        <ShadCNLabel className="text-xs text-[#797979]">Expiry Month</ShadCNLabel>
+                        <Input />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-rows-2 gap-4 py-4  ">
+                    <div className="grid grid-cols-2 items-center gap-4  ">
+                      <ShadCNLabel className="text-xs text-[#797979]  ">Account Name</ShadCNLabel>
+                      <Input />
+                    </div>
+                    <div className="grid grid-cols-2 items-center gap-4  ">
+                      <ShadCNLabel className="text-xs text-[#797979]">Card Number</ShadCNLabel>
+                      <Input />
+                    </div>
+                    <div className="grid grid-cols-2 items-center gap-4  ">
+                      <ShadCNLabel className="text-xs text-[#797979]">Routing Number</ShadCNLabel>
+                      <Input />
+                    </div>
+                    <div className="grid grid-cols-2 gap-[23px]">
+                      <div className="grid grid-rows-2 items-center gap-4  ">
+                        <ShadCNLabel className="text-xs text-[#797979]">State</ShadCNLabel>
+                        <Input />
+                      </div>
+                      <div className="grid grid-rows-2 items-center gap-4  ">
+                        <ShadCNLabel className="text-xs text-[#797979]">Zip Code</ShadCNLabel>
+                        <Input />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-black w-full flex justify-between pt-3">
+                  <div className="w-full text-xs leading-relaxed flex items-center gap-2">
+                    <Checkbox />I agree to the terms and conditions
+                  </div>
+                  <div className="flex w-full justify-around">
+                    <Button variant="outlined-black">Cancel</Button>
+                    <Button>Save</Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
           <div className="pl-[10px]">
             <ShadCNLabel className="text-xs text-[#797979]">

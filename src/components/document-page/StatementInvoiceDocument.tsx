@@ -1,14 +1,12 @@
 import { faker } from '@faker-js/faker';
 import { Buffer } from 'buffer';
-import React, { useEffect, useState } from 'react';
-import { ArrowUpDown, ListFilter } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
 import TableUtility from '@/lib/documentDataSorterAndFilter';
 
-import TableSearchBar from './document-table/TableSearchBar';
 import DocumentListTable from './document-table/DocumentListTable';
-import TableUtilitySorterAndFilter from './document-table/TableUtilitySorterAndFilter';
+import TableUtilities from './document-table/table-utilities/TableUtilities';
 
 const getData = async (): Promise<IDocument[]> => {
   const data = [...Array(10)].map((file, index) => {
@@ -39,18 +37,14 @@ const getData = async (): Promise<IDocument[]> => {
 };
 
 function StatementInvoiceDocument() {
-  const [openUtility, setOpenUtility] = useState<string>('');
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
   const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
 
-  const handleUtility = (utility: string) => {
-    if (openUtility === utility) {
-      setOpenUtility('');
-      return;
-    }
-
-    setOpenUtility(utility);
-  };
+  const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
+    return items.filter((item) => {
+      return item.file.filename.toLowerCase().includes(searchData.toLowerCase());
+    });
+  }, []);
 
   useEffect(() => {
     getData()
@@ -72,20 +66,17 @@ function StatementInvoiceDocument() {
 
   return (
     <React.Fragment>
-      <div className="mb-3">
-        <div className="flex items-end">
-          <TableSearchBar />
-          <ArrowUpDown onClick={() => handleUtility('sort')} />
-          <ListFilter onClick={() => handleUtility('filter')} />
-        </div>
-        <TableUtilitySorterAndFilter 
-          data={documentsData}
-          originalData={originalData}
-          openUtility={openUtility} 
-          setDocumentsData={setDocumentsData} 
-          />
-      </div>
-      <DocumentListTable data={documentsData} fileType="PDF" documentType="Statement/Invoice" />
+      <TableUtilities 
+        data={documentsData}
+        originalData={originalData}
+        setData={setDocumentsData}
+        filterCb={filterCb}
+      />
+      <DocumentListTable 
+        data={documentsData} 
+        fileType="PDF" 
+        documentType="Statement/Invoice" 
+      />
     </React.Fragment>
   );
 }

@@ -13,7 +13,7 @@ interface IDocumentDetailsCardProps {
 
 function DocumentDetailsCard({ isVisible, key, item, fileType, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
   const formatDate = (date: Date) => {
-    return moment(date.toString()).add(10, 'days').calendar();
+    return moment(date.toString()).format('MM/DD/YYYY');
   };
 
   const downloadFile = async (file: IFile) => {

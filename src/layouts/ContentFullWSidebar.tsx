@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import SidebarNavigation from "@/components/SidebarNavigation";
-import WrappedContent from "@/components/WrappedContent";
+import { ReactNode } from 'react';
+import SidebarNavigation from '@/components/SidebarNavigation';
+import WrappedContent from '@/components/WrappedContent';
 
 interface IContentFullWidthWSidebarProps {
   sidebar?: ReactNode;
@@ -10,7 +10,7 @@ interface IContentFullWidthWSidebarProps {
 export default function ContentFullWidthWSidebar({ sidebar, content }: IContentFullWidthWSidebarProps) {
   return (
     <div
-      className="layout--full-width-w-sidebar grid grid-cols-2 overflow-hidden"
+      className="layout--full-width-w-sidebar grid grid-cols-2 overflow-hidden h-full"
       style={{
         gridTemplateColumns: '240px 1fr',
       }}

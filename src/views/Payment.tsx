@@ -10,7 +10,7 @@ type PaymentProps = object;
 
 const Payment = ({}: PaymentProps) => {
   return (
-    <div className="ml-5 mt-[30px]">
+    <div className="">
       <Label>Payment</Label>
       <Tabs defaultValue="auto-pay" className="w-full mt-[30px]">
         <TabsButtonWrapper>

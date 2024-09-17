@@ -8,11 +8,10 @@ import DataTablePaginationControllers from '../../data-table/DataTablePagination
 
 interface IDocumentListTableTableProps {
   data: IDocument[];
-  fileType: string;
   documentType: string;
 }
 
-function DocumentListTable({ data, fileType, documentType }: IDocumentListTableTableProps): JSX.Element {
+function DocumentListTable({ data, documentType }: IDocumentListTableTableProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const { paginationNumbers, canNextPage, canPreviousPage } = useDataListPagination({ data, currentPage });
 
@@ -29,8 +28,7 @@ function DocumentListTable({ data, fileType, documentType }: IDocumentListTableT
     >
       <DocumentList 
         data={data} 
-        currentPage={currentPage} 
-        fileType={fileType} 
+        currentPage={currentPage}
         documentType={documentType} 
       />
 

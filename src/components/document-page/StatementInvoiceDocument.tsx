@@ -58,7 +58,10 @@ function StatementInvoiceDocument() {
         filterCb={filterCb}
         utilityInstance={utility}
       />
-      <DocumentListTable data={documentsData} fileType="PDF" documentType="Statement/Invoice" />
+      <DocumentListTable 
+        data={documentsData} 
+        documentType="Statement/Invoice" 
+      />
     </div>
   );
 }

@@ -11,7 +11,7 @@
     }
 
     .header {
-        @apply flex flex-row px-4 items-center h-[70px];
+        @apply flex flex-row px-4 items-center h-[60px] border-b border-[#ECECEC];
     }
 
     .notif-icon-wrapper {

@@ -1,11 +1,14 @@
 import React from 'react'
-import { Label } from '@radix-ui/react-label';
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
-import { ISortOption } from '@/constants/documentsUtilityOptions';
-import { RadioGroup, RadioGroupItem } from '@radix-ui/react-radio-group';
+
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 interface ITableSortUtilityCardProps {
-  option: ISortOption;
+  option: {
+    name: string;
+    sortType: string;
+  };
   index: number;
   sort: {
     parent: string;

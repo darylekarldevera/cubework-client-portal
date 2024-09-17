@@ -18,7 +18,7 @@ function TableUtilitySorterAndFilter<T>({
   setData,
   utilityInstance,
 }: TableUtilitySorterAndFilterProps<T>) {
-  const [checkBox, setCheckBox] = useState<ICheckbox>({
+  const [checkbox, setCheckbox] = useState<ICheckbox>({
     sort: {
       parent: 'Date',
       sortType: 'desc',
@@ -37,25 +37,24 @@ function TableUtilitySorterAndFilter<T>({
     },
   });
 
+  // Update utilityInstance with the latest checkbox state
   useEffect(() => {
-    utilityInstance.setCheckbox(checkBox);
-  }, [checkBox]);
+    utilityInstance.setCheckbox(checkbox);
+  }, [checkbox]);
 
   useEffect(() => {
-    setData(() => utilityInstance.sortAndFilter());
-  }, [openUtility, checkBox, utilityInstance]);
+    const updatedData = utilityInstance.sortAndFilter();
+    setData(() => updatedData);
+  }, [checkbox]);
 
   if (openUtility === '') return null;
 
   return (
     <div className="flex py-3 px-2 items-center">
       {openUtility === 'sort' ? (
-        <TableSortUtility sort={checkBox.sort} setCheckBox={setCheckBox} />
+        <TableSortUtility sort={checkbox.sort} setCheckBox={setCheckbox} />
       ) : (
-        <TableFilterUtility
-          filter={checkBox.filter}
-          setCheckBox={setCheckBox}
-        />
+        <TableFilterUtility filter={checkbox.filter} setCheckBox={setCheckbox} />
       )}
     </div>
   );

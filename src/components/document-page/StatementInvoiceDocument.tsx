@@ -1,21 +1,16 @@
-import { faker } from '@faker-js/faker';
-import { Buffer } from 'buffer';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
+import { DocumentsQuery } from '@/queries/DocumentsQuery';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
-import { DocumentsQuery } from '@/queries/DocumentsQuery';
-
 
 function StatementInvoiceDocument() {
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
   const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
-  const [utility, setUtility] = useState<DocumentTableUtility<IDocument>>(new DocumentTableUtility([]));
   const invoiceDocuments = DocumentsQuery('invoice_documents');
-  
 
   const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
     return items.filter((item) => {
@@ -23,24 +18,28 @@ function StatementInvoiceDocument() {
     });
   }, []);
 
+  // Memoize the utility instance only when the invoiceDocuments data changes
+  const utility = useMemo(() => {
+    if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
+      // Use spread operator to avoid mutating original data
+      return new DocumentTableUtility<IDocument>([...invoiceDocuments.data]);
+    }
+    return new DocumentTableUtility<IDocument>([]);
+  }, [invoiceDocuments.data, invoiceDocuments.isSuccess]);
 
   useEffect(() => {
-    setUtility(
-      () => new DocumentTableUtility(documentsData)
-    );
-  }, [originalData]);
-
-  useEffect(() => {
-    if (invoiceDocuments.isSuccess) {
-      setDocumentsData(invoiceDocuments.data);
-      setOriginalData(invoiceDocuments.data);
-    } 
+    if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
+      // Sort the data and update the state
+      const sortedData = utility.sortData();
+      setDocumentsData(sortedData);
+      setOriginalData(sortedData);
+    }
 
     if (invoiceDocuments.isError) {
       setDocumentsData([]);
       setOriginalData([]);
     }
-  }, [invoiceDocuments]);
+  }, []);
 
   if (invoiceDocuments.isLoading) {
     return <div>Loading...</div>;

@@ -11,11 +11,11 @@ function SidebarNavigation() {
     <div className="border-r border-grey-500 flex-col w-full h-full">
       <div
         className={`h-logoHeight flex bg-cover bg-center object-contain bg-no-repeat`}
-        style={{ 'backgroundImage': `url(${DEFAULT_IMAGE})` }}
+        style={{ backgroundImage: `url(${DEFAULT_IMAGE})` }}
       >
-        <div className="py-8 bg-white/[.7] mt-auto mb-5 relative z-10 w-full h-ful">
-          <p className="font-bold text-center">Company Name</p>
-          <p className="text-center text-sm">Branch name | branch name</p>
+        <div className="py-4 bg-white/[.7] mb-3 text-[11px] leading-relaxed mt-auto relative z-10 w-full">
+          <p className="font-bold text-center text-xs">Managed Products Groups Inc</p>
+          <p className="text-center ">TX Framers Branch | Farmers Branch</p>
         </div>
       </div>
 
@@ -25,37 +25,25 @@ function SidebarNavigation() {
             key={index}
             to={item.path}
             className={`
-              p-3 text-center cursor-pointer hover:text-white flex flex-row items-center group hover:bg-cw-green
-              ${
-                getCurrentTab(pathname) === item.name 
-                  ? 'text-white bg-cw-green' 
-                  : 'text-black'
-                }  
+              pl-7 p-3 text-center cursor-pointer transition-all duration-100 hover:text-white flex flex-row items-center group hover:bg-cw-green
+              ${getCurrentTab(pathname) === item.name ? 'text-white bg-cw-green' : 'text-black'}  
             `}
           >
             <img
               alt={item.alt}
               src={item.img.blackIcon}
-              className={`group-hover:hidden
-                ${
-                  getCurrentTab(pathname) === item.name 
-                    ? 'hidden group-hover:block' 
-                    : 'block'
-                  }  
+              className={`group-hover:hidden h-4
+                ${getCurrentTab(pathname) === item.name ? 'hidden group-hover:block' : 'block'}  
               `}
             />
             <img
               alt={item.alt}
               src={item.img.whiteIcon}
-              className={`group-hover:block
-                ${
-                  getCurrentTab(pathname) === item.name 
-                    ? 'block group-hover:block' 
-                    : 'hidden'
-                }  
+              className={`group-hover:block h-4
+                ${getCurrentTab(pathname) === item.name ? 'block group-hover:block 4' : 'hidden'}  
               `}
             />
-            <p className="w-full text-start pl-7">{item.name}</p>
+            <p className="w-full text-start pl-5 font-bold text-[11px] leading-relaxed">{item.name}</p>
           </Link>
         ))}
       </div>

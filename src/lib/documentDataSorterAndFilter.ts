@@ -1,8 +1,18 @@
 import { IDocument } from "@/types/invoiceDocuments";
 
 export interface ICheckbox {
-  sort: string;
-  filter: string;
+  sort: {
+    parent: string;
+    sortType: string;
+  };
+  filter: {
+    parent: string;
+    filterType: string;
+    pickDate: {
+      startDate: Date;
+      endDate: Date | undefined;
+    }
+  };
 }
 
 class DocumentTableUtility<T> {
@@ -23,31 +33,54 @@ class DocumentTableUtility<T> {
 
   sortData = () => {
     const toUpdateData = [...this.data];
-    if (this?.checkbox?.sort === 'ascending') {
+    if (this?.checkbox?.sort.parent === "Name" && this?.checkbox?.sort.sortType === "asc") {
       return toUpdateData.sort((a, b) => {
         return a.file.filename > b.file.filename ? 1 : -1;
       });
     }
     
-    if (this?.checkbox?.sort === 'descending') {
+    if (this?.checkbox?.sort.parent === "Name" && this?.checkbox?.sort.sortType === "desc") {
       return toUpdateData.sort((a, b) => {
         return a.file.filename < b.file.filename ? 1 : -1;
       });
     }
 
+    if (this?.checkbox?.sort.parent === "Date" && this?.checkbox?.sort.sortType === "asc") {
+      return toUpdateData.sort((a, b) => {
+        return a.date > b.date ? 1 : -1;
+      });
+    }
+
     return toUpdateData.sort((a, b) => {
-      return a.date > b.date ? 1 : -1;
+      return a.date < b.date ? 1 : -1;
     });
   };
 
   filterData = (data: IDocument[]) => {
-    const toUpdateData = [...data];
+    let toUpdateData = [...data];
 
-    if (this?.checkbox?.filter === 'pdf') {
+    if (this?.checkbox?.filter?.pickDate?.startDate && this?.checkbox?.filter?.pickDate?.endDate) {
+      toUpdateData = toUpdateData.filter((item) => {
+        const itemDate = new Date(item.date);
+
+        const startDate = this.checkbox?.filter?.pickDate?.startDate;
+        const endDate = this.checkbox?.filter?.pickDate?.endDate;
+
+        if (startDate && endDate) {
+          return itemDate >= startDate && itemDate <= endDate;
+        }
+
+        return false;
+      });
+    }
+
+
+
+    if (this?.checkbox?.filter.parent === "PDF" && this?.checkbox?.filter.filterType === "pdf") {
       return toUpdateData.filter((item) => item.file.mimetype.includes('application/pdf'));
     }
 
-    if (this?.checkbox?.filter === 'csv') {
+    if (this?.checkbox?.filter.parent === "CSV" && this?.checkbox?.filter.filterType === "csv") {
       return toUpdateData.filter((item) => item.file.mimetype.includes('text/csv'));
     }
 

@@ -17,6 +17,7 @@ function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
                 minWidth: cell.column.columnDef?.size,
                 maxWidth: cell.column.columnDef?.size,
               }}
+              className="text-black font-regular text-[10px] leading-5"
               key={cell.id}
             >
               {flexRender(cell.column.columnDef.cell, cell.getContext())}

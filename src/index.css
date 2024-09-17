@@ -41,7 +41,7 @@
 .home-activity-bar::after {
     content: '';
     position: absolute;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #797979;
     width: 85%;
     right: 0;
 }

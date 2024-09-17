@@ -1,11 +1,6 @@
 import './DataTable.css';
 
-import { 
-  ColumnDef, 
-  getCoreRowModel, 
-  getPaginationRowModel, 
-  useReactTable 
-} from '@tanstack/react-table';
+import { ColumnDef, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import { Table } from '@/components/ui/table';
 import DataTableBody from './DataTableBody';
 import DataTableHeader from './DataTableHeader';
@@ -31,7 +26,12 @@ interface DataTableProps<TData, TValue> {
  * @returns {JSX.Element} - The rendered data table component.
  */
 
-function DataTable<TData, TValue>({ columns, data, pageSize = 5, cwStyle = false }: DataTableProps<TData, TValue>): JSX.Element {
+function DataTable<TData, TValue>({
+  columns,
+  data,
+  pageSize = 5,
+  cwStyle = false,
+}: DataTableProps<TData, TValue>): JSX.Element {
   const table = useReactTable({
     data,
     columns,
@@ -50,7 +50,7 @@ function DataTable<TData, TValue>({ columns, data, pageSize = 5, cwStyle = false
         <DataTableHeader table={table} />
         <DataTableBody table={table} columnsLength={columns.length} />
       </Table>
-      <div className={ cwStyle ? `py-6` : '' }>
+      <div className={cwStyle ? `py-6 ` : ''}>
         <DataTablePaginationControllers
           cwStyle={cwStyle}
           canNextPage={table.getCanNextPage()}

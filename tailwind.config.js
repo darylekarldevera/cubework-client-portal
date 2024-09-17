@@ -18,6 +18,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        'cw-green': '#59BA56',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -84,9 +85,6 @@ export default {
       spacing: {
         sidebar: '236px',
         logoHeight: '130px',
-      },
-      colors: {
-        'cw-green': '#59BA56',
       },
     },
   },

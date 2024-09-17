@@ -15,13 +15,9 @@ export default function ContentFullWidthWSidebar({ sidebar, content }: IContentF
         gridTemplateColumns: '240px 1fr',
       }}
     >
-      <div className="w-sidebar xxs:hidden md:block">
-        {sidebar ?? <SidebarNavigation />}
-      </div>
-      <div>
-        <WrappedContent className="py-8">
-          {content}
-        </WrappedContent>
+      <div className="w-sidebar xxs:hidden md:block">{sidebar ?? <SidebarNavigation />}</div>
+      <div className="overflow-hidden">
+        <WrappedContent className="py-8  h-[calc(100vh-55px)] overflow-auto">{content}</WrappedContent>
       </div>
     </div>
   );

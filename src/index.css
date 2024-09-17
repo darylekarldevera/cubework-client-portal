@@ -5,9 +5,6 @@
 @tailwind utilities;
 
 @layer components {
-    /*.sample-template {*/
-    /*    @apply
-    /*}*/
     .element-viewer {
         @apply border border-red-500;
     }

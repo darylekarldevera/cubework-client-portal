@@ -34,6 +34,11 @@ function StatementInvoiceDocument() {
     if (invoiceDocuments.isSuccess) {
       setDocumentsData(invoiceDocuments.data);
       setOriginalData(invoiceDocuments.data);
+    } 
+
+    if (invoiceDocuments.isError) {
+      setDocumentsData([]);
+      setOriginalData([]);
     }
   }, [invoiceDocuments]);
 
@@ -41,25 +46,21 @@ function StatementInvoiceDocument() {
     return <div>Loading...</div>;
   }
 
-  if (invoiceDocuments.isError) { 
-    return <div className=''>Fetch error</div>;
+  if (invoiceDocuments.isError) {
+    return <div>Error...</div>;
   }
 
   return (
-    <React.Fragment>
-      <TableUtilities 
+    <div className="pb-5">
+      <TableUtilities
         data={documentsData}
         originalData={originalData}
         setData={setDocumentsData}
         filterCb={filterCb}
         utilityInstance={utility}
       />
-      <DocumentListTable 
-        data={documentsData} 
-        fileType="PDF" 
-        documentType="Statement/Invoice" 
-      />
-    </React.Fragment>
+      <DocumentListTable data={documentsData} fileType="PDF" documentType="Statement/Invoice" />
+    </div>
   );
 }
 

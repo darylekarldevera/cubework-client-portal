@@ -1,24 +1,17 @@
 import { ReactNode } from "react";
 import SidebarNavigation from "@/components/SidebarNavigation";
 import WrappedContent from "@/components/WrappedContent";
+import { Outlet } from "react-router-dom";
 
-interface IContentFullWidthWSidebarProps {
-  sidebar?: ReactNode;
-  content?: ReactNode;
-}
-
-export default function ContentFullWidthWSidebar({ sidebar, content }: IContentFullWidthWSidebarProps) {
+export default function ContentFullWidthWSidebar() {
   return (
-    <div
-      className="layout--full-width-w-sidebar grid grid-cols-2 overflow-hidden"
-      style={{
-        gridTemplateColumns: '240px 1fr',
-      }}
-    >
-      <div className="w-sidebar xxs:hidden md:block">{sidebar ?? <SidebarNavigation />}</div>
-      <div className="overflow-hidden">
-        <WrappedContent className="py-8  h-[calc(100vh-55px)] overflow-auto">{content}</WrappedContent>
+    <div className="flex flex-row h-screen overflow-y-auto">
+      <div className="w-sidebar xxs:hidden md:block">
+        <SidebarNavigation />
       </div>
+      <WrappedContent>
+        <Outlet />
+      </WrappedContent>
     </div>
   );
 }

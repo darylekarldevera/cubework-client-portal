@@ -1,15 +1,14 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 
 interface ITabItem {
-  label: string,
-  path: string,
+  label: string;
+  path: string;
 }
 
 interface ITabsProps {
   links: ITabItem[];
   className?: string;
 }
-
 
 export default function Tabs({ links, className = '' }: ITabsProps) {
   const location = useLocation();
@@ -20,7 +19,7 @@ export default function Tabs({ links, className = '' }: ITabsProps) {
         <div key={i.path}>
           <Link
             to={i.path}
-            className={`text-green-600 px-4 py-2 inline-block border-b-2 ${
+            className={`text-green-600 px-4 py-2 inline-block border-b-2 font-regular text-xs leading-5 ${
               i.path === location.pathname ? 'border-green-600' : 'border-white'
             }`}
           >

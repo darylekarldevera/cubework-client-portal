@@ -15,7 +15,7 @@ interface TableUtilitiesControllersProps<T> {
 function TableUtilitiesControllers<T>({
   originalData,
   openUtility,
-  setOpenUtility,
+  setOpenUtility, 
   setData,
   filterCb,
 }: TableUtilitiesControllersProps<T>) {
@@ -27,11 +27,11 @@ function TableUtilitiesControllers<T>({
 
   const handleUtility = (utility: string) => {
     if (openUtility === utility) {
-      setOpenUtility('');
+      setOpenUtility(() => '');
       return;
     }
 
-    setOpenUtility(utility);
+    setOpenUtility(() => utility);
   };
 
   return (

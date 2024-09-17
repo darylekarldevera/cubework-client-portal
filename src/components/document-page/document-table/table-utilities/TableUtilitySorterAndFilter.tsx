@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import * as Checkbox from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
+import React, { useEffect, useState } from 'react';
 
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
-import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
-
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
+
+import TableSortUtility from './TableSortUtility';
+import TableFilterUtility from './TableFilterUtility';
 
 interface TableUtilitySorterAndFilterProps<T> {
   data: T[];
@@ -19,19 +18,24 @@ function TableUtilitySorterAndFilter<T>({
   setData,
   utilityInstance,
 }: TableUtilitySorterAndFilterProps<T>) {
-  const [options, setOptions] = useState<string[]>([]);
   const [checkBox, setCheckBox] = useState<ICheckbox>({
-    sort: 'date',
-    filter: 'all',
+    sort: {
+      parent: 'Date',
+      sortType: 'desc',
+    },
+    filter: {
+      parent: 'All',
+      filterType: 'all',
+      pickDate: {
+        startDate: (() => {
+          const date = new Date();
+          date.setFullYear(date.getFullYear() - 3);
+          return date;
+        })(),
+        endDate: undefined,
+      },
+    },
   });
-
-  useEffect(() => {
-    if (openUtility === 'sort') {
-      setOptions(SORT_OPTIONS);
-    } else {
-      setOptions(FILTER_OPTIONS);
-    }
-  }, [openUtility]);
 
   useEffect(() => {
     utilityInstance.setCheckbox(checkBox);
@@ -45,35 +49,14 @@ function TableUtilitySorterAndFilter<T>({
 
   return (
     <div className="flex py-3 px-2 items-center">
-      {options.map((option, index) => {
-        const lowerCaseOption = option.toLowerCase();
-        const sort = checkBox.sort === lowerCaseOption;
-        const filter = checkBox.filter === lowerCaseOption;
-
-        return (
-          <div className="flex items-center mr-1 cursor-pointer">
-            <Checkbox.Root
-              id={`c${index + 1}`}
-              className="flex items-center justify-center w-3 h-3 border border-black"
-              onCheckedChange={() => {
-                if (openUtility === 'sort') {
-                  setCheckBox((prev) => ({ ...prev, sort: lowerCaseOption }));
-                } else {
-                  setCheckBox((prev) => ({ ...prev, filter: lowerCaseOption }));
-                }
-              }}
-              checked={sort || filter}
-            >
-              <Checkbox.Indicator className="text-black">
-                <CheckIcon />
-              </Checkbox.Indicator>
-            </Checkbox.Root>
-            <label className="mx-1 text-xs" htmlFor={`c${index + 1}`}>
-              {option}
-            </label>
-          </div>
-        );
-      })}
+      {openUtility === 'sort' ? (
+        <TableSortUtility sort={checkBox.sort} setCheckBox={setCheckBox} />
+      ) : (
+        <TableFilterUtility
+          filter={checkBox.filter}
+          setCheckBox={setCheckBox}
+        />
+      )}
     </div>
   );
 }

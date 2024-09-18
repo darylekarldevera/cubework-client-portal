@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
 import { DocumentsQuery } from '@/queries/DocumentsQuery';
@@ -22,24 +22,14 @@ function LeaseDocument() {
   const utility = useMemo(() => {
     if (leaseDocument.isSuccess && leaseDocument.data) {
       // Use spread operator to avoid mutating original data
-      return new DocumentTableUtility<IDocument>([...leaseDocument.data]);
+      const utilityInstance = new DocumentTableUtility<IDocument>([...leaseDocument.data]);
+      const sortedData = utilityInstance.sortData();
+      setDocumentsData(sortedData);
+      setOriginalData(sortedData);
+      return utilityInstance;
     }
     return new DocumentTableUtility<IDocument>([]);
   }, [leaseDocument.data, leaseDocument.isSuccess]);
-
-  useEffect(() => {
-    if (leaseDocument.isSuccess && leaseDocument.data) {
-      // Sort the data and update the state
-      const sortedData = utility.sortData();
-      setDocumentsData(sortedData);
-      setOriginalData(sortedData);
-    }
-
-    if (leaseDocument.isError) {
-      setDocumentsData([]);
-      setOriginalData([]);
-    }
-  }, []);
 
   if (leaseDocument.isLoading) {
     return <div>Loading...</div>;
@@ -58,10 +48,7 @@ function LeaseDocument() {
         filterCb={filterCb}
         utilityInstance={utility}
       />
-      <DocumentListTable 
-        data={documentsData} 
-        documentType="Least Documents" 
-      />
+      <DocumentListTable data={documentsData} documentType="Least Documents" />
     </div>
   );
 }

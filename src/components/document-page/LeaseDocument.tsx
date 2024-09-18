@@ -50,7 +50,7 @@ function LeaseDocument() {
   }
 
   return (
-    <div className='pb-5'>
+    <div>
       <TableUtilities
         data={documentsData}
         originalData={originalData}

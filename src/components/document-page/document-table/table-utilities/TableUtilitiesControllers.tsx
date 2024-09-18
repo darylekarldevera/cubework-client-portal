@@ -37,8 +37,8 @@ function TableUtilitiesControllers<T>({
   return (
     <div className="flex items-end">
       <TableSearchBar search={searchData} setSearch={setSearchData} />
-      <ArrowUpDown onClick={() => handleUtility('sort')} />
-      <ListFilter onClick={() => handleUtility('filter')} />
+      <ArrowUpDown className="w-4 cursor-pointer" onClick={() => handleUtility('sort')} />
+      <ListFilter className="w-4 cursor-pointer" onClick={() => handleUtility('filter')} />
     </div>
   );
 }

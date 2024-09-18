@@ -22,7 +22,11 @@ function StatementInvoiceDocument() {
   const utility = useMemo(() => {
     if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
       // Use spread operator to avoid mutating original data
-      return new DocumentTableUtility<IDocument>([...invoiceDocuments.data]);
+      const utilityInstance = new DocumentTableUtility<IDocument>([...invoiceDocuments.data]);
+      const sortedData = utilityInstance.sortData();
+      setDocumentsData(sortedData);
+      setOriginalData(sortedData);
+      return utilityInstance;
     }
     return new DocumentTableUtility<IDocument>([]);
   }, [invoiceDocuments.data, invoiceDocuments.isSuccess]);
@@ -50,7 +54,7 @@ function StatementInvoiceDocument() {
   }
 
   return (
-    <div className="pb-5">
+    <div>
       <TableUtilities
         data={documentsData}
         originalData={originalData}
@@ -58,10 +62,7 @@ function StatementInvoiceDocument() {
         filterCb={filterCb}
         utilityInstance={utility}
       />
-      <DocumentListTable 
-        data={documentsData} 
-        documentType="Statement/Invoice" 
-      />
+      <DocumentListTable data={documentsData} documentType="Statement/Invoice" />
     </div>
   );
 }

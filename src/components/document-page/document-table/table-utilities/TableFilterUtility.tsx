@@ -20,9 +20,9 @@ interface ITableFilterUtilityProps {
 
 function TableFilterUtility({ filter, setCheckBox }: ITableFilterUtilityProps) {
   return (
-    <React.Fragment>
+    <div className="flex h-5">
       <RadioGroup
-        className='flex flex-row items-center justify-center space-x-2 mr-5 border-r pr-4'
+        className="flex flex-row items-center justify-center space-x-2 mr-5 border-r pr-4"
         value={`${filter.parent}-${filter.filterType}`}
         onValueChange={(newValue) => {
           const [parent, filterType] = newValue.split('-');
@@ -38,15 +38,19 @@ function TableFilterUtility({ filter, setCheckBox }: ITableFilterUtilityProps) {
       >
         {FILTER_OPTIONS.map((option, index) => (
           <div className="flex items-center space-x-2" key={index}>
-            <RadioGroupItem value={`${option.name}-${option.filterType}`} id={`c${index}`} />
-            <Label className="text-xs" htmlFor={`c${index}`}>
+            <RadioGroupItem
+              className="w-[14px] h-[h-14px]"
+              value={`${option.name}-${option.filterType}`}
+              id={`c${index}`}
+            />
+            <Label className="text-[0.70rem]" htmlFor={`c${index}`}>
               {option.name}
             </Label>
           </div>
         ))}
       </RadioGroup>
       <TablePickDate pickDate={filter.pickDate} setPickDate={setCheckBox} />
-    </React.Fragment>
+    </div>
   );
 }
 

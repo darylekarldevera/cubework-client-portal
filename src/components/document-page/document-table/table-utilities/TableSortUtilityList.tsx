@@ -1,11 +1,11 @@
 import React from 'react'
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
-import { ISortOption } from '@/constants/documentsUtilityOptions';
 import TableSortUtilityCard from './TableSortUtilityCard';
+import { ISortOption } from '@/constants/documentsUtilityOptions';
 
 interface ITableSortUtilityListProps {
-  option: ISortOption;
   index: number;
+  option: ISortOption;
   sort: {
     parent: string;
     sortType: string;

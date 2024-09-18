@@ -50,7 +50,7 @@ function TableUtilitySorterAndFilter<T>({
   if (openUtility === '') return null;
 
   return (
-    <div className="flex py-3 px-2 items-center">
+    <div className="flex px-2 items-center mt-2">
       {openUtility === 'sort' ? (
         <TableSortUtility sort={checkbox.sort} setCheckBox={setCheckbox} />
       ) : (

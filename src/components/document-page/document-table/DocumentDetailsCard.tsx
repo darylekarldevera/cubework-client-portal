@@ -42,14 +42,14 @@ function DocumentDetailsCard({ isVisible, key, item, documentType, }: IDocumentD
   if (isVisible) return null;
 
   return (
-    <div key={key} className="flex items-center justify-between p-2">
+    <div key={key} className="flex items-center justify-between p-2 font-regular text-[10px]">
       <div className="flex flex-col mx-1">
         <p className="text-[#59BA56]">{item.file.filename}</p>
         <p>
           {getFileType(item.file.mimetype)} • {formatDate(item.date)} • {documentType}
         </p>
       </div>
-      <img alt="download_icon" src={arrowDown} className="cursor-pointer" onClick={() => downloadFile(item.file)} />
+      <img alt="download_icon" src={arrowDown} className="cursor-pointer w-4" onClick={() => downloadFile(item.file)} />
     </div>
   );
 }

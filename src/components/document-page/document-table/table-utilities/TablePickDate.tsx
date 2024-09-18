@@ -16,16 +16,19 @@ interface ITablePickDateProps {
 
 function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
   return (
-    <div className="flex w-[20rem] justify-around">
+    <div className="flex w-80 justify-around">
       {Object.keys(pickDate).map((key) => (
         <Popover>
           <PopoverTrigger asChild>
             <Button
               variant={'outline'}
-              className={cn('w-[12vw] justify-start text-left font-normal', !pickDate[key] && 'text-muted-foreground')}
+              className={cn(
+                'w-[140px] h-full flex font-normal',
+                !pickDate[key] && 'text-muted-foreground'
+              )}
             >
               <span>{pickDate[key] ? moment(pickDate[key].toString()).format('MM/DD/YYYY') : null}</span>
-              <CalendarIcon className="mr-2 h-4 ml-auto" />
+              <CalendarIcon className="mr-2 w-4 h-4 ml-auto" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-white flex flex-row" align="start">

@@ -21,7 +21,7 @@ function DocumentListTable({ data, documentType }: IDocumentListTableTableProps)
 
   return (
     <div
-      className="flex flex-col rounded-t-[2vh] rounded-b-[4vh] p-2 border min-h-[55vh]"
+      className="flex flex-col rounded-t-[2vh] rounded-b-[4vh] px-2 py-5 border min-h-[58vh]"
       style={{
         boxShadow: '0px 4px 12px 0px #00000040'
       }}

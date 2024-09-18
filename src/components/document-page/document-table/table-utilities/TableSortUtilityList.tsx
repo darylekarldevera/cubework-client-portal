@@ -19,6 +19,7 @@ function TableSortUtilityList({ option, index, sort, setCheckBox }: ITableSortUt
     <div className="flex flex-row space-x-2">
       {optionKeys.map((sortType, keyIndex) => (
         <TableSortUtilityCard
+          key={keyIndex}
           keyIndex={keyIndex}
           option={option}
           index={index}

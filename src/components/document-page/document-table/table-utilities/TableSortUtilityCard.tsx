@@ -21,6 +21,7 @@ function TableSortUtilityCard({ option, index, sort, setCheckBox, sortType, keyI
   return (
     <div className="flex items-center cursor-pointer" key={keyIndex}>
       <RadioGroup
+        value={`c${option.name}-${option.sortType}`}
         onValueChange={() => {
           setCheckBox((prev) => {
             return {
@@ -35,12 +36,12 @@ function TableSortUtilityCard({ option, index, sort, setCheckBox, sortType, keyI
       >
         <div className="flex items-center space-x-2">
           <RadioGroupItem
-            className='w-[14px] h-[14px]'
+            className="w-[14px] h-[14px]"
             value={`c${index}-${keyIndex}`}
             id={`c${index}-${keyIndex}`}
             checked={sort.parent === option.name && sort.sortType === sortType}
           />
-          <Label className="text-[0.70rem]" htmlFor={`c${index}-${keyIndex}`}>
+          <Label className="text-[0.70rem]" htmlFor={`c${option.name}-${option.sortType}`}>
             {sortType.toUpperCase()}
           </Label>
         </div>

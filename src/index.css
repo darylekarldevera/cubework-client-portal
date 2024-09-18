@@ -5,15 +5,12 @@
 @tailwind utilities;
 
 @layer components {
-    /*.sample-template {*/
-    /*    @apply
-    /*}*/
     .element-viewer {
         @apply border border-red-500;
     }
 
     .header {
-        @apply flex flex-row px-4 items-center h-[70px];
+        @apply flex flex-row px-4 items-center h-[60px] border-b border-[#ECECEC];
     }
 
     .notif-icon-wrapper {
@@ -35,6 +32,18 @@
     .badge-component {
         @apply absolute left-2 bottom-3 bg-red-500 w-[14px] h-[14px] rounded-full text-[10px] text-white flex justify-center items-center;
     }
+}
+
+:root {
+    --radius: 16px;
+}
+
+.home-activity-bar::after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid #797979;
+    width: 85%;
+    right: 0;
 }
 
 body {

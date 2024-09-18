@@ -12,7 +12,16 @@ function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
       {table.getRowModel().rows.map((row) => (
         <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
           {row.getVisibleCells().map((cell) => (
-            <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+            <TableCell
+              style={{
+                minWidth: cell.column.columnDef?.size,
+                maxWidth: cell.column.columnDef?.size,
+              }}
+              className="text-black font-regular text-[10px] leading-5"
+              key={cell.id}
+            >
+              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            </TableCell>
           ))}
         </TableRow>
       ))}

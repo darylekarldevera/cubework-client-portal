@@ -19,6 +19,10 @@ interface IDataTablePaginationControllersProps {
   setPage: (page: number) => void;
 }
 
+interface ICwDataTablePaginationControllersProps extends IDataTablePaginationControllersProps {
+  cwStyle: boolean;
+}
+
 function DataTablePaginationControllers({
   canPreviousPage,
   previousPage,
@@ -26,16 +30,20 @@ function DataTablePaginationControllers({
   nextPage,
   paginationNumbers,
   setPage,
-}: IDataTablePaginationControllersProps) {
+  cwStyle,
+}: ICwDataTablePaginationControllersProps) {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [previousPageNumber, setPreviousPageNumber] = useState<number>(0);
 
-  const handlePageChange = useCallback((page: number) => {
-    setPage(page);
-    setPreviousPageNumber(currentPage);
-    setCurrentPage(page);
-  }, [currentPage, setPage]);
-  
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setPage(page);
+      setPreviousPageNumber(currentPage);
+      setCurrentPage(page);
+    },
+    [currentPage, setPage]
+  );
+
   const handleNextPage = () => {
     nextPage();
     setCurrentPage(currentPage + 1);
@@ -44,7 +52,7 @@ function DataTablePaginationControllers({
   const handlePreviousPage = () => {
     previousPage();
     setCurrentPage(currentPage - 1);
-  }
+  };
 
   const conditionalClassName = useCallback((value: number | boolean) => {
     return value ? 'pointer-events-none opacity-50' : 'cursor-pointer';
@@ -53,10 +61,13 @@ function DataTablePaginationControllers({
   const { paginationOptions } = UsePaginationHook({ currentPage, paginationNumbers, previousPageNumber });
 
   return (
-    <Pagination>
-      <PaginationContent>
+    <Pagination className={`${cwStyle ? 'cw-style' : ''}`}>
+      <PaginationContent className="">
         <PaginationItem>
-          <PaginationPrevious className={conditionalClassName(!canPreviousPage)} onClick={() => handlePreviousPage()} />
+          <PaginationPrevious
+            className={`page-prev ${conditionalClassName(!canPreviousPage)}`}
+            onClick={() => handlePreviousPage()}
+          />
         </PaginationItem>
 
         <PaginationItemLink
@@ -64,19 +75,27 @@ function DataTablePaginationControllers({
           pageNumber={1}
           onClick={() => handlePageChange(0)}
           isVisible={paginationNumbers.length > 1}
-          className={conditionalClassName(currentPage === 0)}
+          className={`
+            ${conditionalClassName(currentPage === 0)}
+            ${currentPage === 0 && 'active'}
+          `}
         />
 
         <EllipsisIndicator isVisible={currentPage > 2} />
 
         {paginationOptions.map((number) => (
-          <PaginationItemLink
-            key={number}
-            pageNumber={number + 1}
-            isVisible={number !== 0 && number !== paginationNumbers.length - 1}
-            onClick={() => handlePageChange(number)}
-            className={conditionalClassName(currentPage === number)}
-          />
+          <div className="border-slate-600 border-solid border-1 ">
+            <PaginationItemLink
+              key={number}
+              pageNumber={number + 1}
+              isVisible={number !== 0 && number !== paginationNumbers.length - 1}
+              onClick={() => handlePageChange(number)}
+              className={`
+                ${conditionalClassName(currentPage === number)}
+                ${currentPage === number && 'active'}
+              `}
+            />
+          </div>
         ))}
 
         <EllipsisIndicator isVisible={currentPage < paginationNumbers.length - 5} />
@@ -86,11 +105,17 @@ function DataTablePaginationControllers({
           pageNumber={paginationNumbers.length}
           onClick={() => handlePageChange(paginationNumbers.length - 1)}
           isVisible={paginationNumbers.length > 1}
-          className={conditionalClassName(currentPage === paginationNumbers.length - 1)}
+          className={`
+            ${conditionalClassName(currentPage === paginationNumbers.length - 1)}
+            ${currentPage === paginationNumbers.length - 1 && 'active'}
+          `}
         />
 
         <PaginationItem>
-          <PaginationNext className={conditionalClassName(!canNextPage)} onClick={() => handleNextPage()} />
+          <PaginationNext
+            className={`page-next ${conditionalClassName(!canNextPage)}`}
+            onClick={() => handleNextPage()}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

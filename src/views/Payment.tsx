@@ -12,7 +12,7 @@ const Payment = ({}: PaymentProps) => {
   return (
     <div className="ml-5 mt-[30px]">
       <Label>Payment</Label>
-      <Tabs defaultValue="account" className="w-full mt-[30px]">
+      <Tabs defaultValue="make-payment" className="w-full mt-[30px]">
         <TabsButtonWrapper>
           <TabsButton link="make-payment">Make Payment</TabsButton>
           <TabsButton link="auto-pay">Auto Pay</TabsButton>

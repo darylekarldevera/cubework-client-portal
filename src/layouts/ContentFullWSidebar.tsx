@@ -8,10 +8,10 @@ interface IContentFullWidthWSidebarProps {
   content?: ReactNode;
 }
 
-export default function ContentFullWidthWSidebar({ sidebar, content }: IContentFullWidthWSidebarProps) {
+export default function ContentFullWidthWSidebar({ sidebar }: IContentFullWidthWSidebarProps) {
   return (
     <div
-      className="flex flex-row h-full"
+      className="flex flex-row h-full overflow-hidden"
       style={{
         gridTemplateColumns: '240px 1fr',
       }}

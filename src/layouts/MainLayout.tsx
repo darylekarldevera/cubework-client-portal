@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom';
 import Header from '@/components/Header';
 import ContentFullWidthWSidebar from './ContentFullWSidebar';
 
@@ -8,9 +7,7 @@ function MainLayout() {
       <section>
         <Header />
       </section>
-      <section className="flex-grow">
-        <ContentFullWidthWSidebar content={<Outlet />} />
-      </section>
+      <ContentFullWidthWSidebar />
     </div>
   );
 }

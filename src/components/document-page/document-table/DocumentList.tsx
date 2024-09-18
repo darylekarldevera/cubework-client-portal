@@ -6,11 +6,10 @@ import DocumentListNoRecords from './DocumentListNoRecords';
 interface IDocumentListTableProps {
   data: IDocument[];
   currentPage: number;
-  fileType: string;
   documentType: string;
 }
 
-function DocumentList({ data, currentPage, fileType, documentType }: IDocumentListTableProps): JSX.Element {
+function DocumentList({ data, currentPage, documentType }: IDocumentListTableProps): JSX.Element {
   const VISIBLE_DATA = 5;
   const dataStartIndex = currentPage * VISIBLE_DATA;
   const dataEndIndex = dataStartIndex + VISIBLE_DATA;
@@ -24,7 +23,6 @@ function DocumentList({ data, currentPage, fileType, documentType }: IDocumentLi
               key={item.id}
               item={item}
               isVisible={index < dataStartIndex || index > dataEndIndex}
-              fileType={fileType}
               documentType={documentType}
             />
           ))}

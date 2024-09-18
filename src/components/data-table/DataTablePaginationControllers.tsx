@@ -61,7 +61,7 @@ function DataTablePaginationControllers({
   const { paginationOptions } = UsePaginationHook({ currentPage, paginationNumbers, previousPageNumber });
 
   return (
-    <Pagination className={`${cwStyle ? 'cw-style' : ''}`}>
+    <Pagination className={`${cwStyle ? 'cw-style' : ''} mt-auto`}>
       <PaginationContent className="">
         <PaginationItem>
           <PaginationPrevious

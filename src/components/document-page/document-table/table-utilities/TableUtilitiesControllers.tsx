@@ -15,7 +15,7 @@ interface TableUtilitiesControllersProps<T> {
 function TableUtilitiesControllers<T>({
   originalData,
   openUtility,
-  setOpenUtility,
+  setOpenUtility, 
   setData,
   filterCb,
 }: TableUtilitiesControllersProps<T>) {
@@ -27,18 +27,18 @@ function TableUtilitiesControllers<T>({
 
   const handleUtility = (utility: string) => {
     if (openUtility === utility) {
-      setOpenUtility('');
+      setOpenUtility(() => '');
       return;
     }
 
-    setOpenUtility(utility);
+    setOpenUtility(() => utility);
   };
 
   return (
     <div className="flex items-end">
       <TableSearchBar search={searchData} setSearch={setSearchData} />
-      <ArrowUpDown onClick={() => handleUtility('sort')} />
-      <ListFilter onClick={() => handleUtility('filter')} />
+      <ArrowUpDown className="w-4 cursor-pointer" onClick={() => handleUtility('sort')} />
+      <ListFilter className="w-4 cursor-pointer" onClick={() => handleUtility('filter')} />
     </div>
   );
 }

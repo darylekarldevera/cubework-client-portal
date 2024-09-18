@@ -1,86 +1,72 @@
-import { faker } from '@faker-js/faker';
-import { Buffer } from 'buffer';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
+import { DocumentsQuery } from '@/queries/DocumentsQuery';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
-
-const getData = async (): Promise<IDocument[]> => {
-  const data = [...Array(10)].map((file, index) => {
-    const filenames = [faker.system.commonFileName('pdf'), faker.system.commonFileName('csv')];
-    const randomIndex = Math.floor(Math.random() * filenames.length);
-    const filename = filenames[randomIndex];
-    const mimetype = filename.includes("pdf") ? 'application/pdf' : 'text/csv';
-
-    return {
-      ...file,
-      id: index + 1,
-      date: faker.date.anytime(),
-      file: {
-        buffer: Buffer.from(faker.system.filePath()),
-        mimetype: mimetype,
-        originalname: faker.system.fileName(),
-        size: Buffer.byteLength(faker.system.filePath()),
-        filename: filename,
-        destination: faker.system.directoryPath(),
-        fieldname: '',
-        encoding: '',
-        path: faker.system.filePath(),
-      },
-    };
-  });
-
-  return data;
-};
+import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 
 function StatementInvoiceDocument() {
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
   const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
-  const [utility, setUtility] = useState<DocumentTableUtility<IDocument>>(new DocumentTableUtility([]));
+  const invoiceDocuments = DocumentsQuery('invoice_documents');
 
   const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
     return items.filter((item) => {
-      return item.file.filename.toLowerCase().includes(searchData.toLowerCase());
+      return item?.file?.filename.toLowerCase().includes(searchData.toLowerCase());
     });
   }, []);
 
+  // Memoize the utility instance only when the invoiceDocuments data changes
+  const utility = useMemo(() => {
+    if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
+      // Use spread operator to avoid mutating original data
+      const utilityInstance = new DocumentTableUtility<IDocument>([...invoiceDocuments.data]);
+      const sortedData = utilityInstance.sortData();
+      setDocumentsData(sortedData);
+      setOriginalData(sortedData);
+      return utilityInstance;
+    }
+    return new DocumentTableUtility<IDocument>([]);
+  }, [invoiceDocuments.data, invoiceDocuments.isSuccess]);
+
   useEffect(() => {
-    getData()
-      .then((data) => {
-        const updatedData = new DocumentTableUtility(data).sortData();
-        
-        setDocumentsData(() => updatedData);
-        setOriginalData(() => updatedData);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
+      // Sort the data and update the state
+      const sortedData = utility.sortData();
+      setDocumentsData(sortedData);
+      setOriginalData(sortedData);
+    }
+
+    if (invoiceDocuments.isError) {
+      setDocumentsData([]);
+      setOriginalData([]);
+    }
   }, []);
 
-  useEffect(() => {
-    setUtility(
-      () => new DocumentTableUtility(documentsData)
-    );
-  }, [originalData])
+  if (invoiceDocuments.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (invoiceDocuments.isError) {
+    return <div>Error...</div>;
+  }
 
   return (
-    <React.Fragment>
-      <TableUtilities 
+    <div>
+      <TableUtilities
         data={documentsData}
         originalData={originalData}
         setData={setDocumentsData}
         filterCb={filterCb}
         utilityInstance={utility}
+        sortOptions={SORT_OPTIONS}
+        filterOptions={FILTER_OPTIONS}
       />
-      <DocumentListTable 
-        data={documentsData} 
-        fileType="PDF" 
-        documentType="Statement/Invoice" 
-      />
-    </React.Fragment>
+      <DocumentListTable data={documentsData} documentType="Statement/Invoice" />
+    </div>
   );
 }
 

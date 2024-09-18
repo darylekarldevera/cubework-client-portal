@@ -7,26 +7,25 @@ interface IDocumentDetailsCardProps {
   key: number | string;
   isVisible: boolean;
   item: IDocument;
-  fileType: string;
   documentType: string;
 }
 
-function DocumentDetailsCard({ isVisible, key, item, fileType, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
+function DocumentDetailsCard({ isVisible, key, item, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
   const formatDate = (date: Date) => {
-    return moment(date.toString()).add(10, 'days').calendar();
+    return moment(date.toString()).format('MM/DD/YYYY');
   };
 
   const downloadFile = async (file: IFile) => {
     try {
       const options = {
-        suggestedName: file.filename,
+        suggestedName: file?.filename,
         ...FILE_SYSTEM_PICKER_OPTIONS,
       };
 
-      // prompt the user for the location to save the file.
+      // prompt the user for the location to save the file?.
       const handle = await window.showSaveFilePicker(options);
-      const blob = new Blob([file.buffer], { type: file.mimetype });
-      const objToFile = new File([blob], 'filename' + '.pdf', { type: file.mimetype });
+      const blob = new Blob([file?.buffer], { type: file?.mimetype });
+      const objToFile = new File([blob], 'filename' + '.pdf', { type: file?.mimetype });
 
       const writable = await handle.createWritable();
       await writable.write(objToFile);
@@ -36,20 +35,21 @@ function DocumentDetailsCard({ isVisible, key, item, fileType, documentType, }: 
     }
   };
 
+  function getFileType(fileType: string) {
+    return fileType?.includes('pdf') ? 'PDF' : 'CSV';
+  }
+
   if (isVisible) return null;
 
   return (
-    <div key={key} className="flex items-center justify-between p-2">
+    <div key={key} className="flex items-center justify-between p-2 font-regular text-[10px]">
       <div className="flex flex-col mx-1">
-        <p className="text-[#59BA56]">{item.file.filename}</p>
-        <p>{fileType} • {formatDate(item.date)} • {documentType}</p>
+        <p className="text-[#59BA56]">{item?.file?.filename}</p>
+        <p>
+          {getFileType(item?.file?.mimetype)} • {formatDate(item?.date)} • {documentType}
+        </p>
       </div>
-      <img 
-        alt="download_icon" 
-        src={arrowDown} 
-        className="cursor-pointer" 
-        onClick={() => downloadFile(item.file)} 
-      />
+      <img alt="download_icon" src={arrowDown} className="cursor-pointer w-4" onClick={() => downloadFile(item?.file)} />
     </div>
   );
 }

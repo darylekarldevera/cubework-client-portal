@@ -19,20 +19,13 @@ interface ITableFilterUtilityProps {
 }
 
 function TableFilterUtility({ filter, setCheckBox, options }: ITableFilterUtilityProps) {
-  const keyNameSetter = (parent: string, type: string) => {
-    const regex = /[\W_]+/g;
-    const newParent = parent?.toLowerCase()?.replace(regex, '');
-    const newType = type?.toLowerCase()?.replace(regex, '');
-    return `${newParent}-${newType}`;
-  };
-  
   return (
     <div className="flex h-5">
       <RadioGroup
         className="flex flex-row items-center justify-center space-x-2 mr-5 border-r pr-4"
-        value={keyNameSetter(filter.parent, filter.filterType)}
+        value={`${filter.parent}_${filter.filterType}`}
         onValueChange={(newValue) => {
-          const [parent, filterType] = newValue.split('-');
+          const [parent, filterType] = newValue.split('_');
           setCheckBox((prev) => ({
             ...prev,
             filter: {
@@ -47,7 +40,7 @@ function TableFilterUtility({ filter, setCheckBox, options }: ITableFilterUtilit
           <div className="flex items-center space-x-2" key={index}>
             <RadioGroupItem
               className="w-[14px] h-[h-14px]"
-              value={keyNameSetter(option.parent, option.filterType)}
+              value={`${option.name}_${option.filterType}`}
               id={`c${index}`}
             />
             <Label className="text-[0.70rem]" htmlFor={`c${index}`}>

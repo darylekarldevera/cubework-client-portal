@@ -9,8 +9,8 @@ interface IDataTableBodyListProps<TData> {
 
 function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
   function renderCellContent(cell: Cell<TData, unknown>) {
-    if (typeof cell.getValue() === 'string' && new Date(cell.getValue() as string).toString() !== 'Invalid Date') {
-      return <p>{moment(cell.getValue() as any).format('MM/DD/YYYY')}</p>;
+    if (new Date(cell.getValue() as string).toString() !== 'Invalid Date') {
+      return <p>{moment(new Date(cell.getValue() as string)).format('MM/DD/YYYY')}</p>;
     }
 
     return flexRender(cell.column.columnDef.cell, cell.getContext());

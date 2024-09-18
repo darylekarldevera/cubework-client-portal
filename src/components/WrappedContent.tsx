@@ -2,13 +2,12 @@ import React from 'react';
 
 interface WrappedContentProps {
   children: React.ReactNode;
-  className?: string;
 }
 
-function WrappedContent({ children, className = '' }: WrappedContentProps) {
+function WrappedContent({ children }: WrappedContentProps) {
   return (
-    <div className="h-full w-[100vw] max-w-full  overflow-y-auto ">
-      <div className={`h-full w-full px-16`}>{children}</div>
+    <div className="h-full overflow-y-auto">
+      <div className={`h-full w-full xxs:px-5 px-16`}>{children}</div>
     </div>
   );
 }

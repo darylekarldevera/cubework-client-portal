@@ -1,12 +1,21 @@
 import React from 'react';
-import { flexRender, Table } from '@tanstack/react-table';
+import { Cell, flexRender, Table } from '@tanstack/react-table';
 import { TableCell, TableRow } from '../ui/table';
+import moment from 'moment';
 
 interface IDataTableBodyListProps<TData> {
   table: Table<TData>;
 }
 
 function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
+  function renderCellContent(cell: Cell<TData, unknown>) {
+    if (typeof cell.getValue() === 'string' && new Date(cell.getValue() as string).toString() !== 'Invalid Date') {
+      return <p>{moment(cell.getValue() as any).format('MM/DD/YYYY')}</p>;
+    }
+
+    return flexRender(cell.column.columnDef.cell, cell.getContext());
+  };
+
   return (
     <React.Fragment>
       {table.getRowModel().rows.map((row) => (
@@ -20,7 +29,7 @@ function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
               className="text-black font-regular text-[10px] leading-5"
               key={cell.id}
             >
-              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              {renderCellContent(cell)}
             </TableCell>
           ))}
         </TableRow>

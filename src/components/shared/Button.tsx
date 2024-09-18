@@ -10,12 +10,16 @@ const variantObject = {
   primary: 'bg-[#4DB850]',
   secondary: 'bg-[#FFFFFF]',
   destructive: 'bg-[#FF3B30]',
+  outlined: 'bg-white',
+  'outlined-black': 'bg-white',
 };
 
 const darkObject = {
   primary: 'hover:bg-[#4FA04C]',
   secondary: 'hover:bg-[#F3F3F3]',
   destructive: 'hover:bg-[#DF3329]',
+  outlined: 'hover:bg-[#EEEEEE]',
+  'outlined-black': 'hover:bg-[#EEEEEE]',
 };
 
 const Button = ({ children, variant = 'primary' }: ButtonProps) => {
@@ -24,17 +28,26 @@ const Button = ({ children, variant = 'primary' }: ButtonProps) => {
       ? variantObject.destructive
       : variant === 'secondary'
         ? variantObject.secondary
-        : variantObject.primary;
+        : variant === 'outlined'
+          ? variantObject.outlined
+          : variant === 'outlined-black'
+            ? variantObject.outlined
+            : variantObject.primary;
   const darkHover =
     variant === 'destructive'
       ? darkObject.destructive
       : variant === 'secondary'
         ? darkObject.secondary
-        : darkObject.primary;
+        : variant === 'outlined'
+          ? darkObject.outlined
+          : variant === 'outlined-black'
+            ? darkObject['outlined-black']
+            : darkObject.primary;
   return (
     <ShadCNButton
-      className={`text-[12px] leading-relaxed  font-bold rounded-[32px]   h-[35px] ${darkHover}
-       ${color} ${variant === 'secondary' ? 'border border-[#717171] text-[#717171]' : 'text-white'} ${children === 'Setup Auto Pay' ? ' w-[120px]' : 'px-[37px] w-[100px]'}`}
+      type="submit"
+      className={`text-[11px] leading-relaxed   text-white border rounded-[6px]  h-[35px] ${darkHover}
+       ${color} ${variant === 'secondary' ? ' border-[#717171] text-[#717171]' : variant === 'outlined' ? ' border-[#59BA56] text-[#59BA56] ' : variant === 'outlined-black' ? 'border-black text-black' : ''} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : 'px-[37px] w-[100px]'}`}
     >
       {children}
     </ShadCNButton>

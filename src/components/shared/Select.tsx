@@ -16,7 +16,7 @@ const Select = ({ placeholder, items }: SelectProps) => {
   placeholder = items && items[0];
   return (
     <ShadCNSelect>
-      <SelectTrigger className="w-[178px] h-[30px] text-[11px] leading-relaxed rounded-[6px] border border-[#717171] text-[#717171]">
+      <SelectTrigger className="w-full h-[30px] text-[11px] leading-relaxed rounded-[6px] border border-[#717171] text-[#717171]">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className=" bg-white rounded-[6px]">

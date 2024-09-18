@@ -1,8 +1,7 @@
 import { Label as ShadCNLabel } from '@/components/ui/label';
-import { ReactNode } from 'react';
 
 type TableHeaderProps = {
-  children: ReactNode;
+  children: string;
 };
 
 const TableHeader = ({ children }: TableHeaderProps) => {

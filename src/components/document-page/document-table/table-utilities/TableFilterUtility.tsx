@@ -1,5 +1,4 @@
 import React from 'react';
-import { FILTER_OPTIONS } from '@/constants/documentsUtilityOptions';
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 
 import { Label } from '@/components/ui/label';
@@ -16,14 +15,22 @@ interface ITableFilterUtilityProps {
     };
   };
   setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
+  options: any[];
 }
 
-function TableFilterUtility({ filter, setCheckBox }: ITableFilterUtilityProps) {
+function TableFilterUtility({ filter, setCheckBox, options }: ITableFilterUtilityProps) {
+  const keyNameSetter = (parent: string, type: string) => {
+    const regex = /[\W_]+/g;
+    const newParent = parent?.toLowerCase()?.replace(regex, '');
+    const newType = type?.toLowerCase()?.replace(regex, '');
+    return `${newParent}-${newType}`;
+  };
+  
   return (
     <div className="flex h-5">
       <RadioGroup
         className="flex flex-row items-center justify-center space-x-2 mr-5 border-r pr-4"
-        value={`${filter.parent}-${filter.filterType}`}
+        value={keyNameSetter(filter.parent, filter.filterType)}
         onValueChange={(newValue) => {
           const [parent, filterType] = newValue.split('-');
           setCheckBox((prev) => ({
@@ -36,11 +43,11 @@ function TableFilterUtility({ filter, setCheckBox }: ITableFilterUtilityProps) {
           }));
         }}
       >
-        {FILTER_OPTIONS.map((option, index) => (
+        {(options as any)?.map((option: any, index: number) => (
           <div className="flex items-center space-x-2" key={index}>
             <RadioGroupItem
               className="w-[14px] h-[h-14px]"
-              value={`${option.name}-${option.filterType}`}
+              value={keyNameSetter(option.parent, option.filterType)}
               id={`c${index}`}
             />
             <Label className="text-[0.70rem]" htmlFor={`c${index}`}>

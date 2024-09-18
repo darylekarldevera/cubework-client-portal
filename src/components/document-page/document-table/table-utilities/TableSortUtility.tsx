@@ -1,5 +1,4 @@
 import React from 'react';
-import { SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 
 import TableSortUtilityList from './TableSortUtilityList';
@@ -10,12 +9,13 @@ interface ITableSortUtilityProps {
     sortType: string;
   };
   setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
+  options: any[];
 }
 
-function TableSortUtility({ sort, setCheckBox }: ITableSortUtilityProps) {
+function TableSortUtility({ sort, setCheckBox, options }: ITableSortUtilityProps) {
   return (
     <React.Fragment>
-      {SORT_OPTIONS.map((option, index) => (
+      {options?.map((option, index) => (
         <div key={index} className="flex flex-row space-x-2 mr-5 border-r pr-4">
           <p className="text-center font-bold text-xs">{option.name}</p>
           <TableSortUtilityList

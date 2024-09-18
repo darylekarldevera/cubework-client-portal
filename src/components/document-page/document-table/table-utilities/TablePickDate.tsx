@@ -17,8 +17,8 @@ interface ITablePickDateProps {
 function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
   return (
     <div className="flex w-80 justify-around">
-      {Object.keys(pickDate).map((key) => (
-        <Popover>
+      {Object.keys(pickDate).map((key, index) => (
+        <Popover key={`c${key}${index}`}>
           <PopoverTrigger asChild>
             <Button
               variant={'outline'}
@@ -31,7 +31,7 @@ function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
               <CalendarIcon className="mr-2 w-4 h-4 ml-auto" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 bg-white flex flex-row" align="start">
+          <PopoverContent className="w-auto p-0 bg-white flex flex-row" align="start" key={`d${key}${index}`}>
             <Calendar
               mode="single"
               captionLayout="dropdown-buttons"

@@ -6,6 +6,7 @@ import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
+import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 
 function StatementInvoiceDocument() {
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
@@ -14,7 +15,7 @@ function StatementInvoiceDocument() {
 
   const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
     return items.filter((item) => {
-      return item.file.filename.toLowerCase().includes(searchData.toLowerCase());
+      return item?.file?.filename.toLowerCase().includes(searchData.toLowerCase());
     });
   }, []);
 
@@ -61,6 +62,8 @@ function StatementInvoiceDocument() {
         setData={setDocumentsData}
         filterCb={filterCb}
         utilityInstance={utility}
+        sortOptions={SORT_OPTIONS}
+        filterOptions={FILTER_OPTIONS}
       />
       <DocumentListTable data={documentsData} documentType="Statement/Invoice" />
     </div>

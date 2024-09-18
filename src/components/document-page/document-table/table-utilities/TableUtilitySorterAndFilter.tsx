@@ -5,18 +5,22 @@ import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 
 import TableSortUtility from './TableSortUtility';
 import TableFilterUtility from './TableFilterUtility';
+import { IFilterOption, ISortOption } from '@/constants/documentsUtilityOptions';
+import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
 
 interface TableUtilitySorterAndFilterProps<T> {
   data: T[];
   openUtility: string;
   setData: React.Dispatch<React.SetStateAction<T[]>>;
-  utilityInstance: DocumentTableUtility<T>;
+  utilityInstance: DocumentTableUtility<T> | HomeTableUtility<T>;
+  options: ISortOption[] | IFilterOption[];
 }
 
 function TableUtilitySorterAndFilter<T>({
   openUtility,
   setData,
   utilityInstance,
+  options,
 }: TableUtilitySorterAndFilterProps<T>) {
   const [checkbox, setCheckbox] = useState<ICheckbox>({
     sort: {
@@ -52,9 +56,9 @@ function TableUtilitySorterAndFilter<T>({
   return (
     <div className="flex px-2 items-center mt-2">
       {openUtility === 'sort' ? (
-        <TableSortUtility sort={checkbox.sort} setCheckBox={setCheckbox} />
+        <TableSortUtility sort={checkbox.sort} setCheckBox={setCheckbox} options={options} />
       ) : (
-        <TableFilterUtility filter={checkbox.filter} setCheckBox={setCheckbox} />
+        <TableFilterUtility filter={checkbox.filter} setCheckBox={setCheckbox} options={options} />
       )}
     </div>
   );

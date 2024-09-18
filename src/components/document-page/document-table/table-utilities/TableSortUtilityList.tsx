@@ -14,10 +14,10 @@ interface ITableSortUtilityListProps {
 }
 
 function TableSortUtilityList({ option, index, sort, setCheckBox }: ITableSortUtilityListProps) {
-  const optionKeys = Object.keys(option.sortType);
+  const optionKeys = Object.keys(option.sortType ?? {}) ?? [];
   return (
     <div className="flex flex-row space-x-2">
-      {optionKeys.map((sortType, keyIndex) => (
+      {optionKeys?.map((sortType, keyIndex) => (
         <TableSortUtilityCard
           key={keyIndex}
           keyIndex={keyIndex}

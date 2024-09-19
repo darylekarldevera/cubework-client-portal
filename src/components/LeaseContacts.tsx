@@ -43,25 +43,21 @@ export default function LeaseContacts() {
     data = q?.data?.data;
   }
 
-  return (<>
-    <Heading1 text="Lease" />
+  return (
+    <>
+      <Heading1 text="License Profile" />
 
-    <Tabs links={LEASE_TABS} />
+      <Tabs links={LEASE_TABS} />
 
-    {q.isFetching && (<>Loading...</>)}
+      {q.isFetching && <>Loading...</>}
 
-    {(q.isError || q.isLoadingError) && (
-      <div>Error fetching data</div>
-    )}
+      {(q.isError || q.isLoadingError) && <div>Error fetching data</div>}
 
-    {q.isSuccess &&  (
-      <CWCard>
-        <DataTable
-          columns={ACTIVITY_TABLE_COLUMNS}
-          data={data}
-          cwStyle={true}
-        />
-      </CWCard>
-    )}
-  </>);
+      {q.isSuccess && (
+        <CWCard>
+          <DataTable columns={ACTIVITY_TABLE_COLUMNS} data={data} cwStyle={true} />
+        </CWCard>
+      )}
+    </>
+  );
 }

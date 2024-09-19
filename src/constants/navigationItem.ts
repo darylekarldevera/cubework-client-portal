@@ -6,8 +6,8 @@ import servicesBlackIcon from '@/assets/icons/services-black.svg';
 import servicesWhiteIcon from '@/assets/icons/services-white.svg';
 import documentsBlackIcon from '@/assets/icons/documents-black.svg';
 import documentsWhiteIcon from '@/assets/icons/documents-white.svg';
-import leaseProfileWhiteIcon from '@/assets/icons/lease-profile-white.svg';
-import leaseProfileBlackIcon from '@/assets/icons/lease-profile-black.svg';
+import licenseProfileWhiteIcon from '@/assets/icons/lease-profile-white.svg';
+import licenseProfileBlackIcon from '@/assets/icons/lease-profile-black.svg';
 
 const NAVIGATION_ITEMS = [
   {
@@ -20,12 +20,12 @@ const NAVIGATION_ITEMS = [
     },
   },
   {
-    name: 'Lease Profile',
-    path: '/lease-profile/contacts',
-    alt: 'lease profile icon',
+    name: 'License Profile',
+    path: '/license-profile/contacts',
+    alt: 'license profile icon',
     img: {
-      blackIcon: leaseProfileBlackIcon,
-      whiteIcon: leaseProfileWhiteIcon,
+      blackIcon: licenseProfileBlackIcon,
+      whiteIcon: licenseProfileWhiteIcon,
     },
   },
   {
@@ -39,8 +39,8 @@ const NAVIGATION_ITEMS = [
   },
   {
     name: 'Documents',
-    path: '/lease-documents/invoice',
-    alt: 'lease document icon',
+    path: '/license-documents/invoice',
+    alt: 'license document icon',
     img: {
       blackIcon: documentsBlackIcon,
       whiteIcon: documentsWhiteIcon,

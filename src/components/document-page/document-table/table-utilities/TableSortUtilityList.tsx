@@ -1,35 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
-import TableSortUtilityCard from './TableSortUtilityCard';
 import { ISortOption } from '@/constants/documentsUtilityOptions';
+import TableSortUtilityCardV2 from './TableSortUtilityCardV2';
 
 interface ITableSortUtilityListProps {
-  index: number;
-  option: ISortOption;
-  sort: {
-    parent: string;
-    sortType: string;
-  };
+  options: ISortOption[];
   setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
 }
 
-function TableSortUtilityList({ option, index, sort, setCheckBox }: ITableSortUtilityListProps) {
-  const optionKeys = Object.keys(option.sortType ?? {}) ?? [];
+function TableSortUtilityList({ options, setCheckBox }: ITableSortUtilityListProps) {
+  const [openSort, setOpenSort] = useState('');
+  const [select, setSelect] = useState<any>({
+    name: '',
+    sortType: '',
+  });
+
   return (
     <div className="flex flex-row space-x-2">
-      {optionKeys?.map((sortType, keyIndex) => (
-        <TableSortUtilityCard
-          key={keyIndex}
-          keyIndex={keyIndex}
-          option={option}
-          index={index}
-          sort={sort}
-          setCheckBox={setCheckBox}
-          sortType={sortType}
-        />
-      ))}
+      {options?.length
+        ? options?.map((option, index) => (
+            <TableSortUtilityCardV2
+              key={index}
+              option={option}
+              select={select}
+              openSort={openSort}
+              sortTypeKeys={Object.keys(option?.sortType ?? {}) ?? []}
+              setSelect={setSelect}
+              setCheckBox={setCheckBox}
+              setOpenSort={setOpenSort}
+            />
+          ))
+        : null}
     </div>
   );
 }
 
-export default TableSortUtilityList
+export default TableSortUtilityList;

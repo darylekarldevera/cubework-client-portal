@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { IDocument } from '@/types/invoiceDocuments';
 
-import DataTablePaginationControllers from '../../data-table/DataTablePaginationControllers';
 import useDataListPagination from '@/customHook/useDataListPagination';
+
 import DocumentList from './DocumentList';
+import DataTablePaginationControllers from '../../data-table/DataTablePaginationControllers';
 
 interface IDocumentListTableTableProps {
   data: IDocument[];
-  fileType: string;
   documentType: string;
 }
 
-function DocumentListTable({ data, fileType, documentType }: IDocumentListTableTableProps): JSX.Element {
+function DocumentListTable({ data, documentType }: IDocumentListTableTableProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const { paginationNumbers, canNextPage, canPreviousPage } = useDataListPagination({ data, currentPage });
 
@@ -21,12 +21,16 @@ function DocumentListTable({ data, fileType, documentType }: IDocumentListTableT
 
   return (
     <div
-      className="flex flex-col overflow-auto rounded-t-[2vh] rounded-b-[4vh] p-5 max-h-full"
+      className="flex flex-col rounded-t-[2vh] rounded-b-[4vh] px-2 py-5 border min-h-[58vh]"
       style={{
-        boxShadow: '0px 4px 12px 0px #00000040',
+        boxShadow: '0px 4px 12px 0px #00000040'
       }}
     >
-      <DocumentList data={data} currentPage={currentPage} fileType={fileType} documentType={documentType} />
+      <DocumentList 
+        data={data} 
+        currentPage={currentPage}
+        documentType={documentType} 
+      />
 
       <DataTablePaginationControllers
         canNextPage={canNextPage}

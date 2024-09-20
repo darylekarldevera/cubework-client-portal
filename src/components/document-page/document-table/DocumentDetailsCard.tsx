@@ -42,7 +42,7 @@ function DocumentDetailsCard({ isVisible, key, item, documentType, }: IDocumentD
   if (isVisible) return null;
 
   return (
-    <div key={key} className="flex items-center justify-between p-2 font-regular text-[10px]">
+    <div key={key} className="flex items-center justify-between p-2 font-regular text-[10px] border-b border-gray-500W">
       <div className="flex flex-col mx-1">
         <p className="text-[#59BA56]">{item?.file?.filename}</p>
         <p>

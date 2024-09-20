@@ -22,9 +22,28 @@ function HomeQuery(endpoint: string) {
       const data = resp.data.map((item: any, index: number) => {
         const typeArray = ['Pre-Authorized Payment', 'Rent - Warehouse', 'Forklift Rental'];
         const methodArray = ['-', '(chk) : ACH - 0000 Pre - Authorized', 'Visa'];
+        const chargeArray = [
+          'Parking Space',
+          'Maintenance Fee',
+          'Late Payment Penalty',
+          'Membership Fee',
+          'Service Upgrade',
+          'Utility Bill',
+        ];
+
+        const paymentArray = [
+          'Credit Card Payment',
+          'Cash Payment',
+          'Bank Transfer',
+          'Online Payment',
+          'Check Payment',
+          'Mobile Payment',
+        ];
 
         const type = generateRandom(typeArray);
         const method = generateRandom(methodArray);
+        const charge = generateRandom(chargeArray);
+        const payment = generateRandom(paymentArray);
 
         return {
           ...item,
@@ -32,6 +51,8 @@ function HomeQuery(endpoint: string) {
           type,
           method,
           date: faker.date.anytime(),
+          charge,
+          payments: payment,
         };
       });
 

@@ -15,15 +15,15 @@ const SORT_OPTIONS: ISortOption[] = [
   {
     name: 'Name',
     sortType: {
-      asc: 'ASC',
-      desc: 'DESC'
+      asc: 'ascending',
+      desc: 'descending'
     }
   },
   {
     name: 'Date',
     sortType: {
-      asc: 'ASC',
-      desc: 'DESC'
+      asc: 'ascending',
+      desc: 'descending'
     }
   }
 ];

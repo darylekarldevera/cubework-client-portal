@@ -7,9 +7,11 @@ interface IDataTableBodyListProps<TData> {
   table: Table<TData>;
 }
 
+
 function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
   function renderCellContent(cell: Cell<TData, unknown>) {
-    if (new Date(cell.getValue() as string).toString() !== 'Invalid Date') {
+    const isValidDate = new Date(cell.getValue() as string).toString() !== 'Invalid Date'
+    if (isValidDate && cell.getValue() instanceof Date) {
       return <p>{moment(new Date(cell.getValue() as string)).format('MM/DD/YYYY')}</p>;
     }
 

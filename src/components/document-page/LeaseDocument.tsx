@@ -3,9 +3,11 @@ import { useCallback, useMemo, useState } from 'react';
 import { IDocument } from '@/types/invoiceDocuments';
 import { DocumentsQuery } from '@/queries/DocumentsQuery';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
+import { SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
+import ErrorMessage from '@/shared/modals/ErrorMessage';
 
 function LeaseDocument() {
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
@@ -35,18 +37,17 @@ function LeaseDocument() {
     return <div>Loading...</div>;
   }
 
-  if (leaseDocument.isError) {
-    return <div>Error...</div>;
-  }
-
   return (
     <div>
+      <ErrorMessage isVisible={leaseDocument.isError} />
       <TableUtilities
         data={documentsData}
         originalData={originalData}
         setData={setDocumentsData}
         filterCb={filterCb}
         utilityInstance={utility}
+        sortOptions={SORT_OPTIONS}
+        filterOptions={[]}
       />
       <DocumentListTable data={documentsData} documentType="Least Documents" />
     </div>

@@ -3,10 +3,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IDocument } from '@/types/invoiceDocuments';
 import { DocumentsQuery } from '@/queries/DocumentsQuery';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
+import { SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
-import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
+import ErrorMessage from '@/shared/modals/ErrorMessage';
 
 function StatementInvoiceDocument() {
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
@@ -50,12 +51,9 @@ function StatementInvoiceDocument() {
     return <div>Loading...</div>;
   }
 
-  if (invoiceDocuments.isError) {
-    return <div>Error...</div>;
-  }
-
   return (
     <div>
+      <ErrorMessage isVisible={invoiceDocuments.isError} />
       <TableUtilities
         data={documentsData}
         originalData={originalData}
@@ -63,7 +61,7 @@ function StatementInvoiceDocument() {
         filterCb={filterCb}
         utilityInstance={utility}
         sortOptions={SORT_OPTIONS}
-        filterOptions={FILTER_OPTIONS}
+        filterOptions={[]}
       />
       <DocumentListTable data={documentsData} documentType="Statement/Invoice" />
     </div>

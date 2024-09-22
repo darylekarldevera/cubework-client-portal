@@ -23,14 +23,10 @@ function DocumentListTable({ data, documentType }: IDocumentListTableTableProps)
     <div
       className="flex flex-col rounded-t-[2vh] rounded-b-[4vh] px-2 py-5 border min-h-[58vh]"
       style={{
-        boxShadow: '0px 4px 12px 0px #00000040'
+        boxShadow: '0px 4px 12px 0px #00000040',
       }}
     >
-      <DocumentList 
-        data={data} 
-        currentPage={currentPage}
-        documentType={documentType} 
-      />
+      <DocumentList data={data} currentPage={currentPage} documentType={documentType} />
 
       <DataTablePaginationControllers
         canNextPage={canNextPage}
@@ -38,7 +34,7 @@ function DocumentListTable({ data, documentType }: IDocumentListTableTableProps)
         previousPage={() => handleChangePage(currentPage - 1)}
         nextPage={() => handleChangePage(currentPage + 1)}
         paginationNumbers={paginationNumbers}
-        setPage={() => handleChangePage(currentPage)}
+        setPage={handleChangePage}
         cwStyle={true}
       />
     </div>

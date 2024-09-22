@@ -1,7 +1,9 @@
 import React from 'react';
-import moment from 'moment';
-import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+import formatDate from '@/lib/formatDate';
+
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
@@ -24,7 +26,7 @@ function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
               variant={'outline'}
               className={cn('w-[120px] text-[10px] h-full', !pickDate[key] && 'text-muted-foreground')}
             >
-              <span>{pickDate[key] ? moment(pickDate[key].toString()).format('MM/DD/YYYY') : null}</span>
+              <span>{pickDate[key] ? formatDate(pickDate[key]) : null}</span>
               <CalendarIcon className="w-4 h-4 ml-auto" />
             </Button>
           </PopoverTrigger>

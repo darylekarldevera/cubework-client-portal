@@ -62,16 +62,16 @@ function DataTablePaginationControllers({
 
   return (
     <Pagination className={`${cwStyle ? 'cw-style' : ''} mt-auto`}>
-      <PaginationContent className="">
+      <PaginationContent key="pagination-content">
         <PaginationItem>
           <PaginationPrevious
             className={`page-prev ${conditionalClassName(!canPreviousPage)}`}
-            onClick={() => handlePreviousPage()}
+            onClick={handlePreviousPage}
           />
         </PaginationItem>
 
         <PaginationItemLink
-          key={0}
+          key="first-page-link"
           pageNumber={1}
           onClick={() => handlePageChange(0)}
           isVisible={paginationNumbers.length > 1}
@@ -81,12 +81,12 @@ function DataTablePaginationControllers({
           `}
         />
 
-        <EllipsisIndicator isVisible={currentPage > 2} />
+        <EllipsisIndicator key="ellipsis-start" isVisible={currentPage > 2} />
 
-        {paginationOptions.map((number) => (
-          <div className="border-slate-600 border-solid border-1 ">
+        {paginationOptions.map((number, index) => (
+          <div className="border-slate-600 border-solid border-1 " key={`pagination-item-${number}`}>
             <PaginationItemLink
-              key={number}
+              key={`page-link-${number}-${index}`}
               pageNumber={number + 1}
               isVisible={number !== 0 && number !== paginationNumbers.length - 1}
               onClick={() => handlePageChange(number)}
@@ -98,10 +98,10 @@ function DataTablePaginationControllers({
           </div>
         ))}
 
-        <EllipsisIndicator isVisible={currentPage < paginationNumbers.length - 5} />
+        <EllipsisIndicator key="ellipsis-end" isVisible={currentPage < paginationNumbers.length - 5} />
 
         <PaginationItemLink
-          key={paginationNumbers.length}
+          key="last-page-link"
           pageNumber={paginationNumbers.length}
           onClick={() => handlePageChange(paginationNumbers.length - 1)}
           isVisible={paginationNumbers.length > 1}
@@ -112,10 +112,7 @@ function DataTablePaginationControllers({
         />
 
         <PaginationItem>
-          <PaginationNext
-            className={`page-next ${conditionalClassName(!canNextPage)}`}
-            onClick={() => handleNextPage()}
-          />
+          <PaginationNext className={`page-next ${conditionalClassName(!canNextPage)}`} onClick={handleNextPage} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

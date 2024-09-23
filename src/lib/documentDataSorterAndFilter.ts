@@ -2,16 +2,16 @@ import { IDocument } from "@/types/invoiceDocuments";
 
 export interface ICheckbox {
   sort: {
-    parent: string;
+    name: string;
     sortType: string;
   };
   filter: {
-    parent: string;
+    name: string;
     filterType: string;
     pickDate: {
       startDate: Date;
       endDate: Date | undefined;
-    }
+    };
   };
 }
 
@@ -33,23 +33,26 @@ class DocumentTableUtility<T> {
 
   sortData = () => {
     const toUpdateData = [...this.data];
-    // if (this?.checkbox?.sort.parent === "Name" && this?.checkbox?.sort.sortType === "asc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.file.filename > b.file.filename ? 1 : -1;
-    //   });
-    // }
-    
-    // if (this?.checkbox?.sort.parent === "Name" && this?.checkbox?.sort.sortType === "desc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.file.filename < b.file.filename ? 1 : -1;
-    //   });
-    // }
+    const sortName = this?.checkbox?.sort?.name?.toLowerCase();
+    const sortType = this?.checkbox?.sort?.sortType?.toLowerCase();
 
-    // if (this?.checkbox?.sort.parent === "Date" && this?.checkbox?.sort.sortType === "asc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.date > b.date ? 1 : -1;
-    //   });
-    // }
+    if (sortName === "name" && sortType === "ascending") {
+      return toUpdateData.sort((a, b) => {
+        return a.file.filename > b.file.filename ? 1 : -1;
+      });
+    }
+    
+    if (sortName === "name" && sortType === "descending") {
+      return toUpdateData.sort((a, b) => {
+        return a.file.filename < b.file.filename ? 1 : -1;
+      });
+    }
+
+    if (sortName === "date" && sortType === "ascending") {
+      return toUpdateData.sort((a, b) => {
+        return a.date > b.date ? 1 : -1;
+      });
+    }
 
     return toUpdateData.sort((a, b) => {
       return a.date < b.date ? 1 : -1;
@@ -58,13 +61,18 @@ class DocumentTableUtility<T> {
 
   filterData = (data: IDocument[]) => {
     let toUpdateData = [...data];
+    // Filter by name and type of document (invoice, statement, etc.)
+    const filterName = this?.checkbox?.filter?.name?.toLowerCase();
+    const filterType = this?.checkbox?.filter?.filterType?.toLowerCase();
 
-    if (this?.checkbox?.filter?.pickDate?.startDate && this?.checkbox?.filter?.pickDate?.endDate) {
+    // Filter by date
+    const startDate = this?.checkbox?.filter?.pickDate?.startDate;
+    const endDate = this?.checkbox?.filter?.pickDate?.endDate;
+
+    // filter by date range before filtering by name and type
+    if (startDate && endDate) {
       toUpdateData = toUpdateData.filter((item) => {
         const itemDate = new Date(item.date);
-
-        const startDate = this.checkbox?.filter?.pickDate?.startDate;
-        const endDate = this.checkbox?.filter?.pickDate?.endDate;
 
         if (startDate && endDate) {
           return itemDate >= startDate && itemDate <= endDate;
@@ -77,16 +85,6 @@ class DocumentTableUtility<T> {
         return false;
       });
     }
-
-
-
-    // if (this?.checkbox?.filter.parent === "PDF" && this?.checkbox?.filter.filterType === "pdf") {
-    //   return toUpdateData.filter((item) => item.file.mimetype.includes('application/pdf'));
-    // }
-
-    // if (this?.checkbox?.filter.parent === "CSV" && this?.checkbox?.filter.filterType === "csv") {
-    //   return toUpdateData.filter((item) => item.file.mimetype.includes('text/csv'));
-    // }
 
     return toUpdateData;
   };

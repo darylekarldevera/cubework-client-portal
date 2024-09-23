@@ -47,7 +47,7 @@ const Button = ({ children, variant = 'primary' }: ButtonProps) => {
     <ShadCNButton
       type="submit"
       className={`text-cb-text leading-relaxed   text-white border rounded-[6px]  h-[35px] ${darkHover}
-       ${color} ${variant === 'secondary' ? ' border-[#717171] text-[#717171]' : variant === 'outlined' ? ' border-cw-gray text-cw-green ' : variant === 'outlined-black' ? 'border-black text-black' : ''} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : 'px-[37px] w-[100px]'}`}
+       ${color} ${variant === 'secondary' ? ' border-cw-darkgray text-cw-darkgray' : variant === 'outlined' ? ' border-cw-gray text-cw-green ' : variant === 'outlined-black' ? 'border-black text-black' : ''} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : 'px-[37px] w-[100px]'}`}
     >
       {children}
     </ShadCNButton>

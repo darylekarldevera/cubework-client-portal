@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-const Account = () => {
+const MakePayment = () => {
   return (
     <div>
       <Outlet />
@@ -8,4 +8,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default MakePayment;

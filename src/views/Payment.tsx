@@ -7,7 +7,6 @@ import AccountDashboard from '@/views/payments/AccountDashboard.tsx';
 import { MakePaymentTable } from '@/views/payments/MakePaymentTable.tsx';
 import { IMakePaymentTableProps } from '@/types/payments';
 
-
 const Payment = () => {
 
   // TODO: Remove dummy data
@@ -25,7 +24,7 @@ const Payment = () => {
   };
 
   return (
-    <div className="ml-5 mt-[30px]">
+    <div>
       <Label>Payment</Label>
       <Tabs defaultValue="make-payment" className="w-full mt-[30px]">
         <TabsButtonWrapper>

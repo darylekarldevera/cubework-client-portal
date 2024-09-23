@@ -18,7 +18,7 @@ function DataTableHeaderList<TData>({ table }: IDataTableHeaderListProps<TData>)
                 minWidth: header.column.columnDef?.size,
                 maxWidth: header.column.columnDef?.size,
               }}
-              className="text-[#717171] text-[11px] leading-relaxed"
+              className="text-[#717171] text-cb-text leading-relaxed"
             >
               {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
             </TableHead>

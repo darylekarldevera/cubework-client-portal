@@ -30,7 +30,7 @@
     }
 
     .badge-component {
-        @apply absolute left-2 bottom-3 bg-red-500 w-[14px] h-[14px] rounded-full text-[10px] text-white flex justify-center items-center;
+        @apply absolute left-2 bottom-3 bg-red-500 w-[14px] h-[14px] rounded-full text-cb-table text-white flex justify-center items-center;
     }
 }
 

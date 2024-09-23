@@ -86,6 +86,10 @@ export default {
         sidebar: '236px',
         logoHeight: '130px',
       },
+      fontSize: {
+        'cb-table': '10px',
+        'cb-text': '11px',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

@@ -19,7 +19,7 @@ const Payment = ({}: PaymentProps) => {
           <TabsButton link="account">Accounts/Verify Bank</TabsButton>
         </TabsButtonWrapper>
         <TabsContent value="make-payment">
-          <MakePaymentTable />
+          <MakePaymentTable totalAmount={88.99} totalPayment={88.0} />
         </TabsContent>
         <TabsContent value="auto-pay">
           <AutoPayList />

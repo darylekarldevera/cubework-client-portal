@@ -6,9 +6,8 @@ import AutoPayList from '@/views/payments/AutoPayList.tsx';
 import AccountDashboard from '@/views/payments/AccountDashboard.tsx';
 import MakePaymentTable from '@/views/payments/MakePaymentTable.tsx';
 
-type PaymentProps = object;
 
-const Payment = ({}: PaymentProps) => {
+const Payment = () => {
   return (
     <div className="ml-5 mt-[30px]">
       <Label>Payment</Label>

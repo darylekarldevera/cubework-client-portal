@@ -1,18 +1,19 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { HomeQuery } from '@/queries/HomeQuery';
 import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
 import IHomeActivityTable from '@/types/homeActivityTable';
+import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
 
 import CWCard from './CWCard';
 import { Heading1 } from './ui/headings';
 import DataTable from './data-table/DataTable';
 import PaymentBalanceCard from './PaymentBalanceCard';
-import ErrorMessage from '@/shared/modals/ErrorMessage';
 import TableUtilities from './document-page/document-table/table-utilities/TableUtilities';
 
 function Home() {
+  const { showError, setShowError } = useContext(ErrorModalContext);
   const [originalData, setOriginalData] = useState<IHomeActivityTable[]>([]);
   const [homeData, setHomeData] = useState<IHomeActivityTable[]>([]);
   const homeApiData = HomeQuery('invoice_documents');
@@ -55,11 +56,15 @@ function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    if (homeApiData.isError) {
+      setShowError(!showError);
+    }
+  }, [homeApiData.isError]);
+
   return (
     <div className="pb-[3%]">
-      <ErrorMessage isVisible={homeApiData.isError} />
       <Heading1 text="Home" />
-
       <PaymentBalanceCard />
 
       <div className="border-b-2 border-solid border-cw-green w-[100%] relative home-activity-bar mb-2 mt-6">

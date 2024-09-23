@@ -1,17 +1,16 @@
 import { PaginationItem, PaginationLink } from '../ui/pagination';
 
 interface IPaginationItemLinkProps {
-  key: number;
   pageNumber: number;
   onClick: () => void;
   isVisible: boolean;
   className: string;
 }
 
-function PaginationItemLink({ key, pageNumber, onClick, isVisible, className }: IPaginationItemLinkProps) {
+function PaginationItemLink({ pageNumber, onClick, isVisible, className }: IPaginationItemLinkProps) {
   if (!isVisible) return null;
   return (
-    <PaginationItem key={key}>
+    <PaginationItem>
       <PaginationLink className={className} onClick={onClick}>
         {pageNumber}
       </PaginationLink>

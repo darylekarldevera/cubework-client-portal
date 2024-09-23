@@ -13,7 +13,7 @@ function Login() {
         </form>
         <div className="flex flex-col">
           <p className="font-bold text-sm">Forgot Password</p>
-          <button className="bg-[#59BA56] w-4/5 h-11 self-center mt-8 rounded-md text-white font-bold cursor-pointer">
+          <button className="bg-cw-gray w-4/5 h-11 self-center mt-8 rounded-md text-white font-bold cursor-pointer">
             Confirm
           </button>
         </div>

@@ -25,7 +25,7 @@ const MakePaymentTable = ({ items, totalAmount, totalPayment }: IMakePaymentTabl
         <ShadCNLabel className="text-xs font-regular text-[#797979]">Payment Method</ShadCNLabel>
         <div className="mt-[12px] flex gap-[37px]">
           <Select items={['Bankxx-1009', 'Bankxx-1010', 'Bankxx-1011']} />
-          <ShadCNButton className="border border-[#59BA56] rounded-[6px] text-[#59BA56] text-cb-text leading-relaxed h-[30px]">
+          <ShadCNButton className="border border-cw-gray rounded-[6px] text-cw-green text-cb-text leading-relaxed h-[30px]">
             + Payment Method
           </ShadCNButton>
         </div>

@@ -41,7 +41,7 @@ function DocumentDetailsCard({ isVisible, item, documentType, }: IDocumentDetail
   return (
     <div className="flex items-center justify-between p-2 font-regular text-cb-table border-b border-gray-500W">
       <div className="flex flex-col mx-1">
-        <p className="text-[#59BA56]">{item?.file?.filename}</p>
+        <p className="text-cw-green">{item?.file?.filename}</p>
         <p>
           {getFileType(item?.file?.mimetype)} • {formatDate(item?.date)} • {documentType}
         </p>

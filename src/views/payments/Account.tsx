@@ -25,7 +25,7 @@ const Account = () => {
         <div className="h-1/3 flex items-center gap-1 pl-[16px]">
           <ShadCNButton className="flex items-center gap-1">
             <img src={ManageIcon} alt="" className="h-[20px]" />
-            <ShadCNLabel className="text-xs text-[#59BA56] border-b border-[#59BA56]">Manage Auto Pay</ShadCNLabel>
+            <ShadCNLabel className="text-xs text-cw-green border-b border-cw-gray">Manage Auto Pay</ShadCNLabel>
           </ShadCNButton>
         </div>
       </Card>

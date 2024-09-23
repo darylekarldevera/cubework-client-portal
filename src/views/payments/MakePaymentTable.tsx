@@ -15,23 +15,27 @@ import { Card } from '@/components/ui/card.tsx';
 import CheckoutText from '@/components/shared/CheckoutText.tsx';
 import Input from '@/components/shared/Input.tsx';
 import Button from '@/components/shared/Button.tsx';
+import { Link } from 'react-router-dom';
 
 const MakePaymentTable = () => {
   return (
     <>
       <div className="py-[14px] pl-[10px] w-full">
-        <ShadCNLabel className="text-xs font-regular text-[#797979]">Payment Method</ShadCNLabel>
+        <ShadCNLabel className="text-xs font-regular text-[#212529]">Payment Method</ShadCNLabel>
         <div className="mt-[12px] flex gap-[37px]">
-          <Select items={['Bankxx-1009', 'Bankxx-1010', 'Bankxx-1011']} />
+          <div className="w-[170px]">
+            <Select items={['Bankxx-1009', 'Bankxx-1010', 'Bankxx-1011']} />
+          </div>
           <ShadCNButton className="border border-[#59BA56] rounded-[6px] text-[#59BA56] text-[11px] leading-relaxed h-[30px]">
-            + Payment Method
+            <Link to={'../..' + '/bank-accounts/dashboard'} relative="path">
+              + Payment Method
+            </Link>
           </ShadCNButton>
         </div>
-        <Card className="rounded-[6px] mt-[10px]">
+        <Card className="rounded-[6px] mt-[10px] shadow-lg">
           <Table className="w-full">
             <ShadCNTableHeader>
               <TableRow>
-                {/*<TableHead className="w-[100px]">Invoice</TableHead>*/}
                 <TableHead>
                   <TableHeader>Change Description</TableHeader>
                 </TableHead>
@@ -90,8 +94,12 @@ const MakePaymentTable = () => {
         </div>
       </div>
       <div className="mt-[51px] flex justify-end pr-[35px] gap-[40px]">
-        <Button variant="secondary">Cancel</Button>
-        <Button>Next</Button>
+        <Button variant="secondary">
+          <Link to={'..' + '/dashboard'} relative="path">
+            Cancel
+          </Link>
+        </Button>
+        <Button>Pay Now</Button>
       </div>
     </>
   );

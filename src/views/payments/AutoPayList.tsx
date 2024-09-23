@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/table';
 import TableHeader from '@/components/shared/TableHeader.tsx';
 import TableItem from '@/components/shared/TableItem.tsx';
-import Select from '@/components/shared/Select.tsx';
-import CheckedImage from '@/assets/check-logo.svg';
+import CheckedImage from '@/assets/icons/check-icon.svg';
+import { formatCurrency } from '@/lib/utils.ts';
 
 const AutoPayList = () => {
   return (
@@ -19,14 +19,16 @@ const AutoPayList = () => {
       <div className="py-[14px] pl-[10px]">
         <ShadCNLabel className="text-xs font-bold text-black">Auto Pay Account</ShadCNLabel>
       </div>
-      <div className="pl-[10px] flex gap-2 items-center">
-        <img src={CheckedImage} alt="" />
-        <ShadCNLabel className="text-xs font-medium text-[#797979] flex gap-2">
-          <span className="font-bold">!Important:</span>Your account is now setup for auto pay. To revert, please
-          contact Cubework team.
-        </ShadCNLabel>
+      <div className="pl-[10px] ">
+        <Card className="pl-5 py-3 flex gap-2 items-center bg-[#28A745] w-full">
+          <img src={CheckedImage} alt="" className="text-white" />
+          <ShadCNLabel className="text-xs font-medium text-white">
+            <span className="font-bold">Important:</span>Your account is now setup for auto pay. To revert, please
+            contact Cubework team.
+          </ShadCNLabel>
+        </Card>
       </div>
-      <Card className="mt-[30px] w-full rounded-[16px] ">
+      <Card className="mt-[30px] w-full rounded-[16px] shadow-lg">
         <Table>
           <ShadCNTableHeader>
             <TableRow>
@@ -50,7 +52,8 @@ const AutoPayList = () => {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Select items={['Bankxx-109', 'Bankxx-110']} />
+                {/*<Select items={['Bankxx-109', 'Bankxx-110']} />*/}
+                <TableItem>Bankxx-109</TableItem>
               </TableCell>
               <TableCell>
                 <TableItem>8/1/2024</TableItem>
@@ -62,7 +65,7 @@ const AutoPayList = () => {
                 <TableItem>1</TableItem>
               </TableCell>
               <TableCell>
-                <TableItem>$2000.00</TableItem>
+                <TableItem>${formatCurrency(2000.0)}</TableItem>
               </TableCell>
             </TableRow>
           </TableBody>

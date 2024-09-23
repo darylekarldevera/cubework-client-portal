@@ -1,22 +1,25 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 
 import { HomeQuery } from '@/queries/HomeQuery';
 import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
 import IHomeActivityTable from '@/types/homeActivityTable';
-import { ErrorModalContext } from '@/contexts/ErrorModalContext';
+import useUtilityInstanceAndData from '@/customHook/useUtilityInstanceAndData';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
 
 import CWCard from './CWCard';
-import { Heading1 } from './ui/headings';
 import DataTable from './data-table/DataTable';
+import { Heading1 } from './ui/headings';
 import PaymentBalanceCard from './PaymentBalanceCard';
 import TableUtilities from './document-page/document-table/table-utilities/TableUtilities';
+import { HOME_FILTER_OPTIONS, HOME_SORT_OPTIONS } from '@/constants/homeUtilityOptions';
 
 function Home() {
-  const { showError, setShowError } = useContext(ErrorModalContext);
-  const [originalData, setOriginalData] = useState<IHomeActivityTable[]>([]);
-  const [homeData, setHomeData] = useState<IHomeActivityTable[]>([]);
   const homeApiData = HomeQuery('invoice_documents');
+
+  const { data, setData, originalData, utility, isLoading } = useUtilityInstanceAndData<IHomeActivityTable>({
+    dataApi: homeApiData,
+    utilityClass: HomeTableUtility,
+  });
 
   const filterCb = useCallback((items: IHomeActivityTable[], searchData: string): IHomeActivityTable[] => {
     return items.filter((item) => {
@@ -29,38 +32,9 @@ function Home() {
     });
   }, []);
 
-  // Memoize the utility instance only when the homeApiData data changes
-  const utility = useMemo(() => {
-    if (homeApiData.isSuccess && homeApiData.data) {
-      // Use spread operator to avoid mutating original data
-      const utilityInstance = new HomeTableUtility<IHomeActivityTable>([...homeApiData.data]);
-      const sortedData = utilityInstance.sortData();
-      setHomeData(sortedData);
-      setOriginalData(sortedData);
-      return utilityInstance;
-    }
-    return new HomeTableUtility<IHomeActivityTable>([]);
-  }, [homeApiData.data, homeApiData.isSuccess]);
-
-  useEffect(() => {
-    if (homeApiData.isSuccess && homeApiData.data) {
-      // Sort the data and update the state
-      const sortedData = utility.sortData();
-      setHomeData(sortedData);
-      setOriginalData(sortedData);
-    }
-
-    if (homeApiData.isError) {
-      setHomeData([]);
-      setOriginalData([]);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (homeApiData.isError) {
-      setShowError(!showError);
-    }
-  }, [homeApiData.isError]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="pb-[3%]">
@@ -71,41 +45,18 @@ function Home() {
         <p className="text-xs text-cw-green mb-2 w-[15%] text-center">Activity</p>
       </div>
 
-      {homeApiData.isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <React.Fragment>
-          <TableUtilities
-            data={homeData}
-            originalData={originalData}
-            setData={setHomeData}
-            utilityInstance={utility}
-            sortOptions={[
-              {
-                name: 'Date',
-                sortType: {
-                  asc: 'ascending',
-                  desc: 'descending',
-                },
-              },
-            ]}
-            filterOptions={[
-              {
-                name: 'Charge',
-                filterType: "All",
-              },
-              {
-                name: 'Payments',
-                filterType: "All",
-              },
-            ]}
-            filterCb={filterCb}
-          />
-          <CWCard>
-            <DataTable pageSize={5} data={homeData} columns={HOME_ACTIVITY_TABLE_COLUMNS} cwStyle={true} />
-          </CWCard>
-        </React.Fragment>
-      )}
+      <TableUtilities
+        data={data}
+        originalData={originalData}
+        setData={setData}
+        utilityInstance={utility}
+        sortOptions={HOME_SORT_OPTIONS}
+        filterOptions={HOME_FILTER_OPTIONS}
+        filterCb={filterCb}
+      />
+      <CWCard>
+        <DataTable pageSize={5} data={data} columns={HOME_ACTIVITY_TABLE_COLUMNS} cwStyle={true} />
+      </CWCard>
     </div>
   );
 }

@@ -1,15 +1,17 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
 import { DocumentsQuery } from '@/queries/DocumentsQuery';
-import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
 import { SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
+import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
+import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
-import ErrorMessage from '@/shared/modals/ErrorMessage';
 
 function StatementInvoiceDocument() {
+  const { showError, setShowError } = useContext(ErrorModalContext);
+
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
   const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
   const invoiceDocuments = DocumentsQuery('invoice_documents');
@@ -47,13 +49,18 @@ function StatementInvoiceDocument() {
     }
   }, []);
 
+  useEffect(() => {
+    if (invoiceDocuments.isError) {
+      setShowError(!showError);
+    }
+  }, [invoiceDocuments.isError]);
+
   if (invoiceDocuments.isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <ErrorMessage isVisible={invoiceDocuments.isError} />
       <TableUtilities
         data={documentsData}
         originalData={originalData}
@@ -63,7 +70,11 @@ function StatementInvoiceDocument() {
         sortOptions={SORT_OPTIONS}
         filterOptions={[]}
       />
-      <DocumentListTable data={documentsData} documentType="Statement/Invoice" />
+      
+      <DocumentListTable 
+        data={documentsData} 
+        documentType="Statement/Invoice" 
+      />
     </div>
   );
 }

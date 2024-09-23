@@ -32,13 +32,19 @@ interface ICardProps {
   actions: ReactNode;
 }
 
-function CWForm() {
+interface CWFormProps {
+  amount: number;
+  totalAmount: number;
+  promoBalance: number;
+}
+
+function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
   return (
     <div className="py-4">
       <hr />
       <div className="px-8 py-4 flex flex-row items-center justify-end gap-1">
         <Checkbox id="apply-promo" />
-        <label htmlFor="apply-promo">Apply promo balance: $100.00</label>
+        <label htmlFor="apply-promo">Apply promo balance: ${formatCurrency(promoBalance)}</label>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 px-8">
@@ -102,10 +108,10 @@ function CWForm() {
               <div><Input type="text" /></div>
 
               <div>Amount</div>
-              <div>$1000.00</div>
+              <div>${formatCurrency(amount)}</div>
 
               <div>Total Amount</div>
-              <div>$1200.00</div>
+              <div>${formatCurrency(totalAmount)}</div>
             </div>
             <div>
               <Button
@@ -142,7 +148,7 @@ function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
                 </div>
               </div>
             <AccordionContent>
-              <CWForm />
+              <CWForm amount={1200.0} totalAmount={1200.0} promoBalance={100.0} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

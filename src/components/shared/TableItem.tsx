@@ -6,7 +6,7 @@ type TableHeaderProps = {
 };
 
 const TableHeader = ({ children }: TableHeaderProps) => {
-  return <ShadCNLabel className="text-black font-regular text-[10px] leading-5">{children}</ShadCNLabel>;
+  return <ShadCNLabel className="text-black font-regular text-cb-table leading-5">{children}</ShadCNLabel>;
 };
 
 export default TableHeader;

@@ -2,18 +2,12 @@ import React from 'react';
 
 interface WrappedContentProps {
   children: React.ReactNode;
-  className?: string;
 }
 
-function WrappedContent({ children, className = '' }: WrappedContentProps) {
+function WrappedContent({ children }: WrappedContentProps) {
   return (
-    <div className={`h-full flex justify-center w-full x-sm:max-w-[100vw] x-md:max-w-[80vw] x-lg:max-w-[100vw] m-auto ${className}`}>
-      <div className="flex flex-col justify-start h-full flex-grow
-        x-xxs:max-w-[95%] x-md:max-w-[80%]
-        px-12
-      ">
-        {children}
-      </div>
+    <div className="h-full overflow-y-auto overflow-x-hidden relative">
+      <div className={`h-full w-full xxs:px-5 px-16 relative`}>{children}</div>
     </div>
   );
 }

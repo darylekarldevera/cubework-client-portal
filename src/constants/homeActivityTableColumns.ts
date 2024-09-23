@@ -20,12 +20,12 @@ export const HOME_ACTIVITY_TABLE_COLUMNS: ColumnDef<IHomeActivityTable>[] = [
   {
     header: 'Charge',
     accessorKey: 'charge',
-    size: 70,
+    size: 125,
   },
   {
     header: 'Payments',
     accessorKey: 'payments',
-    size: 70,
+    size: 125,
   },
   {
     header: 'Balance',

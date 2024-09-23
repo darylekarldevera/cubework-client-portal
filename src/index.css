@@ -50,3 +50,7 @@
 body {
     font-family: Inter, serif;
 }
+
+.rdp-vhidden {
+  @apply hidden;
+}

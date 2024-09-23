@@ -1,26 +1,26 @@
 export const LEASE_TABS = [
   {
     label: 'Contacts',
-    path: '/lease-profile/contacts',
+    path: '/license-profile/contacts',
   },
   {
     label: 'My Space(s)',
-    path: '/lease-profile/my-space',
+    path: '/license-profile/my-space',
   },
   {
     label: 'Charge Schedule',
-    path: '/lease-profile/charge-schedule',
+    path: '/license-profile/charge-schedule',
   },
 ];
 
 export const LEASE_DOCUMENTS_TABS = [
   {
     label: 'Statement/Invoices',
-    path: '/lease-documents/invoice',
+    path: '/license-documents/invoice',
   },
   {
-    label: 'Lease Documents',
-    path: '/lease-documents/overview',
+    label: 'License Documents',
+    path: '/license-documents/overview',
   },
 ];
 

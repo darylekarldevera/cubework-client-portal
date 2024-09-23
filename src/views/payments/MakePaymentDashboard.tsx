@@ -8,7 +8,7 @@ const MakePaymentDashboard = () => {
   return (
     <>
       <div className="py-[14px] pl-[10px]">
-        <ShadCNLabel className="text-cb-text leading-relaxed  font-regular text-[#797979]">
+        <ShadCNLabel className="text-cb-text leading-relaxed  font-regular text-cw-gray">
           Make a secure, one-time payment through this page
         </ShadCNLabel>
       </div>

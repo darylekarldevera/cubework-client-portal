@@ -22,7 +22,7 @@ const AutoPayList = () => {
       </div>
       <div className="pl-[10px] flex gap-2 items-center">
         <img src={CheckedImage} alt="" />
-        <ShadCNLabel className="text-xs font-medium text-[#797979] flex gap-2">
+        <ShadCNLabel className="text-xs font-medium text-cw-gray flex gap-2">
           <span className="font-bold">!Important:</span>Your account is now setup for auto pay. To revert, please
           contact Cubework team.
         </ShadCNLabel>

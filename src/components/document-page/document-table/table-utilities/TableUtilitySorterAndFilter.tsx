@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
@@ -21,6 +21,8 @@ function TableUtilitySorterAndFilter<T>({
   utilityInstance,
   options,
 }: TableUtilitySorterAndFilterProps<T>) {
+  const isCheckboxSet = useRef(false); 
+
   const [checkbox, setCheckbox] = useState<any>({
     sort: {
       name: 'Date',
@@ -41,7 +43,7 @@ function TableUtilitySorterAndFilter<T>({
   });
 
   // Update utilityInstance with the latest checkbox state
-  useMemo(() => {
+  useEffect(() => {
     if (!utilityInstance || !checkbox) return;
     utilityInstance.setCheckbox(checkbox);
   }, [checkbox, utilityInstance]);
@@ -51,9 +53,9 @@ function TableUtilitySorterAndFilter<T>({
     setData(() => updatedData);
   }, [checkbox]);
 
-  useMemo(() => {
-    if (!options.length || openUtility !== 'sort') return;
-    const lastIndexSortOption = options.slice(-1)[0] as ISortOption
+  useEffect(() => {
+    if (isCheckboxSet.current || !options.length || openUtility !== 'sort') return;
+    const lastIndexSortOption = options.slice(-1)[0] as ISortOption;
     setCheckbox((prev: ISortOption) => ({
       ...prev,
       sort: {
@@ -61,7 +63,10 @@ function TableUtilitySorterAndFilter<T>({
         sortType: lastIndexSortOption?.sortType?.desc,
       },
     }));
-  }, [options]);
+
+    // Set isCheckboxSet to true to prevent the useEffect from running again
+    isCheckboxSet.current = true; 
+  }, [openUtility, options]);
 
   if (openUtility === '') return null;
 

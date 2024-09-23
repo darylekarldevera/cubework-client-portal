@@ -69,7 +69,7 @@ class HomeTableUtility implements ITableUtility<IHomeActivityTable, ICheckboxPro
     return toUpdateData;
   };
 
-  setCheckbox = (checkbox: any) => {
+  setCheckbox = (checkbox: ICheckboxProps) => {
     this.checkbox = checkbox;
   };
 }

@@ -1,26 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
-import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
-import { IFilterOption, ISortOption } from '@/constants/documentsUtilityOptions';
+import { ITableUtility } from '@/types/tableUtility';
+import { IFilterOption, ISortOption } from '@/types/tableOptions';
 
 import TableSortUtility from './TableSortUtility';
 import TableFilterUtility from './TableFilterUtility';
 
-interface TableUtilitySorterAndFilterProps<T> {
-  data: T[];
+interface TableUtilitySorterAndFilterProps<DataType> {
+  data: DataType[];
   options: ISortOption[] | IFilterOption[];
   openUtility: string;
-  utilityInstance: DocumentTableUtility<T> | HomeTableUtility<T>;
-  setData: React.Dispatch<React.SetStateAction<T[]>>;
+  utilityInstance: ITableUtility<DataType, any>;
+  setData: React.Dispatch<React.SetStateAction<DataType[]>>;
 }
 
-function TableUtilitySorterAndFilter<T>({
+function TableUtilitySorterAndFilter<DataType>({
   openUtility,
   setData,
   utilityInstance,
   options,
-}: TableUtilitySorterAndFilterProps<T>) {
+}: TableUtilitySorterAndFilterProps<DataType>) {
   const isCheckboxSet = useRef(false); 
 
   const [checkbox, setCheckbox] = useState<any>({
@@ -73,9 +72,17 @@ function TableUtilitySorterAndFilter<T>({
   return (
     <div className="flex px-2 items-center mt-2">
       {openUtility === 'sort' ? (
-        <TableSortUtility sort={checkbox.sort} setCheckBox={setCheckbox} options={options} />
+        <TableSortUtility 
+          sort={checkbox.sort} 
+          setCheckBox={setCheckbox} 
+          options={options as ISortOption[]} 
+        />
       ) : (
-        <TableFilterUtility filter={checkbox.filter} setCheckBox={setCheckbox} options={options} />
+        <TableFilterUtility 
+          filter={checkbox.filter} 
+          setCheckBox={setCheckbox} 
+          options={options as IFilterOption[]} 
+        />
       )}
     </div>
   );

@@ -2,29 +2,34 @@ import React from 'react';
 import { CheckIcon } from 'lucide-react';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 
-import { cn } from '@/lib/utils';
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { ISortOption } from '@/types/tableOptions';
+import { ICheckboxProps, ISortProps } from '@/types/tableProps';
+
+import { 
+  Popover, 
+  PopoverContent, 
+  PopoverTrigger 
+} from '@/components/ui/popover';
+
+import { 
+  Command, 
+  CommandEmpty, 
+  CommandGroup, 
+  CommandInput, 
+  CommandItem, 
+  CommandList 
+} from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 
 interface ITableSortUtilityCardPropsV2 {
-  option: {
-    name: string;
-    sortType: {
-      [key: string]: string;
-    };
-  };
-  sort: {
-    [key: string]: string;
-    name: string;
-    sortType: string;
-  };
+  sort: ISortProps;
+  option: ISortOption;
   openSort: string;
   sortTypeKeys: string[];
-  setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
   setOpenSort: React.Dispatch<React.SetStateAction<string>>;
+  setCheckBox: React.Dispatch<React.SetStateAction<ICheckboxProps>>;
 }
 
 function TableSortUtilityCardV2({

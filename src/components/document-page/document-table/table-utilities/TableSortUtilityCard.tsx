@@ -1,20 +1,18 @@
 import React from 'react'
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { ICheckboxProps, ISortProps } from '@/types/tableProps';
+import { ISortOption } from '@/types/tableOptions';
+
 import { Label } from '@/components/ui/label';
-import { ISortOption } from '@/constants/documentsUtilityOptions';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 interface ITableSortUtilityCardProps {
+  sort: ISortProps;
   index: number;
   option: ISortOption;
-  sort: {
-    parent: string;
-    sortType: string;
-  };
-  setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
   sortType: string;
   keyIndex: number;
+  setCheckBox: React.Dispatch<React.SetStateAction<ICheckboxProps>>;
 }
 
 function TableSortUtilityCard({ option, index, sort, setCheckBox, sortType, keyIndex }: ITableSortUtilityCardProps) {
@@ -27,7 +25,7 @@ function TableSortUtilityCard({ option, index, sort, setCheckBox, sortType, keyI
             return {
               ...prev,
               sort: {
-                parent: option.name,
+                name: option.name,
                 sortType,
               },
             };
@@ -39,7 +37,7 @@ function TableSortUtilityCard({ option, index, sort, setCheckBox, sortType, keyI
             className="w-[14px] h-[14px]"
             value={`c${index}-${keyIndex}`}
             id={`c${index}-${keyIndex}`}
-            checked={sort.parent === option.name && sort.sortType === sortType}
+            checked={sort.name === option.name && sort.sortType === sortType}
           />
           <Label className="text-[0.70rem]" htmlFor={`c${option.name}-${option.sortType}`}>
             {sortType.toUpperCase()}

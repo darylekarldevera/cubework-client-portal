@@ -3,17 +3,15 @@ import { CalendarIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import formatDate from '@/lib/formatDate';
+import { ICheckboxProps, IFilterPickDateProps } from '@/types/tableProps';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 interface ITablePickDateProps {
-  pickDate: {
-    [key: string]: Date | undefined;
-  };
-  setPickDate: React.Dispatch<React.SetStateAction<ICheckbox>>;
+  pickDate: IFilterPickDateProps;
+  setPickDate: React.Dispatch<React.SetStateAction<ICheckboxProps>>;
 }
 
 function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
@@ -26,7 +24,7 @@ function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
               variant={'outline'}
               className={cn('w-[120px] text-[10px] h-full', !pickDate[key] && 'text-muted-foreground')}
             >
-              <span>{pickDate[key] ? formatDate(pickDate[key]) : null}</span>
+              <span>{key && pickDate[key] && pickDate[key] instanceof Date ? formatDate(pickDate[key]) : null}</span>
               <CalendarIcon className="w-4 h-4 ml-auto" />
             </Button>
           </PopoverTrigger>

@@ -2,29 +2,28 @@ import React, { useEffect, useState } from 'react'
 
 import TableUtilitiesControllers from './TableUtilitiesControllers'
 import TableUtilitySorterAndFilter from './TableUtilitySorterAndFilter'
-import { IFilterOption, ISortOption } from '@/constants/documentsUtilityOptions';
-import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
-import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
+import { ITableUtility } from '@/types/tableUtility';
+import { IFilterOption, ISortOption } from '@/types/tableOptions';
 
-interface TableUtilitiesProps<T> {
-  data: T[];
-  originalData: T[];
-  setData: React.Dispatch<React.SetStateAction<T[]>>;
-  filterCb: (item: T[], searchData: string) => T[];
-  utilityInstance: DocumentTableUtility<T> | HomeTableUtility<T>;
+interface TableUtilitiesProps<DataType> {
+  data: DataType[];
   sortOptions: ISortOption[];
+  originalData: DataType[];
   filterOptions: IFilterOption[];
+  utilityInstance: ITableUtility<DataType, any>;
+  setData: React.Dispatch<React.SetStateAction<DataType[]>>;
+  filterCb: (item: DataType[], searchData: string) => DataType[];
 }
 
-function TableUtilities<T>({
+function TableUtilities<DataType>({
   data,
+  sortOptions,
   originalData,
+  filterOptions,
   utilityInstance,
   setData,
   filterCb,
-  sortOptions,
-  filterOptions
-}: TableUtilitiesProps<T>) {
+}: TableUtilitiesProps<DataType>) {
   const [openUtility, setOpenUtility] = useState<string>('');
   const [options, setOptions] = useState<ISortOption[] | IFilterOption[]>([]);
 
@@ -49,10 +48,10 @@ function TableUtilities<T>({
       />
       <TableUtilitySorterAndFilter
         data={data}
-        openUtility={openUtility}
-        setData={setData}
-        utilityInstance={utilityInstance}
         options={options}
+        openUtility={openUtility}
+        utilityInstance={utilityInstance}
+        setData={setData}
       />
     </div>
   );

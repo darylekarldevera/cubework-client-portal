@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
-import { ISortOption } from '@/constants/documentsUtilityOptions';
+import { ICheckboxProps, ISortProps } from '@/types/tableProps';
+import { IFilterOption, ISortOption } from '@/types/tableOptions';
+
 import TableSortUtilityCardV2 from './TableSortUtilityCardV2';
 
 interface ITableSortUtilityListProps {
-  sort: any;
-  options: ISortOption[];
-  setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
+  sort: ISortProps;
+  options: ISortOption[] | IFilterOption[];
+  setCheckBox: React.Dispatch<React.SetStateAction<ICheckboxProps>>;
 }
 
 function TableSortUtilityList({ sort, options, setCheckBox }: ITableSortUtilityListProps) {
@@ -19,9 +20,9 @@ function TableSortUtilityList({ sort, options, setCheckBox }: ITableSortUtilityL
             <TableSortUtilityCardV2
               key={index}
               sort={sort}
-              option={option}
+              option={option as ISortOption}
               openSort={openSort}
-              sortTypeKeys={Object.keys(option?.sortType ?? {}) ?? []}
+              sortTypeKeys={Object.keys((option as ISortOption)?.sortType ?? {}) ?? []}
               setCheckBox={setCheckBox}
               setOpenSort={setOpenSort}
             />

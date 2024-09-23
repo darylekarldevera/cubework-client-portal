@@ -3,7 +3,7 @@ import ProfilesButtons from './ProfileButtons';
 
 export default function Header() {
   return (
-    <div className="header">
+    <div className="header shadow-md">
       <Logo />
       <ProfilesButtons />
     </div>

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
 import { DocumentsQuery } from '@/queries/DocumentsQuery';
@@ -7,9 +7,10 @@ import { SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 
 import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
-import ErrorMessage from '@/shared/modals/ErrorMessage';
+import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 
 function LeaseDocument() {
+  const { showError, setShowError } = useContext(ErrorModalContext);
   const [originalData, setOriginalData] = useState<IDocument[]>([]);
   const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
   const leaseDocument = DocumentsQuery('lease_documents');
@@ -33,13 +34,18 @@ function LeaseDocument() {
     return new DocumentTableUtility<IDocument>([]);
   }, [leaseDocument.data, leaseDocument.isSuccess]);
 
+  useEffect(() => {
+    if (leaseDocument.isError) {
+      setShowError(!showError);
+    }
+  }, [leaseDocument.isError]);
+
   if (leaseDocument.isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <ErrorMessage isVisible={leaseDocument.isError} />
       <TableUtilities
         data={documentsData}
         originalData={originalData}
@@ -49,7 +55,10 @@ function LeaseDocument() {
         sortOptions={SORT_OPTIONS}
         filterOptions={[]}
       />
-      <DocumentListTable data={documentsData} documentType="Least Documents" />
+      <DocumentListTable 
+        data={documentsData} 
+        documentType="Least Documents" 
+      />
     </div>
   );
 }

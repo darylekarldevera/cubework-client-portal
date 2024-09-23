@@ -7,9 +7,8 @@ import AccountDashboard from '@/views/payments/AccountDashboard.tsx';
 import { MakePaymentTable } from '@/views/payments/MakePaymentTable.tsx';
 import { IMakePaymentTableProps } from '@/types/payments';
 
-type PaymentProps = object;
 
-const Payment = ({}: PaymentProps) => {
+const Payment = () => {
 
   // TODO: Remove dummy data
   const dummyData: IMakePaymentTableProps = {

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
+import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
+import { IFilterOption, ISortOption } from '@/constants/documentsUtilityOptions';
 
 import TableSortUtility from './TableSortUtility';
 import TableFilterUtility from './TableFilterUtility';
-import { IFilterOption, ISortOption } from '@/constants/documentsUtilityOptions';
-import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
 
 interface TableUtilitySorterAndFilterProps<T> {
   data: T[];
-  openUtility: string;
-  setData: React.Dispatch<React.SetStateAction<T[]>>;
-  utilityInstance: DocumentTableUtility<T> | HomeTableUtility<T>;
   options: ISortOption[] | IFilterOption[];
+  openUtility: string;
+  utilityInstance: DocumentTableUtility<T> | HomeTableUtility<T>;
+  setData: React.Dispatch<React.SetStateAction<T[]>>;
 }
 
 function TableUtilitySorterAndFilter<T>({
@@ -22,13 +21,15 @@ function TableUtilitySorterAndFilter<T>({
   utilityInstance,
   options,
 }: TableUtilitySorterAndFilterProps<T>) {
-  const [checkbox, setCheckbox] = useState<ICheckbox>({
+  const isCheckboxSet = useRef(false); 
+
+  const [checkbox, setCheckbox] = useState<any>({
     sort: {
-      parent: 'Date',
+      name: 'Date',
       sortType: 'desc',
     },
     filter: {
-      parent: 'All',
+      name: 'All',
       filterType: 'all',
       pickDate: {
         startDate: (() => {
@@ -43,13 +44,29 @@ function TableUtilitySorterAndFilter<T>({
 
   // Update utilityInstance with the latest checkbox state
   useEffect(() => {
+    if (!utilityInstance || !checkbox) return;
     utilityInstance.setCheckbox(checkbox);
-  }, [checkbox]);
+  }, [checkbox, utilityInstance]);
 
   useEffect(() => {
     const updatedData = utilityInstance.sortAndFilter();
     setData(() => updatedData);
   }, [checkbox]);
+
+  useEffect(() => {
+    if (isCheckboxSet.current || !options.length || openUtility !== 'sort') return;
+    const lastIndexSortOption = options.slice(-1)[0] as ISortOption;
+    setCheckbox((prev: ISortOption) => ({
+      ...prev,
+      sort: {
+        name: lastIndexSortOption?.name,
+        sortType: lastIndexSortOption?.sortType?.desc,
+      },
+    }));
+
+    // Set isCheckboxSet to true to prevent the useEffect from running again
+    isCheckboxSet.current = true; 
+  }, [openUtility, options]);
 
   if (openUtility === '') return null;
 

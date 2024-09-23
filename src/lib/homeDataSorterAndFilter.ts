@@ -39,11 +39,14 @@ class HomeTableUtility<T> {
 
   sortData = () => {
     const toUpdateData = [...this.data];
-    // if (this?.checkbox?.sort.parent === "Date" && this?.checkbox?.sort.sortType === "asc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.date > b.date ? 1 : -1;
-    //   });
-    // }
+    const sortName = this?.checkbox?.sort?.name?.toLowerCase();
+    const sortType = this?.checkbox?.sort?.sortType?.toLowerCase();
+    
+    if (sortName === 'date' && sortType === 'ascending') {
+      return toUpdateData.sort((a, b) => {
+        return a.date > b.date ? 1 : -1;
+      });
+    }
     
     return toUpdateData.sort((a, b) => {
       return a.date < b.date ? 1 : -1;
@@ -52,23 +55,24 @@ class HomeTableUtility<T> {
 
   filterData = (data: IHomeActivityTable[]) => {
     let toUpdateData = data?.length ? [...data] : [];
+    const startDate = this?.checkbox?.filter?.pickDate?.startDate;
+    const endDate = this?.checkbox?.filter?.pickDate?.endDate;
 
-    if (this?.checkbox?.filter?.pickDate?.startDate && this?.checkbox?.filter?.pickDate?.endDate) {
+    if (startDate && endDate) {
       toUpdateData = toUpdateData.filter((item) => {
         const itemDate = new Date(item.date);
 
-        const startDate = this.checkbox?.filter?.pickDate?.startDate;
-        const endDate = this.checkbox?.filter?.pickDate?.endDate;
-
         if (startDate && endDate) {
           return itemDate >= startDate && itemDate <= endDate;
+        }
+        
+        if (startDate) {
+          return itemDate >= startDate;
         }
 
         return false;
       });
     }
-
-    
 
     return toUpdateData;
   }

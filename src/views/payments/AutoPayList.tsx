@@ -12,6 +12,7 @@ import TableHeader from '@/components/shared/TableHeader.tsx';
 import TableItem from '@/components/shared/TableItem.tsx';
 import Select from '@/components/shared/Select.tsx';
 import CheckedImage from '@/assets/check-logo.svg';
+import { formatCurrency } from '@/lib/utils';
 
 const AutoPayList = () => {
   return (
@@ -62,7 +63,7 @@ const AutoPayList = () => {
                 <TableItem>1</TableItem>
               </TableCell>
               <TableCell>
-                <TableItem>$2000.00</TableItem>
+                <TableItem>${formatCurrency(2000.0)}</TableItem>
               </TableCell>
             </TableRow>
           </TableBody>

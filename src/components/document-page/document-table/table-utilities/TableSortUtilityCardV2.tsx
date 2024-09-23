@@ -16,24 +16,22 @@ interface ITableSortUtilityCardPropsV2 {
       [key: string]: string;
     };
   };
-  sortTypeKeys: string[];
-  select: {
+  sort: {
     [key: string]: string;
     name: string;
     sortType: string;
   };
   openSort: string;
-  setSelect: React.Dispatch<React.SetStateAction<any>>;
+  sortTypeKeys: string[];
   setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
   setOpenSort: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function TableSortUtilityCardV2({
-  openSort,
+  sort,
   option,
+  openSort,
   sortTypeKeys,
-  select,
-  setSelect,
   setCheckBox,
   setOpenSort,
 }: ITableSortUtilityCardPropsV2) {
@@ -48,7 +46,6 @@ function TableSortUtilityCardV2({
         <Button
           variant="outline"
           role="combobox"
-          aria-expanded={select ? true : undefined}
           className="h-[21px] justify-between bg-white z-10 text-center border mr-4 text-[10px]"
           onClick={() => {
             if (openSort === option.name) {
@@ -62,9 +59,9 @@ function TableSortUtilityCardV2({
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0 bg-white">
+      <PopoverContent className="w-min min-w-[120px] p-0 bg-white">
         <Command>
-          <CommandInput placeholder="Search..." className="h-9 bg-white z-1" />
+          <CommandInput placeholder="Search..." className="h-9 bg-white z-1 text-[10px]" />
           <CommandList>
             <CommandEmpty>Not found.</CommandEmpty>
             <CommandGroup>
@@ -72,25 +69,20 @@ function TableSortUtilityCardV2({
                 <CommandItem
                   key={type}
                   value={type}
-                  className="cursor-pointer"
+                  className="cursor-pointer text-[10px] h-9"
                   onSelect={(currentValue) => {
                     setOpenSort('');
-                    setSelect(() => ({
-                      name: option.name,
-                      sortType: currentValue,
-                    }));
-
-                    setCheckBox((prev) => ({
+                    setCheckBox((prev: any) => ({
                       ...prev,
                       sort: {
-                        parent: option.name,
-                        sortType: currentValue,
+                        name: option.name,
+                        sortType: option.sortType[currentValue],
                       },
                     }));
                   }}
                 >
                   {capitalizeFirstLetter(option.sortType[type])}
-                  {type === select.sortType && select.name === option.name ? (
+                  {option.sortType[type] === sort.sortType && sort.name === option.name ? (
                     <CheckIcon className={cn('ml-auto h-4 w-4')} />
                   ) : null}
                 </CommandItem>

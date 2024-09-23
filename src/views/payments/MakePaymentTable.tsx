@@ -15,8 +15,10 @@ import { Card } from '@/components/ui/card.tsx';
 import CheckoutText from '@/components/shared/CheckoutText.tsx';
 import Input from '@/components/shared/Input.tsx';
 import Button from '@/components/shared/Button.tsx';
+import { formatCurrency } from '@/lib/utils';
+import { IMakePaymentTableProps } from '@/types/payments';
 
-const MakePaymentTable = () => {
+const MakePaymentTable = ({ items, totalAmount, totalPayment }: IMakePaymentTableProps) => {
   return (
     <>
       <div className="py-[14px] pl-[10px] w-full">
@@ -47,28 +49,30 @@ const MakePaymentTable = () => {
               </TableRow>
             </ShadCNTableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  <TableItem>Rent-warehouse</TableItem>
-                </TableCell>
-                <TableCell>
-                  <TableItem>8/20/2024</TableItem>
-                </TableCell>
-                <TableCell>
-                  <TableItem>$88.00</TableItem>
-                </TableCell>
-                <TableCell>
-                  <TableItem>$88.00</TableItem>
-                </TableCell>
-              </TableRow>
+              {items?.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell>
+                      <TableItem>{item.description}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem>{item.date}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem>${formatCurrency(item.chargeBalance)}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem>${formatCurrency(item.balance)}</TableItem>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </Card>
         <div className=" mt-[31px] flex flex-col">
-          <div className="w-2/5   self-end ">
+          <div className="w-2/5 self-end">
             <div className="flex">
               <CheckoutText>Total Amount: </CheckoutText>
-              <CheckoutText>$88.00</CheckoutText>
+              <CheckoutText>${formatCurrency(totalAmount)}</CheckoutText>
             </div>
             <div className="flex">
               <CheckoutText>Extra Payment Amount:</CheckoutText>
@@ -84,7 +88,7 @@ const MakePaymentTable = () => {
             </div>
             <div className="flex">
               <CheckoutText>Total Payment:</CheckoutText>
-              <CheckoutText>$88.00</CheckoutText>
+              <CheckoutText>${formatCurrency(totalPayment)}</CheckoutText>
             </div>
           </div>
         </div>
@@ -97,4 +101,5 @@ const MakePaymentTable = () => {
   );
 };
 
-export default MakePaymentTable;
+export { MakePaymentTable };
+

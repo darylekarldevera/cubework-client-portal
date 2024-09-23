@@ -18,6 +18,10 @@ interface ILeastTable {
 
 const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
   {
+    header: 'Name',
+    accessorKey: 'label',
+  },
+  {
     header: 'Start Date',
     accessorKey: 'start_date',
   },

@@ -59,7 +59,7 @@ function TableFilterUtilityCardV2({
             }
           }}
         >
-          {`Sort by ${capitalizeFirstLetter(option.name)}`}
+          {`Filter by ${capitalizeFirstLetter(option.name)}`}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

@@ -15,25 +15,27 @@ import { Card } from '@/components/ui/card.tsx';
 import CheckoutText from '@/components/shared/CheckoutText.tsx';
 import Input from '@/components/shared/Input.tsx';
 import Button from '@/components/shared/Button.tsx';
-import { formatCurrency } from '@/lib/utils';
-import { IMakePaymentTableProps } from '@/types/payments';
+import { Link } from 'react-router-dom';
 
-const MakePaymentTable = ({ items, totalAmount, totalPayment }: IMakePaymentTableProps) => {
+const MakePaymentTable = () => {
   return (
     <>
       <div className="py-[14px] pl-[10px] w-full">
-        <ShadCNLabel className="text-xs font-regular text-cw-gray">Payment Method</ShadCNLabel>
+        <ShadCNLabel className="text-xs font-regular text-[#212529]">Payment Method</ShadCNLabel>
         <div className="mt-[12px] flex gap-[37px]">
-          <Select items={['Bankxx-1009', 'Bankxx-1010', 'Bankxx-1011']} />
-          <ShadCNButton className="border border-cw-gray rounded-[6px] text-cw-green text-cb-text leading-relaxed h-[30px]">
-            + Payment Method
+          <div className="w-[170px]">
+            <Select items={['Bankxx-1009', 'Bankxx-1010', 'Bankxx-1011']} />
+          </div>
+          <ShadCNButton className="border border-[#59BA56] rounded-[6px] text-[#59BA56] text-[11px] leading-relaxed h-[30px]">
+            <Link to={'../..' + '/bank-accounts/dashboard'} relative="path">
+              + Payment Method
+            </Link>
           </ShadCNButton>
         </div>
-        <Card className="rounded-[6px] mt-[10px]">
+        <Card className="rounded-[6px] mt-[10px] shadow-lg">
           <Table className="w-full">
             <ShadCNTableHeader>
               <TableRow>
-                {/*<TableHead className="w-[100px]">Invoice</TableHead>*/}
                 <TableHead>
                   <TableHeader>Change Description</TableHeader>
                 </TableHead>
@@ -49,30 +51,28 @@ const MakePaymentTable = ({ items, totalAmount, totalPayment }: IMakePaymentTabl
               </TableRow>
             </ShadCNTableHeader>
             <TableBody>
-              {items?.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                      <TableItem>{item.description}</TableItem>
-                  </TableCell>
-                  <TableCell>
-                    <TableItem>{item.date}</TableItem>
-                  </TableCell>
-                  <TableCell>
-                    <TableItem>${formatCurrency(item.chargeBalance)}</TableItem>
-                  </TableCell>
-                  <TableCell>
-                    <TableItem>${formatCurrency(item.balance)}</TableItem>
-                  </TableCell>
-                </TableRow>
-              ))}
+              <TableRow>
+                <TableCell>
+                  <TableItem>Rent-warehouse</TableItem>
+                </TableCell>
+                <TableCell>
+                  <TableItem>8/20/2024</TableItem>
+                </TableCell>
+                <TableCell>
+                  <TableItem>$88.00</TableItem>
+                </TableCell>
+                <TableCell>
+                  <TableItem>$88.00</TableItem>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </Card>
         <div className=" mt-[31px] flex flex-col">
-          <div className="w-2/5 self-end">
+          <div className="w-2/5   self-end ">
             <div className="flex">
               <CheckoutText>Total Amount: </CheckoutText>
-              <CheckoutText>${formatCurrency(totalAmount)}</CheckoutText>
+              <CheckoutText>$88.00</CheckoutText>
             </div>
             <div className="flex">
               <CheckoutText>Extra Payment Amount:</CheckoutText>
@@ -88,18 +88,21 @@ const MakePaymentTable = ({ items, totalAmount, totalPayment }: IMakePaymentTabl
             </div>
             <div className="flex">
               <CheckoutText>Total Payment:</CheckoutText>
-              <CheckoutText>${formatCurrency(totalPayment)}</CheckoutText>
+              <CheckoutText>$88.00</CheckoutText>
             </div>
           </div>
         </div>
       </div>
       <div className="mt-[51px] flex justify-end pr-[35px] gap-[40px]">
-        <Button variant="secondary">Cancel</Button>
-        <Button>Next</Button>
+        <Button variant="secondary">
+          <Link to={'..' + '/dashboard'} relative="path">
+            Cancel
+          </Link>
+        </Button>
+        <Button>Pay Now</Button>
       </div>
     </>
   );
 };
 
-export { MakePaymentTable };
-
+export default MakePaymentTable;

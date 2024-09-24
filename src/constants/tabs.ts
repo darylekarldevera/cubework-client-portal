@@ -23,3 +23,18 @@ export const LEASE_DOCUMENTS_TABS = [
     path: '/license-documents/overview',
   },
 ];
+
+export const PAYMENT_TABS = [
+  {
+    label: 'Make Payments',
+    path: '/make-payments/dashboard',
+  },
+  {
+    label: 'Auto Pay',
+    path: '/auto-pay/payment-selection',
+  },
+  {
+    label: 'Accounts/Verify Bank',
+    path: '/bank-accounts/dashboard',
+  },
+];

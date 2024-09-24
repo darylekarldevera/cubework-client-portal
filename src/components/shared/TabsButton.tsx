@@ -1,19 +1,18 @@
 import { ReactNode } from 'react';
-import { TabsTrigger } from '@/components/ui/tabs.tsx';
 
 type TabsButtonProps = {
-  children: ReactNode;
-  link: string;
+  children?: ReactNode;
+  active?: boolean;
 };
 
-const TabsButton = ({ children, link }: TabsButtonProps) => {
+const TabsButton = ({ children, active }: TabsButtonProps) => {
+  console.log('active', active);
   return (
-    <TabsTrigger
-      value={link}
-      className="text-xs rounded-none data-[state=active]:border-b-[1.5px] data-[state=active]:border-cw-gray data-[state=active]:shadow-none data-[state=active]:text-cw-green text-cw-green"
+    <div
+      className={`text-xs rounded-none ${active ? 'border-b-[1.5px] border-[#59BA56] shadow-none text-[#59BA56]' : ''} py-1 text-center text-[#59BA56]`}
     >
       {children}
-    </TabsTrigger>
+    </div>
   );
 };
 

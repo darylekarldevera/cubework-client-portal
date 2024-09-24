@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 type ButtonProps = {
   children: ReactNode;
   variant?: string;
+  onClick?: () => void;
 };
 
 const variantObject = {
@@ -22,7 +23,7 @@ const darkObject = {
   'outlined-black': 'hover:bg-[#EEEEEE]',
 };
 
-const Button = ({ children, variant = 'primary' }: ButtonProps) => {
+const Button = ({ children, variant = 'primary', onClick }: ButtonProps) => {
   const color =
     variant === 'destructive'
       ? variantObject.destructive
@@ -45,6 +46,7 @@ const Button = ({ children, variant = 'primary' }: ButtonProps) => {
             : darkObject.primary;
   return (
     <ShadCNButton
+      onClick={onClick}
       type="submit"
       className={`text-cb-text leading-relaxed   text-white border rounded-[6px]  h-[35px] ${darkHover}
        ${color} ${variant === 'secondary' ? ' border-cw-darkgray text-cw-darkgray' : variant === 'outlined' ? ' border-cw-gray text-cw-green ' : variant === 'outlined-black' ? 'border-black text-black' : ''} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : 'px-[37px] w-[100px]'}`}

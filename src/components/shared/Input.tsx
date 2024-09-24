@@ -14,7 +14,7 @@ const Input = ({ value }: InputProps) => {
   return (
     <div className="flex flex-col gap-[2px]">
       <ShadCNInput
-        className="h-[30px] text-[11px] leading-relaxed w-full bg-white border border-[#717171] text-black rounded-[6px]"
+        className="h-[30px] text-[11px] leading-relaxed w-full bg-white border border-cw-darkgray text-black rounded-[6px]"
         value={value}
         onChange={handleChange}
       />

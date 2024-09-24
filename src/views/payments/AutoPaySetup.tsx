@@ -17,7 +17,7 @@ const AutoPaySetup = () => {
         </ShadCNLabel>
       </div>
       <Card className="mt-[30px] h-[133px] w-full rounded-[16px]">
-        <CardHeader className="h-[40px] pl-[10px] flex justify-center border-b border-[#ECECEC]">
+        <CardHeader className="h-[40px] pl-[10px] flex justify-center border-b border-cw-offwhite">
           <TableHeader>Choose your space</TableHeader>
         </CardHeader>
         <CardContent className="h-full flex flex-row px-[10px] pt-[20px] w-full">

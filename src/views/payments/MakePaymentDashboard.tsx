@@ -10,7 +10,7 @@ const MakePaymentDashboard = () => {
   return (
     <>
       <div className="py-[14px] pl-[10px]">
-        <ShadCNLabel className="text-[11px] leading-relaxed  font-regular text-[#212529]">
+        <ShadCNLabel className="text-[11px] leading-relaxed  font-regular text-cw-charcoal">
           Make a secure, one-time payment through this page
         </ShadCNLabel>
       </div>
@@ -32,7 +32,7 @@ const MakePaymentDashboard = () => {
           <Link to={'../..' + '/auto-pay/payment-selection'} relative="path">
             <ShadCNButton className="flex items-center gap-1">
               <img src={ManageIcon} alt="" className="h-[20px]" />
-              <ShadCNLabel className="text-[11px] leading-relaxed  text-[#59BA56] border-b border-[#59BA56]">
+              <ShadCNLabel className="text-[11px] leading-relaxed  text-cw-green border-b border-cw-green">
                 Manage Auto Pay
               </ShadCNLabel>
             </ShadCNButton>

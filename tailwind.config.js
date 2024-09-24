@@ -20,7 +20,9 @@ export default {
       colors: {
         'cw-green': '#59BA56',
         'cw-gray': '#797979',
-        'cw-darkgray': '#797979',
+        'cw-darkgray': '#717171',
+        'cw-charcoal': '#212529',
+        'cw-offwhite': '#ECECEC',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

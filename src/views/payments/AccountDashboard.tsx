@@ -35,7 +35,7 @@ const AccountDashboard = () => {
   };
   return (
     <>
-      <div className="flex gap-[28px] text-[#212529]">
+      <div className="flex gap-[28px] text-cw-charcoal">
         <div className="w-2/3">
           <div className="py-[14px] pr-[20px] pl-[10px] flex justify-between">
             <ShadCNLabel className="text-xs font-bold text-black">Bank Account(s)</ShadCNLabel>
@@ -50,15 +50,15 @@ const AccountDashboard = () => {
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-2 items-center gap-4">
-                    <ShadCNLabel className="text-xs text-[#212529]">Account Name</ShadCNLabel>
+                    <ShadCNLabel className="text-xs text-cw-charcoal">Account Name</ShadCNLabel>
                     <Input />
                   </div>
                   <div className="grid grid-cols-2 items-center gap-4">
-                    <ShadCNLabel className="text-xs text-[#212529]">Account Number</ShadCNLabel>
+                    <ShadCNLabel className="text-xs text-cw-charcoal">Account Number</ShadCNLabel>
                     <Input />
                   </div>
                   <div className="grid grid-cols-2 items-center gap-4">
-                    <ShadCNLabel className="text-xs text-[#212529]">Routing Number</ShadCNLabel>
+                    <ShadCNLabel className="text-xs text-cw-charcoal">Routing Number</ShadCNLabel>
                     <Input />
                   </div>
                   <div className="grid grid-cols-2 items-center gap-4">
@@ -94,7 +94,7 @@ const AccountDashboard = () => {
             </Dialog>
           </div>
           <div className="pl-[10px]">
-            <ShadCNLabel className="text-xs text-[#212529]">
+            <ShadCNLabel className="text-xs text-cw-charcoal">
               Use the bank accounts listed below to make payments or schedule monthly automatic payments.
             </ShadCNLabel>
           </div>
@@ -131,15 +131,15 @@ const AccountDashboard = () => {
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
                           <div className="grid grid-cols-2 items-center gap-4">
-                            <ShadCNLabel className="text-xs text-[#212529]">Account Name</ShadCNLabel>
+                            <ShadCNLabel className="text-xs text-cw-charcoal">Account Name</ShadCNLabel>
                             <Input value="Chan User" />
                           </div>
                           <div className="grid grid-cols-2 items-center gap-4">
-                            <ShadCNLabel className="text-xs text-[#212529]">Account Number</ShadCNLabel>
+                            <ShadCNLabel className="text-xs text-cw-charcoal">Account Number</ShadCNLabel>
                             <Input value="********1234" />
                           </div>
                           <div className="grid grid-cols-2 items-center gap-4">
-                            <ShadCNLabel className="text-xs text-[#212529]">Routing Number</ShadCNLabel>
+                            <ShadCNLabel className="text-xs text-cw-charcoal">Routing Number</ShadCNLabel>
                             <Input value="12,500" />
                           </div>
                           <div className="grid grid-cols-2 items-center gap-4">
@@ -184,48 +184,48 @@ const AccountDashboard = () => {
                 <div className="grid grid-cols-2 gap-[34px] text-black">
                   <div className="grid grid-rows-2 gap-4 pb-4 ">
                     <div className="grid grid-cols-2 items-center gap-4  ">
-                      <ShadCNLabel className="text-xs text-[#212529]">Card Number</ShadCNLabel>
+                      <ShadCNLabel className="text-xs text-cw-charcoal">Card Number</ShadCNLabel>
                       <Input />
                     </div>
                     <div className="grid grid-cols-2 items-center gap-4  ">
-                      <ShadCNLabel className="text-xs text-[#212529]">Card Holder Name</ShadCNLabel>
+                      <ShadCNLabel className="text-xs text-cw-charcoal">Card Holder Name</ShadCNLabel>
                       <Input />
                     </div>
                     <div className="grid grid-cols-2 items-center gap-4  ">
-                      <ShadCNLabel className="text-xs text-[#212529]">CVC</ShadCNLabel>
+                      <ShadCNLabel className="text-xs text-cw-charcoal">CVC</ShadCNLabel>
                       <Input />
                     </div>
                     <div className="grid grid-cols-2 gap-[23px]">
                       <div className="grid grid-rows-2 items-center gap-4  ">
-                        <ShadCNLabel className="text-xs text-[#212529]">Expiry Date</ShadCNLabel>
+                        <ShadCNLabel className="text-xs text-cw-charcoal">Expiry Date</ShadCNLabel>
                         <Input />
                       </div>
                       <div className="grid grid-rows-2 items-center gap-4  ">
-                        <ShadCNLabel className="text-xs text-[#212529]">Expiry Month</ShadCNLabel>
+                        <ShadCNLabel className="text-xs text-cw-charcoal">Expiry Month</ShadCNLabel>
                         <Input />
                       </div>
                     </div>
                   </div>
                   <div className="grid grid-rows-2 gap-4 pb-4  ">
                     <div className="grid grid-cols-2 items-center gap-4  ">
-                      <ShadCNLabel className="text-xs text-[#212529]">Country</ShadCNLabel>
+                      <ShadCNLabel className="text-xs text-cw-charcoal">Country</ShadCNLabel>
                       <Input />
                     </div>
                     <div className="grid grid-cols-2 items-center gap-4  ">
-                      <ShadCNLabel className="text-xs text-[#212529]">Address 1</ShadCNLabel>
+                      <ShadCNLabel className="text-xs text-cw-charcoal">Address 1</ShadCNLabel>
                       <Input />
                     </div>
                     <div className="grid grid-cols-2 items-center gap-4  ">
-                      <ShadCNLabel className="text-xs text-[#212529]">City</ShadCNLabel>
+                      <ShadCNLabel className="text-xs text-cw-charcoal">City</ShadCNLabel>
                       <Input />
                     </div>
                     <div className="grid grid-cols-2 gap-[23px]">
                       <div className="grid grid-rows-2 items-center gap-4  ">
-                        <ShadCNLabel className="text-xs text-[#212529]">State</ShadCNLabel>
+                        <ShadCNLabel className="text-xs text-cw-charcoal">State</ShadCNLabel>
                         <Input />
                       </div>
                       <div className="grid grid-rows-2 items-center gap-4  ">
-                        <ShadCNLabel className="text-xs text-[#212529]">Zip Code</ShadCNLabel>
+                        <ShadCNLabel className="text-xs text-cw-charcoal">Zip Code</ShadCNLabel>
                         <Input />
                       </div>
                     </div>
@@ -257,7 +257,7 @@ const AccountDashboard = () => {
             </Dialog>
           </div>
           <div className="pl-[10px]">
-            <ShadCNLabel className="text-xs text-[#212529]">
+            <ShadCNLabel className="text-xs text-cw-charcoal">
               Use the credit cards below to make one-time payments.
             </ShadCNLabel>
           </div>
@@ -279,7 +279,7 @@ const AccountDashboard = () => {
         </div>
         <div className="mt-[15px] w-1/3">
           <Card className="w-full rounded-[16px] shadow-lg">
-            <CardHeader className="h-[15px] border-b border-[#ECECEC] flex justify-center pl-[10px] items-start">
+            <CardHeader className="h-[15px] border-b border-cw-offwhite flex justify-center pl-[10px] items-start">
               <TableHeader>How to verify a new bank account</TableHeader>
             </CardHeader>
             <CardContent className="pt-[10px]">

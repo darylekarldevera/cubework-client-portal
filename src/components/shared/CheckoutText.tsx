@@ -4,7 +4,7 @@ type CheckoutTextProps = {
   children: ReactNode;
 };
 const CheckoutText = ({ children }: CheckoutTextProps) => {
-  return <div className="w-1/2 py-[10px] text-cw-darkgray text-cb-text leading-relaxed font-bold">{children}</div>;
+  return <div className="w-1/2 py-[10px] text-[#717171] text-[11px] leading-relaxed font-bold">{children}</div>;
 };
 
 export default CheckoutText;

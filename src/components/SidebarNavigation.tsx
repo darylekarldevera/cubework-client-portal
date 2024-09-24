@@ -13,7 +13,7 @@ function SidebarNavigation() {
         className={`h-logoHeight flex bg-cover bg-center object-contain bg-no-repeat`}
         style={{ backgroundImage: `url(${DEFAULT_IMAGE})` }}
       >
-        <div className="py-4 bg-white/[.7] mb-3 text-cb-text leading-relaxed mt-auto relative z-10 w-full">
+        <div className="py-4 bg-white/[.7] mb-3 text-[11px] leading-relaxed mt-auto relative z-10 w-full">
           <p className="font-bold text-center text-xs">Managed Products Groups Inc</p>
           <p className="text-center ">TX Framers Branch | Farmers Branch</p>
         </div>
@@ -43,7 +43,7 @@ function SidebarNavigation() {
                 ${getCurrentTab(pathname) === item.name ? 'block group-hover:block 4' : 'hidden'}  
               `}
             />
-            <p className="w-full text-start pl-5 font-bold text-cb-text leading-relaxed">{item.name}</p>
+            <p className="w-full text-start pl-5 font-bold text-[11px] leading-relaxed">{item.name}</p>
           </Link>
         ))}
       </div>

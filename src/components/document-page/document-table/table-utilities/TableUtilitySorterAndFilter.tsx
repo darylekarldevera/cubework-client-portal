@@ -1,26 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
-import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
-import { IFilterOption, ISortOption } from '@/constants/documentsUtilityOptions';
+import { ITableUtility } from '@/types/tableUtility';
+import { IFilterOption, ISortOption } from '@/types/tableOptions';
 
 import TableSortUtility from './TableSortUtility';
-import TableFilterUtility from './TableFilterUtility';
+import TableFilterUtilityV2 from './TableFilterUtilityV2';
 
-interface TableUtilitySorterAndFilterProps<T> {
-  data: T[];
+interface TableUtilitySorterAndFilterProps<DataType> {
+  data: DataType[];
   options: ISortOption[] | IFilterOption[];
   openUtility: string;
-  utilityInstance: DocumentTableUtility<T> | HomeTableUtility<T>;
-  setData: React.Dispatch<React.SetStateAction<T[]>>;
+  utilityInstance: ITableUtility<DataType, any>;
+  setData: React.Dispatch<React.SetStateAction<DataType[]>>;
 }
 
-function TableUtilitySorterAndFilter<T>({
+function TableUtilitySorterAndFilter<DataType>({
   openUtility,
   setData,
   utilityInstance,
   options,
-}: TableUtilitySorterAndFilterProps<T>) {
+}: TableUtilitySorterAndFilterProps<DataType>) {
   const isCheckboxSet = useRef(false); 
 
   const [checkbox, setCheckbox] = useState<any>({
@@ -54,16 +53,35 @@ function TableUtilitySorterAndFilter<T>({
   }, [checkbox]);
 
   useEffect(() => {
-    if (isCheckboxSet.current || !options.length || openUtility !== 'sort') return;
-    const lastIndexSortOption = options.slice(-1)[0] as ISortOption;
-    setCheckbox((prev: ISortOption) => ({
-      ...prev,
-      sort: {
-        name: lastIndexSortOption?.name,
-        sortType: lastIndexSortOption?.sortType?.desc,
-      },
-    }));
-
+    if (isCheckboxSet.current && options.length && openUtility === 'sort') {
+      const lastIndexSortOption = options.slice(-1)[0] as ISortOption;
+      setCheckbox((prev: ISortOption) => ({
+        ...prev,
+        sort: {
+          name: lastIndexSortOption?.name,
+          sortType: lastIndexSortOption?.sortType?.desc,
+        },
+      }));
+    }
+    
+    if (isCheckboxSet.current && options.length && openUtility === 'filter') {
+      const lastIndexFilterOption = options.slice(-1)[0] as IFilterOption;
+      setCheckbox((prev: IFilterOption) => ({
+        ...prev,
+        filter: {
+          name: lastIndexFilterOption?.name,
+          filterType: lastIndexFilterOption?.filterType?.all,
+          pickDate: {
+            startDate: (() => {
+              const date = new Date();
+              date.setFullYear(date.getFullYear() - 3);
+              return date;
+            })(),
+            endDate: undefined,
+          },
+        },
+      }))
+    }
     // Set isCheckboxSet to true to prevent the useEffect from running again
     isCheckboxSet.current = true; 
   }, [openUtility, options]);
@@ -73,9 +91,17 @@ function TableUtilitySorterAndFilter<T>({
   return (
     <div className="flex px-2 items-center mt-2">
       {openUtility === 'sort' ? (
-        <TableSortUtility sort={checkbox.sort} setCheckBox={setCheckbox} options={options} />
+        <TableSortUtility 
+          sort={checkbox.sort} 
+          setCheckBox={setCheckbox} 
+          options={options as ISortOption[]} 
+        />
       ) : (
-        <TableFilterUtility filter={checkbox.filter} setCheckBox={setCheckbox} options={options} />
+        <TableFilterUtilityV2
+          filter={checkbox.filter} 
+          setCheckBox={setCheckbox} 
+          options={options as IFilterOption[]} 
+        />
       )}
     </div>
   );

@@ -1,53 +1,45 @@
+import { ITableUtility } from "@/types/tableUtility";
+import { ICheckboxProps, IFilterProps } from "@/types/tableProps";
 import IHomeActivityTable from "@/types/homeActivityTable";
 
-export interface IHomeCheckbox {
-  sort: {
-    parent: string;
-    sortType: string;
+export interface IHomeFilterProps extends IFilterProps {
+  charge: {
+    name: string;
+    filterType: string;
   };
-  filter: {
-    charge: {
-      name: string;
-      filterType: string;
-    };
-    payments: {
-      name: string;
-      filterType: string;
-    };
-    pickDate: {
-      startDate: Date;
-      endDate: Date | undefined;
-    };
+  payments: {
+    name: string;
+    filterType: string;
   };
 }
 
-class HomeTableUtility<T> {
+class HomeTableUtility implements ITableUtility<IHomeActivityTable, ICheckboxProps> {
   private data: IHomeActivityTable[];
-  private checkbox?: any;
+  private checkbox?: ICheckboxProps;
 
-  constructor(data: IHomeActivityTable[], checkbox?: any){
+  constructor(data: IHomeActivityTable[], checkbox?: any) {
     this.data = data;
     this.checkbox = checkbox;
   }
 
-  sortAndFilter = (): T[] => {
+  sortAndFilter = (): IHomeActivityTable[] => {
     let toUpdateData = [...this.data];
     toUpdateData = this.sortData();
     toUpdateData = this.filterData(toUpdateData);
-    return toUpdateData as T[];
-  }
+    return toUpdateData;
+  };
 
   sortData = () => {
     const toUpdateData = [...this.data];
     const sortName = this?.checkbox?.sort?.name?.toLowerCase();
     const sortType = this?.checkbox?.sort?.sortType?.toLowerCase();
-    
+
     if (sortName === 'date' && sortType === 'ascending') {
       return toUpdateData.sort((a, b) => {
         return a.date > b.date ? 1 : -1;
       });
     }
-    
+
     return toUpdateData.sort((a, b) => {
       return a.date < b.date ? 1 : -1;
     });
@@ -65,7 +57,7 @@ class HomeTableUtility<T> {
         if (startDate && endDate) {
           return itemDate >= startDate && itemDate <= endDate;
         }
-        
+
         if (startDate) {
           return itemDate >= startDate;
         }
@@ -75,11 +67,11 @@ class HomeTableUtility<T> {
     }
 
     return toUpdateData;
-  }
+  };
 
-  setCheckbox = (checkbox: any) => {
+  setCheckbox = (checkbox: ICheckboxProps) => {
     this.checkbox = checkbox;
-  }
+  };
 }
 
 export default HomeTableUtility;

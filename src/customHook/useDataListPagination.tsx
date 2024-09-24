@@ -1,13 +1,19 @@
 
-import { IDocument } from '@/types/invoiceDocuments';
 import { useEffect, useState } from 'react'
+import { IDocument } from '@/types/invoiceDocuments';
 
 interface IDataListPaginationProps {
   data: IDocument[];
   currentPage: number;
 }
 
-function useDataListPagination({ data, currentPage, }: IDataListPaginationProps) {
+interface IDataListPaginationReturn {
+  paginationNumbers: number[];
+  canNextPage: boolean;
+  canPreviousPage: boolean;
+}
+
+function useDataListPagination({ data, currentPage, }: IDataListPaginationProps): IDataListPaginationReturn {
   const [paginationNumbers, setPaginationNumbers] = useState<number[]>([]);
   const [canNextPage, setCanNextPage] = useState<boolean>(true);
   const [canPreviousPage, setCanPreviousPage] = useState<boolean>(true);
@@ -34,7 +40,6 @@ function useDataListPagination({ data, currentPage, }: IDataListPaginationProps)
     } else {
       setCanNextPage(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   return { paginationNumbers, canNextPage, canPreviousPage };

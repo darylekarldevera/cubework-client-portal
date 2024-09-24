@@ -6,9 +6,11 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { useCallback, useState } from 'react';
+
+import useDataTablePagination from '@/customHook/useDataTablePagination';
+
 import PaginationItemLink from './PaginationItemLink';
 import EllipsisIndicator from './EllipsisIndicator';
-import UsePaginationHook from '@/customHook/usePaginationHook';
 
 interface IDataTablePaginationControllersProps {
   canPreviousPage: boolean;
@@ -58,7 +60,7 @@ function DataTablePaginationControllers({
     return value ? 'pointer-events-none opacity-50' : 'cursor-pointer';
   }, []);
 
-  const { paginationOptions } = UsePaginationHook({ currentPage, paginationNumbers, previousPageNumber });
+  const { paginationOptions } = useDataTablePagination({ currentPage, paginationNumbers, previousPageNumber });
 
   return (
     <Pagination className={`${cwStyle ? 'cw-style' : ''} mt-auto`}>

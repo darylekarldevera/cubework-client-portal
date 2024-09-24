@@ -1,34 +1,21 @@
 import { IDocument } from "@/types/invoiceDocuments";
+import { ITableUtility } from "@/types/tableUtility";
+import { ICheckboxProps } from "@/types/tableProps";
 
-export interface ICheckbox {
-  sort: {
-    name: string;
-    sortType: string;
-  };
-  filter: {
-    name: string;
-    filterType: string;
-    pickDate: {
-      startDate: Date;
-      endDate: Date | undefined;
-    };
-  };
-}
-
-class DocumentTableUtility<T> {
+class DocumentTableUtility implements ITableUtility<IDocument, ICheckboxProps> {
   private data: IDocument[];
-  private checkbox?: ICheckbox;
+  private checkbox?: ICheckboxProps;
 
-  constructor(data: IDocument[], checkbox?: ICheckbox){
+  constructor(data: IDocument[], checkbox?: ICheckboxProps){
     this.data = data;
     this.checkbox = checkbox;
   }
 
-  sortAndFilter = (): T[] => {
+  sortAndFilter = (): IDocument[] => {
     let toUpdateData = [...this.data];
     toUpdateData = this.sortData();
     toUpdateData = this.filterData(toUpdateData);
-    return toUpdateData as T[];
+    return toUpdateData;
   }
 
   sortData = () => {
@@ -89,7 +76,7 @@ class DocumentTableUtility<T> {
     return toUpdateData;
   };
 
-  setCheckbox = (checkbox: ICheckbox) => {
+  setCheckbox = (checkbox: ICheckboxProps) => {
     this.checkbox = checkbox;
   };
 }

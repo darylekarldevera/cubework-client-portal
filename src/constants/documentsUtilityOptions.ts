@@ -1,17 +1,6 @@
-export interface ISortOption {
-  name: string;
-  sortType: {
-    asc: string;
-    desc: string;
-  };
-}
+import { IFilterOption, ISortOption } from "@/types/tableOptions";
 
-export interface IFilterOption {
-  name: string;
-  filterType: string;
-}
-
-const SORT_OPTIONS: ISortOption[] = [
+export const DOCUMENT_SORT_OPTIONS: ISortOption[] = [
   {
     name: 'Name',
     sortType: {
@@ -28,7 +17,7 @@ const SORT_OPTIONS: ISortOption[] = [
   }
 ];
 
-const FILTER_OPTIONS: IFilterOption[] = [
+export const DOCUMENT_FILTER_OPTIONS: IFilterOption[] = [
   {
     name: 'All',
     filterType: 'all'
@@ -42,5 +31,3 @@ const FILTER_OPTIONS: IFilterOption[] = [
     filterType: 'csv'
   },
 ];
-
-export { SORT_OPTIONS, FILTER_OPTIONS };

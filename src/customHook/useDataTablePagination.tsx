@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
 
-interface IPaginationHook {
+interface IDataTablePagination {
   currentPage: number;
   paginationNumbers: number[];
   previousPageNumber: number;
 }
 
-function UsePaginationHook({ currentPage, paginationNumbers, previousPageNumber }: IPaginationHook) {
+interface IDataTablePaginationReturn {
+  paginationOptions: number[];
+}
+
+function useDataTablePagination({
+  currentPage,
+  paginationNumbers,
+  previousPageNumber,
+}: IDataTablePagination): IDataTablePaginationReturn {
   const [paginationOptions, setPaginationOptions] = useState<number[]>([]);
-  
+
   useEffect(() => {
     const paginationNumbersLength = paginationNumbers.length;
     const visiblePageCount = 3;
@@ -35,4 +43,4 @@ function UsePaginationHook({ currentPage, paginationNumbers, previousPageNumber 
   return { paginationOptions };
 }
 
-export default UsePaginationHook;
+export default useDataTablePagination;

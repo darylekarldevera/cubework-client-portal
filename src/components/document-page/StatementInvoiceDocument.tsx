@@ -1,20 +1,21 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 
 import { IDocument } from '@/types/invoiceDocuments';
 import { DocumentsQuery } from '@/queries/DocumentsQuery';
-import { SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
 import DocumentTableUtility from '@/lib/documentDataSorterAndFilter';
-import { ErrorModalContext } from '@/contexts/ErrorModalContext';
+import { DOCUMENT_SORT_OPTIONS } from '@/constants/documentsUtilityOptions';
+import useUtilityInstanceAndData from '@/customHook/useUtilityInstanceAndData';
 
-import DocumentListTable from './document-table/DocumentListTable';
 import TableUtilities from './document-table/table-utilities/TableUtilities';
+import DocumentListTable from './document-table/DocumentListTable';
 
 function StatementInvoiceDocument() {
-  const { showError, setShowError } = useContext(ErrorModalContext);
-
-  const [originalData, setOriginalData] = useState<IDocument[]>([]);
-  const [documentsData, setDocumentsData] = useState<IDocument[]>([]);
   const invoiceDocuments = DocumentsQuery('invoice_documents');
+
+  const { data, setData, originalData, utility, isLoading } = useUtilityInstanceAndData<IDocument>({
+    dataApi: invoiceDocuments,
+    utilityClass: DocumentTableUtility,
+  });
 
   const filterCb = useCallback((items: IDocument[], searchData: string): IDocument[] => {
     return items.filter((item) => {
@@ -22,57 +23,24 @@ function StatementInvoiceDocument() {
     });
   }, []);
 
-  // Memoize the utility instance only when the invoiceDocuments data changes
-  const utility = useMemo(() => {
-    if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
-      // Use spread operator to avoid mutating original data
-      const utilityInstance = new DocumentTableUtility<IDocument>([...invoiceDocuments.data]);
-      const sortedData = utilityInstance.sortData();
-      setDocumentsData(sortedData);
-      setOriginalData(sortedData);
-      return utilityInstance;
-    }
-    return new DocumentTableUtility<IDocument>([]);
-  }, [invoiceDocuments.data, invoiceDocuments.isSuccess]);
-
-  useEffect(() => {
-    if (invoiceDocuments.isSuccess && invoiceDocuments.data) {
-      // Sort the data and update the state
-      const sortedData = utility.sortData();
-      setDocumentsData(sortedData);
-      setOriginalData(sortedData);
-    }
-
-    if (invoiceDocuments.isError) {
-      setDocumentsData([]);
-      setOriginalData([]);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (invoiceDocuments.isError) {
-      setShowError(!showError);
-    }
-  }, [invoiceDocuments.isError]);
-
-  if (invoiceDocuments.isLoading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
       <TableUtilities
-        data={documentsData}
+        data={data}
         originalData={originalData}
-        setData={setDocumentsData}
+        setData={setData}
         filterCb={filterCb}
         utilityInstance={utility}
-        sortOptions={SORT_OPTIONS}
+        sortOptions={DOCUMENT_SORT_OPTIONS}
         filterOptions={[]}
       />
-      
+
       <DocumentListTable 
-        data={documentsData} 
+        data={data} 
         documentType="Statement/Invoice" 
       />
     </div>

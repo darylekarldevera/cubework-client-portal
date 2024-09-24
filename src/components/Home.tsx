@@ -55,7 +55,12 @@ function Home() {
         filterCb={filterCb}
       />
       <CWCard>
-        <DataTable pageSize={5} data={data} columns={HOME_ACTIVITY_TABLE_COLUMNS} cwStyle={true} />
+        <DataTable 
+          pageSize={5} 
+          data={data} 
+          columns={HOME_ACTIVITY_TABLE_COLUMNS} 
+          cwStyle={true} 
+        />
       </CWCard>
     </div>
   );

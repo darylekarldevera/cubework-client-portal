@@ -12,11 +12,11 @@ export const HOME_SORT_OPTIONS: ISortOption[] = [
 
 export const HOME_FILTER_OPTIONS: IFilterOption[] = [
   {
-    name: 'Charge',
-    filterType: 'All',
-  },
-  {
-    name: 'Payments',
-    filterType: 'All',
+    name: 'Column',
+    filterType: {
+      all: 'all',
+      charge: 'charge',
+      payments: 'payments',
+    }
   },
 ];

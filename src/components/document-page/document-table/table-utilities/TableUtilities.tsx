@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import TableUtilitiesControllers from './TableUtilitiesControllers'
-import TableUtilitySorterAndFilter from './TableUtilitySorterAndFilter'
 import { ITableUtility } from '@/types/tableUtility';
 import { IFilterOption, ISortOption } from '@/types/tableOptions';
+
+import TableUtilitiesControllers from './TableUtilitiesControllers'
+import TableUtilitySorterAndFilter from './TableUtilitySorterAndFilter'
 
 interface TableUtilitiesProps<DataType> {
   data: DataType[];

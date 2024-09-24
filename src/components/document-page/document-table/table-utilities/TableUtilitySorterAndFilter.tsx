@@ -4,7 +4,7 @@ import { ITableUtility } from '@/types/tableUtility';
 import { IFilterOption, ISortOption } from '@/types/tableOptions';
 
 import TableSortUtility from './TableSortUtility';
-import TableFilterUtility from './TableFilterUtility';
+import TableFilterUtilityV2 from './TableFilterUtilityV2';
 
 interface TableUtilitySorterAndFilterProps<DataType> {
   data: DataType[];
@@ -53,16 +53,35 @@ function TableUtilitySorterAndFilter<DataType>({
   }, [checkbox]);
 
   useEffect(() => {
-    if (isCheckboxSet.current || !options.length || openUtility !== 'sort') return;
-    const lastIndexSortOption = options.slice(-1)[0] as ISortOption;
-    setCheckbox((prev: ISortOption) => ({
-      ...prev,
-      sort: {
-        name: lastIndexSortOption?.name,
-        sortType: lastIndexSortOption?.sortType?.desc,
-      },
-    }));
-
+    if (isCheckboxSet.current && options.length && openUtility === 'sort') {
+      const lastIndexSortOption = options.slice(-1)[0] as ISortOption;
+      setCheckbox((prev: ISortOption) => ({
+        ...prev,
+        sort: {
+          name: lastIndexSortOption?.name,
+          sortType: lastIndexSortOption?.sortType?.desc,
+        },
+      }));
+    }
+    
+    if (isCheckboxSet.current && options.length && openUtility === 'filter') {
+      const lastIndexFilterOption = options.slice(-1)[0] as IFilterOption;
+      setCheckbox((prev: IFilterOption) => ({
+        ...prev,
+        filter: {
+          name: lastIndexFilterOption?.name,
+          filterType: lastIndexFilterOption?.filterType?.all,
+          pickDate: {
+            startDate: (() => {
+              const date = new Date();
+              date.setFullYear(date.getFullYear() - 3);
+              return date;
+            })(),
+            endDate: undefined,
+          },
+        },
+      }))
+    }
     // Set isCheckboxSet to true to prevent the useEffect from running again
     isCheckboxSet.current = true; 
   }, [openUtility, options]);
@@ -78,7 +97,7 @@ function TableUtilitySorterAndFilter<DataType>({
           options={options as ISortOption[]} 
         />
       ) : (
-        <TableFilterUtility 
+        <TableFilterUtilityV2
           filter={checkbox.filter} 
           setCheckBox={setCheckbox} 
           options={options as IFilterOption[]} 

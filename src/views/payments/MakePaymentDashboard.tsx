@@ -15,7 +15,7 @@ const MakePaymentDashboard = () => {
         </ShadCNLabel>
       </div>
       <Card className="mt-[12px] h-[153px] w-full rounded-[16px] overflow-auto shadow-lg">
-        <div className="h-2/3 flex justify-between px-[36px] items-center bg-gradient-to-r from-[#4EB951] to-white">
+        <div className="h-2/3 flex justify-between px-[36px] items-center bg-gradient-to-r from-cw-green to-white">
           <div className="flex flex-col gap-1">
             <ShadCNLabel className="text-[11px] leading-relaxed  font-medium text-white ">Balance</ShadCNLabel>
             <ShadCNLabel className="text-xl font-semibold text-white">${formatCurrency(8000.88)}</ShadCNLabel>

@@ -20,7 +20,7 @@ const AutoPayList = () => {
         <ShadCNLabel className="text-xs font-bold text-black">Auto Pay Account</ShadCNLabel>
       </div>
       <div className="pl-[10px] ">
-        <Card className="pl-5 py-3 flex gap-2 items-center bg-[#28A745] w-full">
+        <Card className="pl-5 py-3 flex gap-2 items-center bg-cw-green w-full">
           <img src={CheckedImage} alt="" className="text-white" />
           <ShadCNLabel className="text-xs font-medium text-white">
             <span className="font-bold">Important:</span>Your account is now setup for auto pay. To revert, please

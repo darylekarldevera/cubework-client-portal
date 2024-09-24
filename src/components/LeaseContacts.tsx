@@ -20,7 +20,11 @@ interface ILeastTable {
 
 const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
   {
-    header: 'Name',
+    header: 'Last Name',
+    accessorKey: 'last_name',
+  },
+  {
+    header: 'First Name',
     accessorKey: 'first_name',
   },
   {

@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
-import { TabsList } from '@radix-ui/react-tabs';
 
 type TabsButtonWrapper = {
   children: ReactNode;
 };
 
 const TabsButtonWrapper = ({ children }: TabsButtonWrapper) => {
-  return <TabsList className="grid w-full grid-cols-6 border-b border-[#ECECEC]">{children}</TabsList>;
+  return <div className="text-[10px] grid w-full grid-cols-6 border-b border-[#ECECEC] mb-3">{children}</div>;
+  // return <div className="text-[10px] grid w-full grid-cols-6 border border-red-500 ">{children}</div>;
 };
 
 export default TabsButtonWrapper;

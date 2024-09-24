@@ -69,32 +69,29 @@ function TableFilterUtilityCardV2({
           <CommandList>
             <CommandEmpty>Not found.</CommandEmpty>
             <CommandGroup>
-              {sortTypeKeys?.map((type: any) => {
-                console.log(option.filterType[type], filter.filterType, filter.name, option.name);
-                return (
-                  <CommandItem
-                    key={type}
-                    value={type}
-                    className="cursor-pointer text-[10px] h-9"
-                    onSelect={(currentValue) => {
-                      setOpenSort('');
-                      setCheckBox((prev) => ({
-                        ...prev,
-                        filter: {
-                          ...prev.filter,
-                          name: option.name,
-                          filterType: option?.filterType?.[currentValue],
-                        },
-                      }));
-                    }}
-                  >
-                    {capitalizeFirstLetter(option.filterType[type])}
-                    {option.filterType[type] === filter.filterType && filter.name === option.name ? (
-                      <CheckIcon className={cn('ml-auto h-4 w-4')} />
-                    ) : null}
-                  </CommandItem>
-                );
-              })}
+              {sortTypeKeys?.map((type: any) => (
+                <CommandItem
+                  key={type}
+                  value={type}
+                  className="cursor-pointer text-[10px] h-9"
+                  onSelect={(currentValue) => {
+                    setOpenSort('');
+                    setCheckBox((prev) => ({
+                      ...prev,
+                      filter: {
+                        ...prev.filter,
+                        name: option.name,
+                        filterType: option?.filterType?.[currentValue],
+                      },
+                    }));
+                  }}
+                >
+                  {capitalizeFirstLetter(option.filterType[type])}
+                  {option.filterType[type] === filter.filterType && filter.name === option.name ? (
+                    <CheckIcon className={cn('ml-auto h-4 w-4')} />
+                  ) : null}
+                </CommandItem>
+              ))}
             </CommandGroup>
           </CommandList>
         </Command>

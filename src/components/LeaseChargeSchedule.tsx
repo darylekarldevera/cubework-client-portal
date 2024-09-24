@@ -59,7 +59,7 @@ export default function LeaseChargeSchedule() {
   }
 
   return (<>
-    <Heading1 text="Lease" />
+    <Heading1 text="License Profile" />
 
     <Tabs links={LEASE_TABS} />
 

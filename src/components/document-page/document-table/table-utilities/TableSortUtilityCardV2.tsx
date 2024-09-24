@@ -51,7 +51,7 @@ function TableSortUtilityCardV2({
         <Button
           variant="outline"
           role="combobox"
-          className="h-[21px] justify-between bg-white z-10 text-center border mr-4 text-[10px]"
+          className="h-[21px] justify-between bg-white z-10 text-center border mr-4 text-cb-table"
           onClick={() => {
             if (openSort === option.name) {
               setOpenSort('');
@@ -66,7 +66,7 @@ function TableSortUtilityCardV2({
       </PopoverTrigger>
       <PopoverContent className="w-min min-w-[120px] p-0 bg-white">
         <Command>
-          <CommandInput placeholder="Search..." className="h-9 bg-white z-1 text-[10px]" />
+          <CommandInput placeholder="Search..." className="h-9 bg-white z-1 text-cb-table" />
           <CommandList>
             <CommandEmpty>Not found.</CommandEmpty>
             <CommandGroup>
@@ -74,7 +74,7 @@ function TableSortUtilityCardV2({
                 <CommandItem
                   key={type}
                   value={type}
-                  className="cursor-pointer text-[10px] h-9"
+                  className="cursor-pointer text-cb-table h-9"
                   onSelect={(currentValue) => {
                     setOpenSort('');
                     setCheckBox((prev: any) => ({

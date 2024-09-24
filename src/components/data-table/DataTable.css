@@ -8,7 +8,7 @@
 .cw-table-wrapper [role=navigation],
 .cw-style {
   li a {
-    @apply border border-slate-600 rounded-sm w-7 h-7 text-[10px];
+    @apply border border-slate-600 rounded-sm w-7 h-7 text-cb-table;
   }
 
   li a.page-prev, li a.page-next {

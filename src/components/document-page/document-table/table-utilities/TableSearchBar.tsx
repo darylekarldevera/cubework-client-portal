@@ -10,7 +10,7 @@ interface TableSearchBarProps {
 function TableSearchBar({ search, setSearch }: TableSearchBarProps) {
   return (
     <Command value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}>
-      <CommandInput placeholder="Type a command or search..." className='text-[10px]'/>
+      <CommandInput placeholder="Type a command or search..." className='text-cb-table'/>
       <CommandList>
         <CommandItem />
       </CommandList>

@@ -11,7 +11,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function DatePicker({ className='' }: { className?: string }) {
+export function DatePicker() {
   const [date, setDate] = React.useState<Date>()
 
   return (
@@ -21,8 +21,7 @@ export function DatePicker({ className='' }: { className?: string }) {
           variant={"outline"}
           className={cn(
             "w-full justify-between text-left font-normal",
-            !date && "text-muted-foreground",
-            className
+            !date && "text-muted-foreground"
           )}
         >
           {date ? format(date, "PPP") : <span>Pick a date</span>}

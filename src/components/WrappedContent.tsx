@@ -7,7 +7,7 @@ interface WrappedContentProps {
 function WrappedContent({ children }: WrappedContentProps) {
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden relative">
-      <div className={`h-full w-full xxs:px-5 px-16 xxs:py-4 py-10 relative`}>{children}</div>
+      <div className={`h-full w-full xxs:px-5 px-16 relative`}>{children}</div>
     </div>
   );
 }

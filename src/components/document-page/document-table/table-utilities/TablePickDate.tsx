@@ -24,7 +24,7 @@ function TablePickDate({ pickDate, setPickDate }: ITablePickDateProps) {
           <PopoverTrigger asChild>
             <Button
               variant={'outline'}
-              className={cn('w-[120px] text-cb-table h-full', !pickDate[key] && 'text-muted-foreground')}
+              className={cn('w-[120px] text-[10px] h-full', !pickDate[key] && 'text-muted-foreground')}
             >
               <span>{pickDate[key] ? formatDate(pickDate[key]) : null}</span>
               <CalendarIcon className="w-4 h-4 ml-auto" />

@@ -11,7 +11,7 @@ const AutoPaySetup = () => {
         <ShadCNLabel className="text-xs font-bold text-black">Auto Pay Account</ShadCNLabel>
       </div>
       <div className="pl-[10px]">
-        <ShadCNLabel className="text-xs font-medium text-cw-gray">
+        <ShadCNLabel className="text-xs font-medium text-[#797979]">
           <span className="font-bold">!Important:</span> Once auto pay is setup, you must contact Cubework team directly
           to revert.
         </ShadCNLabel>

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { servicesQuery } from "@/queries/ServicesQuery"
-import { Heading1 } from "./ui/headings"
+import { Heading1, Heading2 } from "./ui/headings"
 import { Card, CardContent } from "./ui/card";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
@@ -42,7 +42,7 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
   return (
     <div className="py-4">
       <hr />
-      <div className="px-8 py-4 flex flex-row items-center justify-end gap-1 text-cb-text">
+      <div className="px-8 py-4 flex flex-row items-center justify-end gap-1">
         <Checkbox id="apply-promo" />
         <label htmlFor="apply-promo">Apply promo balance: ${formatCurrency(promoBalance)}</label>
       </div>
@@ -56,31 +56,31 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
                 width="200"
               />
             </div>
-            <div className="text-cb-text"><strong>Add card details</strong></div>
+            <div><strong>Add card details</strong></div>
             <div>
               {/* TODO: Add validation */}
-              <Label htmlFor="card-number" className="text-cb-text">Card number</Label>
-              <Input name="card-number" type="text" pattern="\d{3}" className="text-cb-text" />
+              <Label htmlFor="card-number">Card number</Label>
+              <Input name="card-number" type="text" pattern="\d{3}" />
             </div>
-            <div className="text-cb-text">
+            <div>
               {/* TODO: Add validation */}
-              <Label htmlFor="card-holder-name" className="text-cb-text">Card Holder Name</Label>
-              <Input name="card-holder-name" type="text" className="text-cb-text" />
+              <Label htmlFor="card-holder-name">Card Holder Name</Label>
+              <Input name="card-holder-name" type="text" />
             </div>
             <div className="flex flex-row gap-4">
               <div>
                 {/* TODO: Add validation */}
-                <Label htmlFor="expiry-date" className="text-cb-text">Expiry date</Label>
-                <Input name="expiry-date" type="text" className="text-cb-text" />
+                <Label htmlFor="expiry-date">Expiry date</Label>
+                <Input name="expiry-date" type="text" />
               </div>
               <div>
-                <Label htmlFor="ccv" className="text-cb-text">CVC</Label>
-                <Input name="cvc" type="text" className="text-cb-text" />
+                <Label htmlFor="ccv">CVC</Label>
+                <Input name="cvc" type="text" />
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full bg-slate-100 p-4 text-cb-text">
+        <div className="w-full bg-slate-100 p-4">
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
               <div>Hours</div>
@@ -88,10 +88,10 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
 
               <div>
                 <Select>
-                  <SelectTrigger className="w-[180px] text-cb-text">
+                  <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Pick hour range" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white text-cb-text">
+                  <SelectContent className="bg-white">
                     <SelectItem value="2-3">2:00 PM - 3:00 PM</SelectItem>
                     <SelectItem value="3-4">3:00 PM - 4:00 PM</SelectItem>
                     <SelectItem value="4-5">4:00 PM - 5:00 PM</SelectItem>
@@ -99,13 +99,13 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
                 </Select>
               </div>
 
-              <div><DatePicker className="text-cb-text" /></div>
+              <div><DatePicker /></div>
 
               <div>Summary</div>
               <div>8/21/2024<br />1 hour (2:00 PM)</div>
 
               <div>Promo Code</div>
-              <div><Input type="text" className="text-cb-text" /></div>
+              <div><Input type="text" /></div>
 
               <div>Amount</div>
               <div>${formatCurrency(amount)}</div>
@@ -115,7 +115,7 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
             </div>
             <div>
               <Button
-                className="w-full bg-blue-600 text-white text-cb-text"
+                className="w-full bg-blue-600 text-white"
                 variant="default"
               >Pay Now</Button>
             </div>
@@ -128,7 +128,7 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
 
 function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
   return (
-    <Card className="w-full rounded-none text-cb-text">
+    <Card className="w-full rounded-none">
       <CardContent className="p-2">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1" className="border-0">
@@ -137,8 +137,8 @@ function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
                   <img src={`https://picsum.photos/80/80?id=${id}`} />
                 </div>
                 <div className="flex-grow">
-                  <p className="mb-1">{ serviceName }</p>
-                  <p className="mb-1">{ description }</p>
+                  <p>{ serviceName }</p>
+                  <p>{ description }</p>
                   <p>${ formatCurrency(rate) }</p>
                 </div>
                 <div className="flex flex-row gap-4">
@@ -168,7 +168,7 @@ export default function Services() {
   return (<>
       <Heading1 text="Services" />
 
-      <p className="mb-4">Cubework Services Offered</p>
+      <Heading2 text="Cubework Services Offered" className="mb-4" />
 
       {servicesQ.isFetching && (<>Loading...</>)}
 
@@ -187,14 +187,14 @@ export default function Services() {
             description={ i.description }
             rate={ i.rate }
             actions={
-              <Button variant="outline" className="text-cb-text">Checkout</Button>
+              <Button variant="outline">Checkout</Button>
             }
           />
 
         </div>
       ))}
 
-      <Heading1 text="My Services" />
+      <Heading2 text="My Services" className="mb-4" />
 
       {myServicesQ.isFetching && (<>Loading...</>)}
 
@@ -212,17 +212,13 @@ export default function Services() {
             serviceName={ i.service_name }
             description={ i.description }
             rate={ i.rate }
-            actions={(<>
-              <Button
-                variant="outline"
-                className="text-cb-text"
-              >Checkout</Button>
+            actions={<>
+              <Button variant="outline">Checkout</Button>
               <Button
                 variant="outline"
                 onClick={() => alert(i.id + ':' + i.service_name)}
-                className="text-cb-text"
               >Reschedule</Button>
-            </>)}
+            </>}
           />
         </div>
       ))}

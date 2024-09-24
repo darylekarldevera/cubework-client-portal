@@ -19,8 +19,6 @@ export default {
       },
       colors: {
         'cw-green': '#59BA56',
-        'cw-gray': '#797979',
-        'cw-darkgray': '#797979',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -87,10 +85,6 @@ export default {
       spacing: {
         sidebar: '236px',
         logoHeight: '130px',
-      },
-      fontSize: {
-        'cb-table': '10px',
-        'cb-text': '11px',
       },
     },
   },

@@ -1,8 +1,8 @@
-import { Link, useLocation } from 'react-router-dom';
-import getCurrentTab from '@/lib/getCurrentTab';
-import NAVIGATION_ITEMS from '@/constants/navigationItem';
-import { SidebarContext } from '@/contexts/SidebarContext';
 import { useContext } from 'react';
+import getCurrentTab from '@/lib/getCurrentTab';
+import { SidebarContext } from '@/contexts/SidebarContext';
+import NAVIGATION_ITEMS from '@/constants/navigationItem';
+import { Link, useLocation } from 'react-router-dom';
 
 interface ISidebarNavigationList {
   className?: string;
@@ -13,10 +13,9 @@ function SidebarNavigationList({ className }: ISidebarNavigationList) {
 
   const { pathname } = useLocation();
   return (
-    <div className={`flex-grow-3 ${className}`}>
+    <div className={`flex-grow-3 pt-3 ${className}`} onClick={() => setOpenSidebar((prev: boolean) => !prev)}>
       {NAVIGATION_ITEMS.map((item, index) => (
         <Link
-          onClick={() => setOpenSidebar((prev: boolean) => !prev)}
           key={index}
           to={item.path}
           className={`
@@ -38,11 +37,11 @@ function SidebarNavigationList({ className }: ISidebarNavigationList) {
                 ${getCurrentTab(pathname) === item.name ? 'block group-hover:block 4' : 'hidden'}  
               `}
           />
-          <p className="w-full text-start pl-5 font-bold text-[11px] leading-relaxed">{item.name}</p>
+          <p className="w-full text-start pl-5 font-bold text-cb-text leading-relaxed">{item.name}</p>
         </Link>
       ))}
     </div>
   );
 }
 
-export default SidebarNavigationList
+export default SidebarNavigationList;

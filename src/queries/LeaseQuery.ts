@@ -32,6 +32,7 @@ interface ILeaseChargeScheduleItem {
   period: string,
   billing_frequency: string,
   units: string,
+  amount: number | string,
 
 }
 

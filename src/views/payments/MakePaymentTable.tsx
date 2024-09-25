@@ -21,12 +21,12 @@ const MakePaymentTable = () => {
   return (
     <>
       <div className="py-[14px] pl-[10px] w-full">
-        <ShadCNLabel className="text-xs font-regular text-[#212529]">Payment Method</ShadCNLabel>
+        <ShadCNLabel className="text-xs font-regular text-cw-charcoal">Payment Method</ShadCNLabel>
         <div className="mt-[12px] flex gap-[37px]">
           <div className="w-[170px]">
             <Select items={['Bankxx-1009', 'Bankxx-1010', 'Bankxx-1011']} />
           </div>
-          <ShadCNButton className="border border-[#59BA56] rounded-[6px] text-[#59BA56] text-[11px] leading-relaxed h-[30px]">
+          <ShadCNButton className="border border-cw-green rounded-[6px] text-cw-green text-[11px] leading-relaxed h-[30px]">
             <Link to={'../..' + '/bank-accounts/dashboard'} relative="path">
               + Payment Method
             </Link>

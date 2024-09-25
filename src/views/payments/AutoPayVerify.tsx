@@ -86,7 +86,7 @@ const AutoPayVerify = () => {
         </Table>
       </Card>
       <div className="mt-[20px] pl-[10px]">
-        <ShadCNLabel className="text-[11px] leading-relaxed text-[#212529] font-bold ">
+        <ShadCNLabel className="text-[11px] leading-relaxed text-cw-charcoal font-bold ">
           I authorize the Cubework to withdraw the amount specified above from my account on the designated payment date
           each month, in accordance with the agreed terms and conditions.
         </ShadCNLabel>
@@ -100,7 +100,7 @@ const AutoPayVerify = () => {
                   id="terms"
                   className="border border-[#E5E7EB] rounded-[4px] focus:shadow-[0_0_0_2px_#E5E7EB]"
                 />
-                <ShadCNLabel id="terms" className="text-[11px] leading-relaxed text-[#212529] font-bold ">
+                <ShadCNLabel id="terms" className="text-[11px] leading-relaxed text-cw-charcoal font-bold ">
                   I have read and agree to the Cubework's terms and conditions
                 </ShadCNLabel>
               </div>

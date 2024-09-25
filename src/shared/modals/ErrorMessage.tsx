@@ -16,7 +16,7 @@ function ErrorMessage({ isVisible }: IErrorMessageProps) {
       <div className="bg-white p-4 rounded-lg flex flex-col">
         <h1 className="text-2xl font-bold">Error</h1>
         <p>Something went wrong. Please try again later.</p>
-        <button className="ml-auto mt-5 py-2 px-3 bg-[#4EB951] text-white rounded-sm cursor-pointer" onClick={() => setShowError(!showError)}>
+        <button className="ml-auto mt-5 py-2 px-3 bg-cw-green text-white rounded-sm cursor-pointer" onClick={() => setShowError(!showError)}>
           Continue
         </button>
       </div>

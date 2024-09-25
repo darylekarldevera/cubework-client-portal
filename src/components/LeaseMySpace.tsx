@@ -46,7 +46,7 @@ export default function LeaseMySpace() {
   }
 
   return (<>
-    <Heading1 text="Lease" />
+    <Heading1 text="License Profile" />
 
     <Tabs links={LEASE_TABS} />
 

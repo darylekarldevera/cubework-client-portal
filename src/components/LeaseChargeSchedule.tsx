@@ -8,13 +8,14 @@ import Tabs from "./Tabs";
 import WrappedContent from "./WrappedContent";
 import { LEASE_TABS } from "@/constants/tabs";
 import CWCard from "./CWCard";
-
+import { formatCurrency } from "@/lib/utils";
 
 interface ILeastTable {
   description: string,
   period: string,
   billing_frequency: string,
   units: string,
+  amount: number | string,
 }
 
 const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
@@ -34,6 +35,10 @@ const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
     header: 'Units',
     accessorKey: 'units',
   },
+  {
+    header: 'Amount',
+    accessorKey: 'amount',
+  },
 ];
 
 
@@ -46,14 +51,15 @@ export default function LeaseChargeSchedule() {
     data = q?.data?.data.map(i => {
       return {
         ...i,
-        description: i.description.split('.')[0],
+        description: i.description?.split('.')[0],
         units: i.units.toUpperCase(),
+        amount: '$' + formatCurrency(Number(i.amount)),
       }
     });
   }
 
   return (<>
-    <Heading1 text="Lease" />
+    <Heading1 text="License Profile" />
 
     <Tabs links={LEASE_TABS} />
 

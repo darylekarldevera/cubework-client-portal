@@ -4,7 +4,7 @@ import PaymentTabs from '@/views/payments/PaymentTabs.tsx';
 
 const Payment = () => {
   return (
-    <div className="ml-5 mt-[30px]">
+    <div>
       <Label>Payments</Label>
       <div className="w-full mt-[30px]">
         <PaymentTabs />

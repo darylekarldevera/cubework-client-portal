@@ -42,12 +42,12 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
   return (
     <div className="py-4">
       <hr />
-      <div className="px-8 py-4 flex flex-row items-center justify-end gap-1 text-cb-text">
+      <div className="px-8 py-4 flex flex-row items-center justify-end gap-1 !text-cb-text">
         <Checkbox id="apply-promo" />
         <label htmlFor="apply-promo">Apply promo balance: ${formatCurrency(promoBalance)}</label>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4 px-8">
+      <div className="flex flex-col lg:flex-row gap-4 px-8">
         <div className="w-full">
           <div className="flex flex-col gap-4">
             <div>
@@ -56,56 +56,56 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
                 width="200"
               />
             </div>
-            <div className="text-cb-text"><strong>Add card details</strong></div>
+            <div className="!text-cb-text"><strong>Add card details</strong></div>
             <div>
               {/* TODO: Add validation */}
-              <Label htmlFor="card-number" className="text-cb-text">Card number</Label>
-              <Input name="card-number" type="text" pattern="\d{3}" className="text-cb-text" />
+              <Label htmlFor="card-number" className="!text-cb-text">Card number</Label>
+              <Input name="card-number" type="text" pattern="\d{3}" className="!text-cb-text py-2 px-4 h-auto" />
             </div>
-            <div className="text-cb-text">
+            <div className="!text-cb-text">
               {/* TODO: Add validation */}
-              <Label htmlFor="card-holder-name" className="text-cb-text">Card Holder Name</Label>
-              <Input name="card-holder-name" type="text" className="text-cb-text" />
+              <Label htmlFor="card-holder-name" className="!text-cb-text">Card Holder Name</Label>
+              <Input name="card-holder-name" type="text" className="!text-cb-text py-2 px-4 h-auto" />
             </div>
-            <div className="flex flex-row gap-4">
-              <div>
+            <div className="flex flex-col lg:flex-row gap-4">
+              <div className="w-full">
                 {/* TODO: Add validation */}
-                <Label htmlFor="expiry-date" className="text-cb-text">Expiry date</Label>
-                <Input name="expiry-date" type="text" className="text-cb-text" />
+                <Label htmlFor="expiry-date" className="!text-cb-text">Expiry date</Label>
+                <Input name="expiry-date" type="text" className="!text-cb-text py-2 px-4 h-auto w-full" />
               </div>
-              <div>
-                <Label htmlFor="ccv" className="text-cb-text">CVC</Label>
-                <Input name="cvc" type="text" className="text-cb-text" />
+              <div className="w-full">
+                <Label htmlFor="ccv" className="!text-cb-text">CVC</Label>
+                <Input name="cvc" type="text" className="!text-cb-text py-2 px-4 h-auto" />
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full bg-slate-100 p-4 text-cb-text">
+        <div className="w-full bg-slate-100 p-4 !text-cb-text">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>Hours</div>
-              <div>Date</div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div>
+                <div>Hours</div>
                 <Select>
-                  <SelectTrigger className="w-[180px] text-cb-text">
+                  <SelectTrigger className="!text-cb-text">
                     <SelectValue placeholder="Pick hour range" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white text-cb-text">
+                  <SelectContent className="bg-white !text-cb-text">
                     <SelectItem value="2-3">2:00 PM - 3:00 PM</SelectItem>
                     <SelectItem value="3-4">3:00 PM - 4:00 PM</SelectItem>
                     <SelectItem value="4-5">4:00 PM - 5:00 PM</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-
-              <div><DatePicker className="text-cb-text" /></div>
+              <div>
+                <div>Date</div>
+                <div><DatePicker className="!text-cb-text" /></div>
+              </div>
 
               <div>Summary</div>
               <div>8/21/2024<br />1 hour (2:00 PM)</div>
 
               <div>Promo Code</div>
-              <div><Input type="text" className="text-cb-text" /></div>
+              <div><Input type="text" className="!text-cb-text py-2 px-4 h-auto" /></div>
 
               <div>Amount</div>
               <div>${formatCurrency(amount)}</div>
@@ -115,7 +115,7 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
             </div>
             <div>
               <Button
-                className="w-full bg-blue-600 text-white text-cb-text"
+                className="w-full bg-blue-600 text-white !text-cb-text"
                 variant="default"
               >Pay Now</Button>
             </div>
@@ -128,7 +128,7 @@ function CWForm({ amount, totalAmount, promoBalance }: CWFormProps) {
 
 function CWCard({ id, serviceName, description, rate, actions }: ICardProps) {
   return (
-    <Card className="w-full rounded-none text-cb-text">
+    <Card className="w-full rounded-none !text-cb-text">
       <CardContent className="p-2">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1" className="border-0">
@@ -187,14 +187,14 @@ export default function Services() {
             description={ i.description }
             rate={ i.rate }
             actions={
-              <Button variant="outline" className="text-cb-text">Checkout</Button>
+              <Button variant="outline" size="sm" className="!text-cb-text">Checkout</Button>
             }
           />
 
         </div>
       ))}
 
-      <Heading1 text="My Services" />
+      <Heading1 text="My Services" className="mt-10" />
 
       {myServicesQ.isFetching && (<>Loading...</>)}
 
@@ -215,12 +215,12 @@ export default function Services() {
             actions={(<>
               <Button
                 variant="outline"
-                className="text-cb-text"
+                className="!text-cb-text"
               >Checkout</Button>
               <Button
                 variant="outline"
                 onClick={() => alert(i.id + ':' + i.service_name)}
-                className="text-cb-text"
+                className="!text-cb-text"
               >Reschedule</Button>
             </>)}
           />

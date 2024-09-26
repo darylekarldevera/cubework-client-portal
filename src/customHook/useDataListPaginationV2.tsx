@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from 'react';
 
-interface IDataListPaginationProps<DataType> {
-  data: DataType[];
+interface IDataListPaginationProps {
+  numberOfItems: number;
   currentPage: number;
+  requestPageSize: string;
 }
 
 interface IDataListPaginationReturn {
@@ -12,20 +12,24 @@ interface IDataListPaginationReturn {
   canPreviousPage: boolean;
 }
 
-function useDataListPagination<DataType>({ data, currentPage, }: IDataListPaginationProps<DataType>): IDataListPaginationReturn {
+function useDataListPaginationV2({
+  numberOfItems,
+  currentPage,
+  requestPageSize,
+}: IDataListPaginationProps): IDataListPaginationReturn {
   const [paginationNumbers, setPaginationNumbers] = useState<number[]>([]);
   const [canNextPage, setCanNextPage] = useState<boolean>(true);
   const [canPreviousPage, setCanPreviousPage] = useState<boolean>(true);
 
   useEffect(() => {
-    const numberOfItems = Array(data.length)
+    const arrayOfNumbers = Array(numberOfItems)
       .fill(0)
       .map((_, index) => index + 1);
-    const changeToAppropriateName = Math.ceil(data.length / 5 - 1);
-    const paginationNumbers = [0, ...numberOfItems.slice(0, changeToAppropriateName)];
+    const changeToAppropriateName = Math.ceil(numberOfItems / 5 - 1);
+    const paginationNumbers = [0, ...arrayOfNumbers.slice(0, changeToAppropriateName)];
 
     setPaginationNumbers(paginationNumbers);
-  }, [data.length, currentPage]);
+  }, [numberOfItems, currentPage, requestPageSize]);
 
   useEffect(() => {
     if (currentPage === 0) {
@@ -44,4 +48,4 @@ function useDataListPagination<DataType>({ data, currentPage, }: IDataListPagina
   return { paginationNumbers, canNextPage, canPreviousPage };
 }
 
-export default useDataListPagination
+export default useDataListPaginationV2;

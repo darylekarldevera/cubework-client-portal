@@ -12,33 +12,36 @@ import {
 import PaginationItemLink from './PaginationItemLink';
 import EllipsisIndicator from './EllipsisIndicator';
 
-interface IDataTablePaginationControllersProps {
+interface IDataTablePaginationControllersV2Props {
   requestPageSize: string;
   canNextPage: boolean;
+  currentPage: number;
   canPreviousPage: boolean;
   paginationNumbers: number[];
   setPage: (page: number) => void;
   nextPage: () => void;
   previousPage: () => void;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   setRequestPageSize: React.Dispatch<React.SetStateAction<string>>;
 }
 
-interface ICwDataTablePaginationControllersProps extends IDataTablePaginationControllersProps {
+interface ICwDataTablePaginationControllersV2Props extends IDataTablePaginationControllersV2Props {
   cwStyle: boolean;
 }
 
-function DataTablePaginationControllers({
+function DataTablePaginationControllersV2({
   requestPageSize,
   cwStyle,
   canNextPage,
+  currentPage,
   canPreviousPage,
   paginationNumbers,
   setPage,
   nextPage,
   setRequestPageSize,
   previousPage,
-}: ICwDataTablePaginationControllersProps) {
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  setCurrentPage,
+}: ICwDataTablePaginationControllersV2Props) {
   const [previousPageNumber, setPreviousPageNumber] = useState<number>(0);
 
   const handlePageChange = useCallback(
@@ -125,12 +128,12 @@ function DataTablePaginationControllers({
       </Pagination>
       <button
         className="absolute bottom-0 right-0 p-2 w-20 mr-2 text-xs bg-cw-green text-white rounded-lg"
-        onClick={() => setRequestPageSize((prev) => (prev === 'minimum' ? 'bulk' : 'minimum'))}
+        onClick={() => setRequestPageSize((prev) => (prev === "minimum" ? "bulk" : "minimum"))}
       >
-        {requestPageSize === 'minimum' ? 'Bulk' : 'Minimum'}
+        {requestPageSize === "minimum" ? "Bulk" : "Minimum"}
       </button>
     </div>
   );
 }
 
-export default DataTablePaginationControllers;
+export default DataTablePaginationControllersV2;

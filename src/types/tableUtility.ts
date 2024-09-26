@@ -6,4 +6,8 @@ export interface ITableUtility<DataType, Checkbox> {
   filterData(data: DataType[]): DataType[];
 
   setCheckbox(checkbox: Checkbox): void;
+
+  sortDataByDate(data: DataType[]): DataType[];
+
+  filterByDate(data: DataType[]): DataType[];
 };

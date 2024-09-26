@@ -2,14 +2,10 @@
 import { useContext } from 'react'
 import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 
-interface IErrorMessageProps {
-  isVisible: boolean
-}
-
-function ErrorMessage({ isVisible }: IErrorMessageProps) {
+function ErrorMessage() {
   const { showError, setShowError } = useContext(ErrorModalContext);
 
-  if (!isVisible) return null;
+  if (!showError) return null;
 
   return (
     <div className="absolute bg-black/[.54] w-full h-full flex justify-center items-center z-50 inset-0">

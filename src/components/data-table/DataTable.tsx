@@ -59,6 +59,9 @@ function DataTable<TData, TValue>({
           nextPage={table.nextPage}
           paginationNumbers={table.getPageOptions()}
           setPage={table.setPageIndex}
+          // just to make the linter happy
+          requestPageSize={""}
+          setRequestPageSize={() => {}}
         />
       </div>
     </div>

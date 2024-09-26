@@ -1,23 +1,23 @@
-import { useState } from 'react';
 import Header from '@/components/Header';
-import ContentFullWidthWSidebar from './ContentFullWSidebar';
 import ErrorMessage from '@/shared/modals/ErrorMessage';
-import { ErrorModalContext } from '@/contexts/ErrorModalContext';
-
-// Define the correct types for the context
+import SidebarProvider from '@/components/providers/SidebarProvider';
+import ErrorModalProvider from '@/components/providers/ErrorModalProvider';
+import ContentFullWidthWSidebar from './ContentFullWSidebar';
+import SidebarMobileMenu from '@/components/SidebarMobileMenu';
 
 function MainLayout() {
-  const [showError, setShowError] = useState(false);
-
   return (
     <div className="main flex flex-col h-full">
-      <ErrorModalContext.Provider value={{ showError, setShowError }}>
-        <ErrorMessage isVisible={showError} />
-        <section>
-          <Header />
-        </section>
-        <ContentFullWidthWSidebar />
-      </ErrorModalContext.Provider>
+      <ErrorModalProvider>
+        <SidebarProvider>
+          <ErrorMessage />
+          <section>
+            <Header />
+          </section>
+          <ContentFullWidthWSidebar />
+          <SidebarMobileMenu />
+        </SidebarProvider>
+      </ErrorModalProvider>
     </div>
   );
 }

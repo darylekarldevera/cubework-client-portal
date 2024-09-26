@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/pagination';
 import PaginationItemLink from './PaginationItemLink';
 import EllipsisIndicator from './EllipsisIndicator';
+import { useLocation } from 'react-router-dom';
 
 interface IDataTablePaginationControllersV2Props {
   requestPageSize: string;
@@ -42,6 +43,7 @@ function DataTablePaginationControllersV2({
   previousPage,
   setCurrentPage,
 }: ICwDataTablePaginationControllersV2Props) {
+  const { pathname } = useLocation();
   const [previousPageNumber, setPreviousPageNumber] = useState<number>(0);
 
   const handlePageChange = useCallback(
@@ -126,12 +128,14 @@ function DataTablePaginationControllersV2({
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-      <button
-        className="absolute bottom-0 right-0 p-2 w-20 mr-2 text-xs bg-cw-green text-white rounded-lg"
-        onClick={() => setRequestPageSize((prev) => (prev === "minimum" ? "bulk" : "minimum"))}
-      >
-        {requestPageSize === "minimum" ? "Bulk" : "Minimum"}
-      </button>
+      {pathname === '/home' ? (
+        <button
+          className="absolute bottom-0 right-0 p-2 w-20 mr-2 text-xs bg-cw-green text-white rounded-lg"
+          onClick={() => setRequestPageSize((prev) => (prev === 'minimum' ? 'bulk' : 'minimum'))}
+        >
+          {requestPageSize === 'minimum' ? 'Bulk' : 'Minimum'}
+        </button>
+      ) : null}
     </div>
   );
 }

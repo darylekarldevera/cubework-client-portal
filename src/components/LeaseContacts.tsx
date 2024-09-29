@@ -20,12 +20,8 @@ interface ILeastTable {
 
 const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
   {
-    header: 'Last Name',
-    accessorKey: 'last_name',
-  },
-  {
-    header: 'First Name',
-    accessorKey: 'first_name',
+    header: 'Name',
+    accessorKey: 'name',
   },
   {
     header: 'Billing Phone Number',
@@ -44,7 +40,12 @@ export default function LeaseContacts() {
   const q = leaseQuery<ILeaseItems>('lease', 1, 50);
 
   if (q.isSuccess) {
-    data = q?.data?.data;
+    data = q?.data?.data.map(i => {
+      return {
+        ...i,
+        name: `${i.last_name}, ${i.first_name}`
+      }
+    });
   }
 
   return (

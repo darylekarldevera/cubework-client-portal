@@ -6,6 +6,11 @@ interface IUseTableSearchUtility<T> {
   filterCb: (items: T[], searchData: string) => T[];
 }
 
+interface IUseTableSearchUtilityReturn {
+  searchData: string;
+  setSearchData: React.Dispatch<React.SetStateAction<string>>;
+}
+
 /**
  * Custom hook for table search utility. It is being used together with the TableUtilitySorterAndFilter component.
  *
@@ -28,7 +33,11 @@ interface IUseTableSearchUtility<T> {
  * });
  */
 
-function useTableSearchUtility<T>({ originalData, setData, filterCb }: IUseTableSearchUtility<T>) {
+function useTableSearchUtility<T>({
+  originalData,
+  setData,
+  filterCb,
+}: IUseTableSearchUtility<T>): IUseTableSearchUtilityReturn {
   const [searchData, setSearchData] = useState<string>('');
 
   useEffect(() => {

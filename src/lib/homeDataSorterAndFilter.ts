@@ -1,81 +1,38 @@
 import IHomeActivityTable from "@/types/homeActivityTable";
+import BaseDataSorterAndFilter from "./baseDataSorterAndFilter";
+import { ICheckboxProps, IFilterProps } from "@/types/tableProps";
 
-export interface IHomeCheckbox {
-  sort: {
-    parent: string;
-    sortType: string;
+export interface IHomeFilterProps extends IFilterProps {
+  charge: {
+    name: string;
+    filterType: string;
   };
-  filter: {
-    charge: {
-      name: string;
-      filterType: string;
-    };
-    payments: {
-      name: string;
-      filterType: string;
-    };
-    pickDate: {
-      startDate: Date;
-      endDate: Date | undefined;
-    };
+  payments: {
+    name: string;
+    filterType: string;
   };
 }
 
-class HomeTableUtility<T> {
-  private data: IHomeActivityTable[];
-  private checkbox?: any;
+class HomeTableUtility extends BaseDataSorterAndFilter<IHomeActivityTable>{
+  protected data: IHomeActivityTable[];
+  protected checkbox?: ICheckboxProps;
 
-  constructor(data: IHomeActivityTable[], checkbox?: any){
+  constructor(data: IHomeActivityTable[], checkbox?: any) {
+    super(data, checkbox);
     this.data = data;
     this.checkbox = checkbox;
   }
 
-  sortAndFilter = (): T[] => {
-    let toUpdateData = [...this.data];
-    toUpdateData = this.sortData();
-    toUpdateData = this.filterData(toUpdateData);
-    return toUpdateData as T[];
-  }
-
   sortData = () => {
     const toUpdateData = [...this.data];
-    // if (this?.checkbox?.sort.parent === "Date" && this?.checkbox?.sort.sortType === "asc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.date > b.date ? 1 : -1;
-    //   });
-    // }
-    
-    return toUpdateData.sort((a, b) => {
-      return a.date < b.date ? 1 : -1;
-    });
+    return this.sortDataByDate(toUpdateData);
   };
 
   filterData = (data: IHomeActivityTable[]) => {
-    let toUpdateData = data?.length ? [...data] : [];
-
-    if (this?.checkbox?.filter?.pickDate?.startDate && this?.checkbox?.filter?.pickDate?.endDate) {
-      toUpdateData = toUpdateData.filter((item) => {
-        const itemDate = new Date(item.date);
-
-        const startDate = this.checkbox?.filter?.pickDate?.startDate;
-        const endDate = this.checkbox?.filter?.pickDate?.endDate;
-
-        if (startDate && endDate) {
-          return itemDate >= startDate && itemDate <= endDate;
-        }
-
-        return false;
-      });
-    }
-
-    
-
-    return toUpdateData;
-  }
-
-  setCheckbox = (checkbox: any) => {
-    this.checkbox = checkbox;
-  }
+    const toUpdateData = data?.length ? [...data] : [];
+    const filteredDataByDate = this.filterByDate(toUpdateData);
+    return filteredDataByDate;
+  };
 }
 
 export default HomeTableUtility;

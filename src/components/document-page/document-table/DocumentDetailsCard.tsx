@@ -1,19 +1,16 @@
-import moment from 'moment';
+
+import formatDate from '@/lib/formatDate';
 import arrowDown from '@/assets/icons/arrow-down.svg';
 import { IDocument, IFile } from '@/types/invoiceDocuments';
 import { FILE_SYSTEM_PICKER_OPTIONS } from '@/constants/fileSystemFileHandle';
 
 interface IDocumentDetailsCardProps {
-  key: number | string;
   isVisible: boolean;
   item: IDocument;
   documentType: string;
 }
 
-function DocumentDetailsCard({ isVisible, key, item, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
-  const formatDate = (date: Date) => {
-    return moment(date.toString()).format('MM/DD/YYYY');
-  };
+function DocumentDetailsCard({ isVisible, item, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
 
   const downloadFile = async (file: IFile) => {
     try {
@@ -42,9 +39,9 @@ function DocumentDetailsCard({ isVisible, key, item, documentType, }: IDocumentD
   if (isVisible) return null;
 
   return (
-    <div key={key} className="flex items-center justify-between p-2 font-regular text-[10px] border-b border-gray-500W">
+    <div className="flex items-center justify-between p-2 font-regular text-cb-table border-b border-gray-500W">
       <div className="flex flex-col mx-1">
-        <p className="text-[#59BA56]">{item?.file?.filename}</p>
+        <p className="text-cw-green">{item?.file?.filename}</p>
         <p>
           {getFileType(item?.file?.mimetype)} • {formatDate(item?.date)} • {documentType}
         </p>

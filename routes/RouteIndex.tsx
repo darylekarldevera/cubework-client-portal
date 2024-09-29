@@ -1,4 +1,4 @@
-import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
 import React from 'react';
 
 import MainLayout from '@/layouts/MainLayout';
@@ -13,6 +13,9 @@ import ServicesRoute from './ServicesRoute';
 
 import Home from '@/components/Home';
 import Login from '@/components/Login';
+import ForgotPassword from '@/views/auth/ForgotPassword.tsx';
+import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
+import PublicLayout from '@/layouts/PublicLayout.tsx';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
 const isAuthenticated = true;
@@ -39,11 +42,13 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <React.Fragment>
       {/* Public Routes */}
-      <Route path="/" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<DummyComponent text="Forgot Password" />} />
-        <Route path="/reset-password" element={<DummyComponent text="Reset Password" />} />
+      <Route element={<PublicRoute isAuthenticated={isAuthenticated} />}>
+        <Route path="/" element={<PublicLayout isAuthenticated={isAuthenticated} />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<VerifyPassword />} />
+        </Route>
       </Route>
 
       {/* Private Routes */}

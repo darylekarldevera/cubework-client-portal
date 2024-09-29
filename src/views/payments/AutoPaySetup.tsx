@@ -11,13 +11,13 @@ const AutoPaySetup = () => {
         <ShadCNLabel className="text-xs font-bold text-black">Auto Pay Account</ShadCNLabel>
       </div>
       <div className="pl-[10px]">
-        <ShadCNLabel className="text-xs font-medium text-[#797979]">
+        <ShadCNLabel className="text-xs font-medium text-cw-gray">
           <span className="font-bold">!Important:</span> Once auto pay is setup, you must contact Cubework team directly
           to revert.
         </ShadCNLabel>
       </div>
       <Card className="mt-[30px] h-[133px] w-full rounded-[16px]">
-        <CardHeader className="h-[40px] pl-[10px] flex justify-center border-b border-[#ECECEC]">
+        <CardHeader className="h-[40px] pl-[10px] flex justify-center border-b border-cw-offwhite">
           <TableHeader>Choose your space</TableHeader>
         </CardHeader>
         <CardContent className="h-full flex flex-row px-[10px] pt-[20px] w-full">

@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 interface IPublicRouteProps {
   isAuthenticated: boolean;
-};
+}
 
 /**
  * A component that restricts access to public routes based on authentication status.
@@ -11,10 +11,10 @@ interface IPublicRouteProps {
  * the user will be redirected to the "/home" route.
  *
  * @component
- * @param {IPublicRouteProps} props - The properties for the PublicRoute component.
- * @param {boolean} props.isAuthenticated - Indicates whether the user is authenticated.
+ * @param {} props - The properties for the PublicRoute component.
+ * @param {} props.isAuthenticated - Indicates whether the user is authenticated.
  * @returns {JSX.Element} - The rendered component.
- * 
+ *
  * @example
  * ```tsx
  * <PrivateRoute isAuthenticated={true}>
@@ -29,7 +29,7 @@ function PublicRoute({ isAuthenticated }: IPublicRouteProps): JSX.Element {
   if (isAuthenticated && !AUTHENTICATED_ROUTES.includes(pathname)) {
     return <Navigate to="/home" />;
   }
-  
+
   return <Outlet />;
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cell, flexRender, Table } from '@tanstack/react-table';
 import { TableCell, TableRow } from '../ui/table';
-import moment from 'moment';
+import formatDate from '@/lib/formatDate';
 
 interface IDataTableBodyListProps<TData> {
   table: Table<TData>;
@@ -12,7 +12,7 @@ function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
   function renderCellContent(cell: Cell<TData, unknown>) {
     const isValidDate = new Date(cell.getValue() as string).toString() !== 'Invalid Date'
     if (isValidDate && cell.getValue() instanceof Date) {
-      return <p>{moment(new Date(cell.getValue() as string)).format('MM/DD/YYYY')}</p>;
+      return <p>{formatDate(cell.getValue() as Date)}</p>;
     }
 
     return flexRender(cell.column.columnDef.cell, cell.getContext());
@@ -28,7 +28,7 @@ function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
                 minWidth: cell.column.columnDef?.size,
                 maxWidth: cell.column.columnDef?.size,
               }}
-              className="text-black font-regular text-[10px] leading-5"
+              className="text-black font-regular text-cb-table leading-5"
               key={cell.id}
             >
               {renderCellContent(cell)}

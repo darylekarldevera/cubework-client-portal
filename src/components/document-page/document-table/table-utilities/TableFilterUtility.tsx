@@ -1,21 +1,15 @@
 import React from 'react';
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
+import { IFilterOption } from '@/types/tableOptions';
+import { ICheckboxProps, IFilterProps } from '@/types/tableProps';
 
 import { Label } from '@/components/ui/label';
 import TablePickDate from './TablePickDate';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 interface ITableFilterUtilityProps {
-  filter: {
-    parent: string;
-    filterType: string;
-    pickDate: {
-      startDate: Date;
-      endDate: Date | undefined;
-    };
-  };
-  setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
-  options: any[];
+  filter: IFilterProps;
+  options: IFilterOption[];
+  setCheckBox: React.Dispatch<React.SetStateAction<ICheckboxProps>>;
 }
 
 function TableFilterUtility({ filter, setCheckBox, options }: ITableFilterUtilityProps) {
@@ -24,7 +18,7 @@ function TableFilterUtility({ filter, setCheckBox, options }: ITableFilterUtilit
       {options.length ? (
         <RadioGroup
           className="flex flex-row items-center justify-center space-x-2 mr-5 border-r pr-4"
-          value={`${filter.parent}_${filter.filterType}`}
+          value={`${filter.name}_${filter.filterType}`}
           onValueChange={(newValue) => {
             const [parent, filterType] = newValue.split('_');
             setCheckBox((prev) => ({

@@ -7,7 +7,11 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function formatCurrency(amount: number) {
-  const dollarUSLocale = Intl.NumberFormat('en-US');
+  const dollarUSLocale = Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   return dollarUSLocale.format(amount);
+
 }

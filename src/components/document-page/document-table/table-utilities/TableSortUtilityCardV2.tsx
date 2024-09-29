@@ -2,38 +2,41 @@ import React from 'react';
 import { CheckIcon } from 'lucide-react';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 
-import { cn } from '@/lib/utils';
-import { ICheckbox } from '@/lib/documentDataSorterAndFilter';
 
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { ISortOption } from '@/types/tableOptions';
+import { ICheckboxProps, ISortProps } from '@/types/tableProps';
+
+import { 
+  Popover, 
+  PopoverContent, 
+  PopoverTrigger 
+} from '@/components/ui/popover';
+
+import { 
+  Command, 
+  CommandEmpty, 
+  CommandGroup, 
+  CommandInput, 
+  CommandItem, 
+  CommandList 
+} from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 
 interface ITableSortUtilityCardPropsV2 {
-  option: {
-    name: string;
-    sortType: {
-      [key: string]: string;
-    };
-  };
-  sortTypeKeys: string[];
-  select: {
-    [key: string]: string;
-    name: string;
-    sortType: string;
-  };
+  sort: ISortProps;
+  option: ISortOption;
   openSort: string;
-  setSelect: React.Dispatch<React.SetStateAction<any>>;
-  setCheckBox: React.Dispatch<React.SetStateAction<ICheckbox>>;
+  sortTypeKeys: string[];
   setOpenSort: React.Dispatch<React.SetStateAction<string>>;
+  setCheckBox: React.Dispatch<React.SetStateAction<ICheckboxProps>>;
 }
 
 function TableSortUtilityCardV2({
-  openSort,
+  sort,
   option,
+  openSort,
   sortTypeKeys,
-  select,
-  setSelect,
   setCheckBox,
   setOpenSort,
 }: ITableSortUtilityCardPropsV2) {
@@ -48,8 +51,7 @@ function TableSortUtilityCardV2({
         <Button
           variant="outline"
           role="combobox"
-          aria-expanded={select ? true : undefined}
-          className="h-[21px] justify-between bg-white z-10 text-center border mr-4 text-[10px]"
+          className="h-[21px] justify-between bg-white z-10 text-center border mr-4 text-cb-table"
           onClick={() => {
             if (openSort === option.name) {
               setOpenSort('');
@@ -62,9 +64,9 @@ function TableSortUtilityCardV2({
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0 bg-white">
+      <PopoverContent className="w-min min-w-[120px] p-0 bg-white">
         <Command>
-          <CommandInput placeholder="Search..." className="h-9 bg-white z-1" />
+          <CommandInput placeholder="Search..." className="h-9 bg-white z-1 text-cb-table" />
           <CommandList>
             <CommandEmpty>Not found.</CommandEmpty>
             <CommandGroup>
@@ -72,25 +74,20 @@ function TableSortUtilityCardV2({
                 <CommandItem
                   key={type}
                   value={type}
-                  className="cursor-pointer"
+                  className="cursor-pointer text-cb-table h-9"
                   onSelect={(currentValue) => {
                     setOpenSort('');
-                    setSelect(() => ({
-                      name: option.name,
-                      sortType: currentValue,
-                    }));
-
-                    setCheckBox((prev) => ({
+                    setCheckBox((prev: any) => ({
                       ...prev,
                       sort: {
-                        parent: option.name,
-                        sortType: currentValue,
+                        name: option.name,
+                        sortType: option.sortType[currentValue],
                       },
                     }));
                   }}
                 >
                   {capitalizeFirstLetter(option.sortType[type])}
-                  {type === select.sortType && select.name === option.name ? (
+                  {option.sortType[type] === sort.sortType && sort.name === option.name ? (
                     <CheckIcon className={cn('ml-auto h-4 w-4')} />
                   ) : null}
                 </CommandItem>

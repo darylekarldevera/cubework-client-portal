@@ -1,98 +1,53 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { IDocument } from "@/types/invoiceDocuments";
+import { ICheckboxProps } from "@/types/tableProps";
+import BaseDataSorterAndFilter from "./baseDataSorterAndFilter";
 
-export interface ICheckbox {
-  sort: {
-    parent: string;
-    sortType: string;
-  };
-  filter: {
-    parent: string;
-    filterType: string;
-    pickDate: {
-      startDate: Date;
-      endDate: Date | undefined;
-    }
-  };
-}
+class DocumentTableUtility extends BaseDataSorterAndFilter<IDocument> {
+  protected data: IDocument[];
+  protected checkbox?: ICheckboxProps;
 
-class DocumentTableUtility<T> {
-  private data: IDocument[];
-  private checkbox?: ICheckbox;
-
-  constructor(data: IDocument[], checkbox?: ICheckbox){
+  constructor(data: IDocument[], checkbox?: ICheckboxProps){
+    super(data, checkbox);
     this.data = data;
     this.checkbox = checkbox;
   }
 
-  sortAndFilter = (): T[] => {
-    let toUpdateData = [...this.data];
-    toUpdateData = this.sortData();
-    toUpdateData = this.filterData(toUpdateData);
-    return toUpdateData as T[];
-  }
-
   sortData = () => {
     const toUpdateData = [...this.data];
-    // if (this?.checkbox?.sort.parent === "Name" && this?.checkbox?.sort.sortType === "asc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.file.filename > b.file.filename ? 1 : -1;
-    //   });
-    // }
+    const sortName = this?.checkbox?.sort?.name?.toLowerCase();
+    const sortType = this?.checkbox?.sort?.sortType?.toLowerCase();
+
+    if (sortName === "name" && sortType === "ascending") {
+      return toUpdateData.sort((a, b) => {
+        return a.file.filename > b.file.filename ? 1 : -1;
+      });
+    }
     
-    // if (this?.checkbox?.sort.parent === "Name" && this?.checkbox?.sort.sortType === "desc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.file.filename < b.file.filename ? 1 : -1;
-    //   });
-    // }
-
-    // if (this?.checkbox?.sort.parent === "Date" && this?.checkbox?.sort.sortType === "asc") {
-    //   return toUpdateData.sort((a, b) => {
-    //     return a.date > b.date ? 1 : -1;
-    //   });
-    // }
-
-    return toUpdateData.sort((a, b) => {
-      return a.date < b.date ? 1 : -1;
-    });
-  };
-
-  filterData = (data: IDocument[]) => {
-    let toUpdateData = [...data];
-
-    if (this?.checkbox?.filter?.pickDate?.startDate && this?.checkbox?.filter?.pickDate?.endDate) {
-      toUpdateData = toUpdateData.filter((item) => {
-        const itemDate = new Date(item.date);
-
-        const startDate = this.checkbox?.filter?.pickDate?.startDate;
-        const endDate = this.checkbox?.filter?.pickDate?.endDate;
-
-        if (startDate && endDate) {
-          return itemDate >= startDate && itemDate <= endDate;
-        }
-
-        if (startDate) {
-          return itemDate >= startDate;
-        }
-
-        return false;
+    if (sortName === "name" && sortType === "descending") {
+      return toUpdateData.sort((a, b) => {
+        return a.file.filename < b.file.filename ? 1 : -1;
       });
     }
 
-
-
-    // if (this?.checkbox?.filter.parent === "PDF" && this?.checkbox?.filter.filterType === "pdf") {
-    //   return toUpdateData.filter((item) => item.file.mimetype.includes('application/pdf'));
-    // }
-
-    // if (this?.checkbox?.filter.parent === "CSV" && this?.checkbox?.filter.filterType === "csv") {
-    //   return toUpdateData.filter((item) => item.file.mimetype.includes('text/csv'));
-    // }
-
-    return toUpdateData;
+    return this.sortDataByDate(toUpdateData);
   };
 
-  setCheckbox = (checkbox: ICheckbox) => {
-    this.checkbox = checkbox;
+  filterData = (data: IDocument[]) => {
+    const toUpdateData = [...data];
+    const filteredDataByDate = this.filterByDate(toUpdateData);
+
+    // Filter by name and type of document (invoice, statement, etc.)
+    // Save these variables for future use
+    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const filterName = this?.checkbox?.filter?.name?.toLowerCase();
+
+    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const filterType = this?.checkbox?.filter?.filterType?.toLowerCase();
+
+    return filteredDataByDate;
   };
 }
 

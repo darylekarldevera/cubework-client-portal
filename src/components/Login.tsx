@@ -7,10 +7,10 @@ function Login() {
   const handleLogin = () => {
     // navigate('/home');
   };
- 
+
   return (
-    <div className="border border-black rounded-[6px] w-80 h-fit max-w-full max-h-full flex flex-col px-5 pt-5 pb-12">
-      <p className="border-b border-black font-bold text-[16px] mb-[24px]">Login into your account</p>
+    <div className="shadow-2xl rounded-[6px] w-80 h-fit max-w-full max-h-full flex flex-col px-5 pt-5 pb-12 bg-white/85">
+      <p className="font-bold text-[16px] mb-[24px]">Login into your account</p>
       <form className="flex flex-col w-full gap-[24px]">
         <div className="flex flex-col  gap-4 w-full">
           <ShadCNLabel className="text-xs text-[#212529]">Email</ShadCNLabel>

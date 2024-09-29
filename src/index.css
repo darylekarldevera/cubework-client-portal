@@ -10,7 +10,7 @@
     }
 
     .header {
-        @apply flex flex-row px-4 items-center h-[60px] border-b border-[#ECECEC];
+        @apply flex flex-row px-4 items-center h-[50px] border-b border-[#ECECEC];
     }
 
     .notif-icon-wrapper {
@@ -38,6 +38,9 @@
     --radius: 16px;
 }
 
+.lucide-x {
+    visibility: hidden;
+}
 
 .home-activity-bar::after {
     content: '';
@@ -52,5 +55,5 @@ body {
 }
 
 .rdp-vhidden {
-  @apply hidden;
+    @apply hidden;
 }

@@ -8,7 +8,6 @@ const PaymentTabs = () => {
   return (
     <TabsButtonWrapper>
       {PAYMENT_TABS.map((tab, index) => {
-        console.log('paths: ', tab.path, location.pathname.slice(9));
         const active = tab.path === location.pathname.slice(9);
         return (
           <TabsButton key={index} active={active}>

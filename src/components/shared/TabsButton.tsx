@@ -6,7 +6,6 @@ type TabsButtonProps = {
 };
 
 const TabsButton = ({ children, active }: TabsButtonProps) => {
-  console.log('active', active);
   return (
     <div
       className={`text-xs rounded-none ${active ? 'border-b-[1.5px] border-cw-green shadow-none text-cw-green' : ''} py-1 text-center text-cw-green`}

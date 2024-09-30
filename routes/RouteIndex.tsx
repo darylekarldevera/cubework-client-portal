@@ -16,6 +16,7 @@ import Login from '@/components/Login';
 import ForgotPassword from '@/views/auth/ForgotPassword.tsx';
 import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
 import PublicLayout from '@/layouts/PublicLayout.tsx';
+import LicenseSelect from '@/components/LicenseSelect';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
 const isAuthenticated = true;
@@ -56,6 +57,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/license-select" element={<LicenseSelect />} />
           <Route path="/license-profile/*" element={<LeaseProfileRoute />} />
           <Route path="/payments/*" element={<PaymentsRoute />} />
           <Route path="/license-documents/*" element={<LeaseDocumentsRoutes />} />

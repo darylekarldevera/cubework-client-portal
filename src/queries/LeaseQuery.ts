@@ -5,6 +5,8 @@ import { API_SOURCE } from "@/constants/apiSource";
 import { useContext } from "react";
 import { ErrorModalContext } from "@/contexts/ErrorModalContext";
 
+import { ILeaseLicenseSelect } from "@/types/lease";
+
 interface ILeaseItem {
   id: number,
   first_name: string,
@@ -62,7 +64,29 @@ function leaseQuery<T extends ILeaseItems | ILeaseMySpaceItems | ILeaseChargeSch
   });
 }
 
-export { leaseQuery, };
+function licenseSelectQuery<ILeaseLicenseSelect>(page: number = 1, perPage: number = 5) {
+  const { setShowError } = useContext(ErrorModalContext);
+
+  const endpoint = 'lease_select';
+
+  return useQuery<ILeaseLicenseSelect>({
+    queryKey: ['lease-license-select'],
+    queryFn: async () => {
+      const resp = await axios
+        .get(`${API_SOURCE}/${endpoint}?_page=${page}&_per_page=${perPage}`)
+        .catch(error => {
+          setShowError(true);
+          console.log(error);
+          throw new Error('Network response was not ok');
+        });
+
+      return resp.data;
+    }
+  });
+
+}
+
+export { leaseQuery, licenseSelectQuery };
 export type {
   ILeaseItem,
   ILeaseItems,

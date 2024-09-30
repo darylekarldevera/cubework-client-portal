@@ -12,23 +12,15 @@ import TableHeader from '@/components/shared/TableHeader.tsx';
 import TableItem from '@/components/shared/TableItem.tsx';
 import Select from '@/components/shared/Select.tsx';
 import Button from '@/components/shared/Button.tsx';
-import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { formatCurrency } from '@/lib/utils.ts';
 import { Link } from 'react-router-dom';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog.tsx';
 import {
   CC_TERMS_CONDITIONS,
   TERMS_CONDITIONS,
   TITLE_CC_TERMS_CONDITIONS,
   TITLE_TERMS_CONDITIONS,
 } from '@/__mocks__/termsConditions.ts';
+import TermsConditions from '@/components/TermsConditions.tsx';
 
 const AutoPayVerify = () => {
   return (
@@ -93,33 +85,14 @@ const AutoPayVerify = () => {
       </div>
       <div className="mt-5 flex items-center justify-between px-[10px]">
         <div className="flex gap-1">
-          <Dialog>
-            <DialogTrigger asChild>
-              <div className=" w-full text-xs leading-relaxed flex items-center gap-2">
-                <Checkbox
-                  id="terms"
-                  className="border border-[#E5E7EB] rounded-[4px] focus:shadow-[0_0_0_2px_#E5E7EB]"
-                />
-                <ShadCNLabel id="terms" className="text-[11px] leading-relaxed text-cw-charcoal font-bold ">
-                  I have read and agree to the Cubework's terms and conditions
-                </ShadCNLabel>
-              </div>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[925px] bg-white overflow-auto max-h-[500px]">
-              <DialogHeader>
-                <DialogTitle>{TITLE_TERMS_CONDITIONS}</DialogTitle>
-                <DialogDescription>Last updated 9/17/2024</DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                {TERMS_CONDITIONS}
-                <DialogHeader className="mt-14">
-                  <DialogTitle>{TITLE_CC_TERMS_CONDITIONS}</DialogTitle>
-                  <DialogDescription>Last updated 9/17/2024</DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">{CC_TERMS_CONDITIONS}</div>
-              </div>
-            </DialogContent>
-          </Dialog>
+          <TermsConditions
+            text={TERMS_CONDITIONS}
+            title={TITLE_TERMS_CONDITIONS}
+            title2={TITLE_CC_TERMS_CONDITIONS}
+            text2={CC_TERMS_CONDITIONS}
+            checkboxText="I have read and agree to the Cubework's terms and conditions"
+            variant="double"
+          />
         </div>
         <div className="flex gap-4">
           <Button variant="secondary">Cancel</Button>

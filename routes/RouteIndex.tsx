@@ -18,7 +18,7 @@ import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
 import PublicLayout from '@/layouts/PublicLayout.tsx';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 /**
  * This setup defines the route structure for the application using `react-router-dom`.

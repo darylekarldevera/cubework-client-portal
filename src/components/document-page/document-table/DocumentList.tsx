@@ -24,6 +24,7 @@ function DocumentList({ data, currentPage, documentType }: IDocumentListTablePro
               item={item}
               isVisible={index < dataStartIndex || index > dataEndIndex}
               documentType={documentType}
+              placeholderError={index === 0}
             />
           ))}
         </div>

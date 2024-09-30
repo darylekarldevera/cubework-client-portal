@@ -1,19 +1,32 @@
+import { useContext } from 'react';
 
 import formatDate from '@/lib/formatDate';
 import arrowDown from '@/assets/icons/arrow-down.svg';
 import { IDocument, IFile } from '@/types/invoiceDocuments';
+import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 import { FILE_SYSTEM_PICKER_OPTIONS } from '@/constants/fileSystemFileHandle';
 
 interface IDocumentDetailsCardProps {
   isVisible: boolean;
   item: IDocument;
   documentType: string;
+  placeholderError: boolean;
 }
 
-function DocumentDetailsCard({ isVisible, item, documentType, }: IDocumentDetailsCardProps): JSX.Element | null {
+function DocumentDetailsCard({
+  isVisible,
+  item,
+  documentType,
+  placeholderError,
+}: IDocumentDetailsCardProps): JSX.Element | null {
+  const { showError, setShowError } = useContext(ErrorModalContext);
 
   const downloadFile = async (file: IFile) => {
     try {
+      if (placeholderError) {
+        throw new Error('File not found');
+      };
+
       const options = {
         suggestedName: file?.filename,
         ...FILE_SYSTEM_PICKER_OPTIONS,
@@ -27,8 +40,10 @@ function DocumentDetailsCard({ isVisible, item, documentType, }: IDocumentDetail
       const writable = await handle.createWritable();
       await writable.write(objToFile);
       await writable.close();
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
+      if (error !== 'File not found') return;
+      setShowError(!showError);
     }
   };
 
@@ -46,7 +61,12 @@ function DocumentDetailsCard({ isVisible, item, documentType, }: IDocumentDetail
           {getFileType(item?.file?.mimetype)} • {formatDate(item?.date)} • {documentType}
         </p>
       </div>
-      <img alt="download_icon" src={arrowDown} className="cursor-pointer w-4" onClick={() => downloadFile(item?.file)} />
+      <img
+        alt="download_icon"
+        src={arrowDown}
+        className="cursor-pointer w-4"
+        onClick={() => downloadFile(item?.file)}
+      />
     </div>
   );
 }

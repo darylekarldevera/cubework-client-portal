@@ -1,14 +1,16 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 
-import { HomeQuery } from '@/queries/HomeQuery';
 import  { IHomeRequestPayload } from '@/types/homeActivityTable';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
+
+import { HomeQuery } from '@/queries/HomeQuery';
+import homeQueryRequestBody from '@/lib/homeRequestBody';
+import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 
 import CWCard from './CWCard';
 import { Heading1 } from './ui/headings';
 import DataTableV2 from './data-table/DataTableV2';
 import PaymentBalanceCard from './PaymentBalanceCard';
-import { ErrorModalContext } from '@/contexts/ErrorModalContext';
 
 function Home() {
   const { showError, setShowError } = useContext(ErrorModalContext)
@@ -17,31 +19,7 @@ function Home() {
   const [pageSize, setPageSize] = useState<number>(5);
   const [requestPageSize, setRequestPageSize] = useState<string>('minimum');
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [requestBody, setRequestBody] = useState<IHomeRequestPayload>({
-    UserID: 16405,
-    Data: {
-      ThirdParty_Program: 'Yardi',
-      ThirdParty_CustomerID: '',
-      ThirdParty_SiteID: '',
-      ReferenceNumber: '',
-      InvoiceDateStart: '',
-      InvoiceDateEnd: '',
-      Category: '',
-      PeriodStart: '',
-      PeriodEnd: '',
-      CustomerPONumber: '',
-      PageIndx: '1',
-      PageSize: pageSize.toString(),
-      DataSource: 'Tenant Portal',
-      InvoiceNumber: 'CW00',
-      ProNumber: '',
-      InvoiceStatus: '13',
-
-      BilltoID: -1,
-      BilltoIDs: [],
-      BilltoCustomerCodes: ['T0002526', 't0000001'],
-    },
-  });
+  const [requestBody, setRequestBody] = useState<IHomeRequestPayload>(homeQueryRequestBody({ PageSize: pageSize.toString(), }));
 
   const homeApiData = HomeQuery('PayAndBillAPI/api/invoice/GetALLInvoiceByParameters', requestBody);
 

@@ -63,29 +63,31 @@ export type InvoiceSummary = {
   TotalPAST_DUE: number | null;
 };
 
+export interface IHomeRequestPayloadData {
+  ThirdParty_Program: string;
+  ThirdParty_CustomerID: string;
+  ThirdParty_SiteID: string;
+  ReferenceNumber: string;
+  InvoiceDateStart: string;
+  InvoiceDateEnd: string;
+  Category: string;
+  PeriodStart: string;
+  PeriodEnd: string;
+  CustomerPONumber: string;
+  PageIndx: string;
+  PageSize: string;
+  DataSource: string;
+  InvoiceNumber: string;
+  ProNumber: string;
+  InvoiceStatus: string;
+  BilltoID: number;
+  BilltoIDs: number[];
+  BilltoCustomerCodes: string[];
+}
+
 export interface IHomeRequestPayload {
   UserID: number;
-  Data: {
-    ThirdParty_Program: string;
-    ThirdParty_CustomerID: string;
-    ThirdParty_SiteID: string;
-    ReferenceNumber: string;
-    InvoiceDateStart: string;
-    InvoiceDateEnd: string;
-    Category: string;
-    PeriodStart: string;
-    PeriodEnd: string;
-    CustomerPONumber: string;
-    PageIndx: string;
-    PageSize: string;
-    DataSource: string;
-    InvoiceNumber: string;
-    ProNumber: string;
-    InvoiceStatus: string;
-    BilltoID: number;
-    BilltoIDs: number[];
-    BilltoCustomerCodes: string[];
-  };
+  Data: IHomeRequestPayloadData;
 }
 
 export interface IHomeResponsePayload {

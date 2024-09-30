@@ -5,7 +5,7 @@ import VisaIcon from '@/assets/icons/visa-icon.svg';
 import MasterCardIcon from '@/assets/icons/mastercard-icon.svg';
 import { Label as ShadCNLabel } from '@/components/ui/label.tsx';
 import Input from '@/components/shared/Input.tsx';
-import TermsConditions from '@/components/ui/TermsConditions.tsx';
+import TermsConditions from '@/components/TermsConditions.tsx';
 import { CC_TERMS_CONDITIONS, TITLE_CC_TERMS_CONDITIONS } from '@/__mocks__/termsConditions.ts';
 
 const AddCreditCardModal = () => {
@@ -17,7 +17,7 @@ const AddCreditCardModal = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[825px] bg-white">
         <DialogHeader>
-          <DialogTitle className="border-b border-black">Add Credit Card</DialogTitle>
+          <DialogTitle className="border-b border-black text-sm">Add Credit Card</DialogTitle>
         </DialogHeader>
         <div className="flex gap-3">
           <img src={PaypalIcon} alt="" />
@@ -80,7 +80,11 @@ const AddCreditCardModal = () => {
         </div>
 
         <div className="border-t border-black w-full flex justify-between pt-3">
-          <TermsConditions text={CC_TERMS_CONDITIONS} title={TITLE_CC_TERMS_CONDITIONS} />
+          <TermsConditions
+            text={CC_TERMS_CONDITIONS}
+            title={TITLE_CC_TERMS_CONDITIONS}
+            checkboxText="I agree to the terms and conditions"
+          />
           <DialogTrigger className="flex w-full justify-end gap-8">
             <Button variant="outlined-black">Cancel</Button>
             <Button>Save</Button>

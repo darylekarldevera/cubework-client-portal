@@ -15,26 +15,41 @@ interface ITermsConditionsProps {
   value?: boolean;
   text: string;
   title: string;
+  variant?: 'single' | 'double';
+  text2?: string;
+  title2?: string;
+  checkboxText: string;
 }
 
-const TermsConditions = ({ text, title }: ITermsConditionsProps) => {
-  // const handleClick = () => setCheck(!value);
+const TermsConditions = ({ text, title, variant = 'single', title2, text2, checkboxText }: ITermsConditionsProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className="w-full text-xs leading-relaxed flex items-center gap-2">
-          <Checkbox className="rounded-[4px]" value={0} />I agree to the terms and conditions
+          <Checkbox className="rounded-[4px]" value={0} />
+          {checkboxText}
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[925px] bg-white overflow-auto max-h-[500px]">
+      <DialogContent className="sm:max-w-[525px] bg-white overflow-auto max-h-[500px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>Last updated 9/17/2024</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">{text}</div>
+        <div className="grid gap-4 py-4 text-sm">{text}</div>
+        {variant === 'double' ? (
+          <>
+            <DialogHeader>
+              <DialogTitle>{title2}</DialogTitle>
+              <DialogDescription>Last updated 9/17/2024</DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4 text-sm">{text2}</div>
+          </>
+        ) : (
+          <></>
+        )}
         <DialogFooter>
-          <Button variant="outlined-black">Decline</Button>
-          <DialogTrigger asChild>
+          <DialogTrigger className=" flex items-center gap-2">
+            <Button variant="outlined-black">Decline</Button>
             <Button>Accept</Button>
           </DialogTrigger>
         </DialogFooter>

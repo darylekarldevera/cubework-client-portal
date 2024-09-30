@@ -42,7 +42,7 @@ function DocumentDetailsCard({
       await writable.close();
     } catch (error:any) {
       console.log(error);
-      if (error !== 'File not found') return;
+      if (error?.message !== 'File not found') return;
       setShowError(!showError);
     }
   };

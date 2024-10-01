@@ -1,13 +1,14 @@
-interface ILicenseSelect {
+interface ILicense {
   id: number,
   label: string,
   unit: string,
   property_address: string,
   lease_end_date: string,
+  cta?: React.ReactNode,
 }
 
-interface ILicenseSelectItems {
-  data: ILicenseSelect[],
+interface ILicenseItems {
+  data: ILicense[],
 }
 
-export type { ILicenseSelect, ILicenseSelectItems };
+export type { ILicense, ILicenseItems };

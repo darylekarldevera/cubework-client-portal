@@ -5,7 +5,6 @@ import { API_SOURCE } from "@/constants/apiSource";
 import { useContext } from "react";
 import { ErrorModalContext } from "@/contexts/ErrorModalContext";
 
-import { ILeaseLicenseSelect } from "@/types/lease";
 
 interface ILeaseItem {
   id: number,

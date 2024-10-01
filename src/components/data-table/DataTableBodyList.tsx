@@ -15,6 +15,10 @@ function DataTableBodyList<TData>({ table }: IDataTableBodyListProps<TData>) {
       return <p>{formatDate(cell.getValue() as Date)}</p>;
     }
 
+    // if (cell.id.includes('_cta') && typeof cell.getValue() === 'object') {
+    //   return (<>{ cell.getValue() }</>);
+    // }
+
     return flexRender(cell.column.columnDef.cell, cell.getContext());
   };
 

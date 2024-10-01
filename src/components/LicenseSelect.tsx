@@ -1,7 +1,6 @@
 import DataTable from "./data-table/DataTable";
 
 import { Heading1 } from "./ui/headings";
-import { ColumnDef } from "@tanstack/react-table";
 import { ILicense, ILicenseItems } from "@/types/lease";
 import CWCard from "./CWCard";
 import { licenseSelectQuery } from "@/queries/LeaseQuery";
@@ -9,44 +8,14 @@ import { Input } from "./ui/input";
 import { useMemo, useState } from "react";
 import Button from "./shared/Button";
 import DOMPurify from 'dompurify';
+import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
 
-
-interface ILeaseLicenseSelectCols {
-  label: string,
-  unit: string,
-  propert_address: string,
-  lease_end_date: string,
-}
 
 export default function LicenseSelect() {
   let data: ILicense[] = [];
   let [searchFilter, setSearchFilter] = useState('');
 
   const q = licenseSelectQuery<ILicenseItems>(1, 50);
-
-  const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeaseLicenseSelectCols>[] = [
-    {
-      header: 'License',
-      accessorKey: 'label',
-    },
-    {
-      header: 'Unit',
-      accessorKey: 'unit',
-    },
-    {
-      header: 'Property Address',
-      accessorKey: 'property_address',
-    },
-    {
-      header: 'Lease End Date',
-      accessorKey: 'lease_end_date',
-    },
-    {
-      header: '',
-      accessorKey: 'cta',
-      cell: ({ getValue }) => getValue(),
-    },
-  ];
 
   if (q.isSuccess) {
     data = q?.data?.data.map(i => {

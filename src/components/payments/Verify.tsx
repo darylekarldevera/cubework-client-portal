@@ -25,7 +25,7 @@ const Verify = ({ handleClick }: VerifyProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px] bg-white text-black">
         <DialogHeader>
-          <DialogTitle className="border-b border-black">Verify Bank Account</DialogTitle>
+          <DialogTitle className="border-b border-black text-sm">Verify Bank Account</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-2 items-center gap-4">

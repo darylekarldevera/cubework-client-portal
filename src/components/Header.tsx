@@ -7,12 +7,11 @@ interface IHeaderProps {
 }
 
 export default function Header({ isAuthenticated }: IHeaderProps) {
-  // const { isAuthenticated } = useContext(AuthContext);
   return (
     <div className="header shadow-md bg-white/85">
       <SidebarBurgerMenu />
       <Logo />
-      {isAuthenticated ?? <ProfilesButtons />}
+      {isAuthenticated && <ProfilesButtons />}
     </div>
   );
 }

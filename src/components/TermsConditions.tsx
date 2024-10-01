@@ -7,8 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog.tsx';
-import { Checkbox } from '@/components/ui/checkbox.tsx';
 import Button from '@/components/shared/Button.tsx';
+import { ChangeEvent, useState } from 'react';
 
 interface ITermsConditionsProps {
   setCheck?: (b: boolean) => void;
@@ -22,27 +22,30 @@ interface ITermsConditionsProps {
 }
 
 const TermsConditions = ({ text, title, variant = 'single', title2, text2, checkboxText }: ITermsConditionsProps) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckChange = (event: ChangeEvent<HTMLInputElement>) => setIsChecked(event.target.checked);
+  const handleClick = () => setIsChecked(!isChecked);
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className="w-full text-xs leading-relaxed flex items-center gap-2">
-          <Checkbox className="rounded-[4px]" value={0} />
+          <input type="checkbox" className="rounded-[4px]" onChange={handleCheckChange} checked={isChecked} />
           {checkboxText}
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px] bg-white overflow-auto max-h-[500px]">
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>Last updated 9/17/2024</DialogDescription>
+          <DialogTitle className="text-sm">{title}</DialogTitle>
+          <DialogDescription className="text-xs">Last updated 9/17/2024</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4 text-sm">{text}</div>
+        <div className="grid gap-4 py-4 text-xs">{text}</div>
         {variant === 'double' ? (
           <>
             <DialogHeader>
-              <DialogTitle>{title2}</DialogTitle>
-              <DialogDescription>Last updated 9/17/2024</DialogDescription>
+              <DialogTitle className="text-sm">{title2}</DialogTitle>
+              <DialogDescription className="text-xs">Last updated 9/17/2024</DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4 text-sm">{text2}</div>
+            <div className="grid gap-4 py-4 text-xs">{text2}</div>
           </>
         ) : (
           <></>
@@ -50,7 +53,7 @@ const TermsConditions = ({ text, title, variant = 'single', title2, text2, check
         <DialogFooter>
           <DialogTrigger className=" flex items-center gap-2">
             <Button variant="outlined-black">Decline</Button>
-            <Button>Accept</Button>
+            <Button onClick={handleClick}>Accept</Button>
           </DialogTrigger>
         </DialogFooter>
       </DialogContent>

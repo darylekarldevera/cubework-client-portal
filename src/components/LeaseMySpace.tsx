@@ -9,14 +9,7 @@ import { LEASE_TABS } from "@/constants/tabs";
 import CWCard from "./CWCard";
 
 
-interface ILeastTable {
-  id: number,
-  start_date: string,
-  end_date: string,
-  move_in_date: string,
-}
-
-const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeastTable>[] = [
+const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeaseMySpaceItem>[] = [
   {
     header: 'Space',
     accessorKey: 'label',

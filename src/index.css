@@ -57,3 +57,8 @@ body {
 .rdp-vhidden {
     @apply hidden;
 }
+
+.main {
+    background-blend-mode: darken;
+    background: rgba(0, 0, 0, 0.2) url("assets/images/public-background.jpg") no-repeat fixed center center;
+}

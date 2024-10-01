@@ -1,5 +1,6 @@
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -10,50 +11,48 @@ import Button from '@/components/shared/Button.tsx';
 import { Label as ShadCNLabel } from '@/components/ui/label.tsx';
 import Input from '@/components/shared/Input.tsx';
 import Select from '@/components/shared/Select.tsx';
-import { TERMS_CONDITIONS, TITLE_TERMS_CONDITIONS } from '@/__mocks__/termsConditions.ts';
-import TermsConditions from '@/components/TermsConditions.tsx';
 
-const AddBankAccountModal = () => {
+interface VerifyProps {
+  handleClick: () => void;
+}
+
+const Verify = ({ handleClick }: VerifyProps) => {
   return (
     <Dialog>
       <DialogTrigger>
         {' '}
-        <Button variant="outlined">+ Bank Account</Button>
+        <Button variant="destructive">Verify Now</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px] bg-white text-black">
         <DialogHeader>
-          <DialogTitle className="border-b border-black text-sm">Add Bank Account</DialogTitle>
+          <DialogTitle className="border-b border-black">Verify Bank Account</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-2 items-center gap-4">
             <ShadCNLabel className="text-xs text-[#212529]">Account Name</ShadCNLabel>
-            <Input />
+            <Input value="Chan User" />
           </div>
           <div className="grid grid-cols-2 items-center gap-4">
             <ShadCNLabel className="text-xs text-[#212529]">Account Number</ShadCNLabel>
-            <Input />
+            <Input value="********1234" />
           </div>
           <div className="grid grid-cols-2 items-center gap-4">
             <ShadCNLabel className="text-xs text-[#212529]">Routing Number</ShadCNLabel>
-            <Input />
+            <Input value="12,500" />
           </div>
           <div className="grid grid-cols-2 items-center gap-4">
-            <ShadCNLabel className="text-xs">Account Type</ShadCNLabel>
+            <ShadCNLabel className="text-xs ">Account Type</ShadCNLabel>
             <Select items={['Checking Account', 'Savings Account']} />
           </div>
         </div>
-        <DialogFooter className="pt-3 border-t border-black w-full flex gap-[63px]">
-          <div className="w-full text-xs leading-relaxed flex items-center gap-2">
-            <TermsConditions text={TERMS_CONDITIONS} title={TITLE_TERMS_CONDITIONS} checkboxText="Set as default" />
-            <DialogTrigger className=" flex gap-2">
-              <Button variant="outlined-black">Cancel</Button>
-              <Button>Save</Button>
-            </DialogTrigger>
-          </div>
+        <DialogFooter className="pt-3 border-t border-black w-full items-center flex gap-[63px]">
+          <DialogClose asChild>
+            <Button onClick={handleClick}>Verify</Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default AddBankAccountModal;
+export default Verify;

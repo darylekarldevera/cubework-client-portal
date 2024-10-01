@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import useDataTablePagination from '@/customHook/useDataTablePagination';
 
@@ -125,14 +125,14 @@ function DataTablePaginationControllers({
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-      {pathname === '/home' ? (
+      {/* {pathname === '/home' ? (
         <button
           className="absolute bottom-0 right-0 p-2 w-20 mr-2 text-xs bg-cw-green text-white rounded-lg"
           onClick={() => setRequestPageSize((prev) => (prev === 'minimum' ? 'bulk' : 'minimum'))}
         >
           {requestPageSize === 'minimum' ? 'Bulk' : 'Minimum'}
         </button>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

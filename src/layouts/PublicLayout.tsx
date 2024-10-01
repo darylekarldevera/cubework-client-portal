@@ -10,7 +10,7 @@ const PublicLayout = ({ isAuthenticated }: IPublicLayoutProps) => {
     <div className="main flex flex-col w-screen h-full">
       <section className="h-full flex flex-col">
         <Header isAuthenticated={isAuthenticated} />
-        <div className="flex flex-col justify-center items-center h-full w-full">
+        <div className="flex flex-col justify-center items-center h-full w-full ">
           <Outlet />
         </div>
       </section>

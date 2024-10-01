@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import Button from "./shared/Button";
 import DOMPurify from 'dompurify';
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
+import { Link } from "react-router-dom";
 
 
 export default function LicenseSelect() {
@@ -22,9 +23,13 @@ export default function LicenseSelect() {
       return {
         ...i,
         cta: (<>
-          <Button onClick={() => alert(DOMPurify.sanitize(i.label))}>
-            <strong>Select</strong>
+            <Link to={'/home'} relative="path">
+            {/* onClick={() => alert(DOMPurify.sanitize(i.label))} */}
+          <Button
+          >
+              <strong>Select</strong>
           </Button>
+            </Link>
         </>),
       };
     });

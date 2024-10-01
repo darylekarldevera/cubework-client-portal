@@ -18,9 +18,10 @@ import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
 import PublicLayout from '@/layouts/PublicLayout.tsx';
 import HomeV2 from '@/components/HomeV2';
 import LicenseSelect from '@/components/LicenseSelect';
+import LicenseSelectLogin from '@/components/LicenseSelectLogin';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
-const isAuthenticated = true;
+const isAuthenticated = false;
 
 /**
  * This setup defines the route structure for the application using `react-router-dom`.
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<VerifyPassword />} />
+          <Route path="/license-select-login" element={<LicenseSelectLogin />} />
         </Route>
       </Route>
 

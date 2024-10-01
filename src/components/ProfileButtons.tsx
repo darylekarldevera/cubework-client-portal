@@ -31,12 +31,14 @@ export default function ProfilesButtons() {
           <DropdownMenuTrigger className="arrow-down-wrapper">
             <img src={ArrowDown} alt="" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white">
-            <DropdownMenuItem>CA Fresco - Unis Transportation</DropdownMenuItem>
-            <DropdownMenuItem>CA Wiegman - Unis Transportation</DropdownMenuItem>
-            <DropdownMenuItem>CA West Sacramento - Unis Transportation</DropdownMenuItem>
+          <DropdownMenuContent className="bg-white text-xs">
+            <DropdownMenuItem className="text-xs">CA Fresco - Unis Transportation</DropdownMenuItem>
+            <DropdownMenuItem className="text-xs">CA Wiegman - Unis Transportation</DropdownMenuItem>
+            <DropdownMenuItem className="text-xs">CA West Sacramento - Unis Transportation</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => setIsAuthenticated(!isAuthenticated)}>Logout</DropdownMenuItem>
+            <DropdownMenuItem className="text-xs" onClick={() => setIsAuthenticated(!isAuthenticated)}>
+              Logout
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

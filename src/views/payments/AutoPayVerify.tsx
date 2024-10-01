@@ -59,7 +59,9 @@ const AutoPayVerify = () => {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Select items={['Bankxx-109', 'Bankxx-110']} />
+                <div className="w-3/4">
+                  <Select items={['Bankxx-109', 'Bankxx-110']} />
+                </div>
               </TableCell>
               <TableCell>
                 <TableItem>8/1/2024</TableItem>

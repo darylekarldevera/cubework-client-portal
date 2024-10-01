@@ -10,8 +10,6 @@ import PaymentsRoute from './PaymentsRoute';
 import LeaseProfileRoute from './LeaseProfileRoute';
 import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
 import ServicesRoute from './ServicesRoute';
-
-import Home from '@/components/Home';
 import Login from '@/components/Login';
 import ForgotPassword from '@/views/auth/ForgotPassword.tsx';
 import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
@@ -55,7 +53,7 @@ const router = createBrowserRouter(
 
       {/* Private Routes */}
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<MainLayout isAuthenticated={isAuthenticated} />}>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomeV2 />} />
           <Route path="/license-select" element={<LicenseSelect />} />

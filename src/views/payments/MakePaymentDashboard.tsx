@@ -28,7 +28,7 @@ const MakePaymentDashboard = () => {
             </Button>
           </div>
         </div>
-        <div className="h-1/3 flex items-center gap-1 pl-[16px]">
+        <div className="h-1/3 flex items-center gap-1 pl-[16px] justify-end">
           <Link to={'../..' + '/auto-pay/payment-selection'} relative="path">
             <ShadCNButton className="flex items-center gap-1">
               <img src={ManageIcon} alt="" className="h-[20px]" />

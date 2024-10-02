@@ -7,29 +7,34 @@ import { licenseSelectQuery } from "@/queries/LeaseQuery";
 import { Input } from "./ui/input";
 import { useMemo, useState } from "react";
 import Button from "./shared/Button";
-import DOMPurify from 'dompurify';
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
 import { Link } from "react-router-dom";
 
+interface LicenseSelectProps {
+  dropShadow: boolean;
+  variant: 'login' | 'default';
+}
 
-export default function LicenseSelect() {
+export default function LicenseSelect({ dropShadow, variant='default' }: LicenseSelectProps) {
   let data: ILicense[] = [];
   let [searchFilter, setSearchFilter] = useState('');
 
   const q = licenseSelectQuery<ILicenseItems>(1, 50);
+
+  const inputBorder = variant === 'default'
+    ? 'border-cw-offwhite'
+    : 'border-slate-600';
 
   if (q.isSuccess) {
     data = q?.data?.data.map(i => {
       return {
         ...i,
         cta: (<>
-            <Link to={'/home'} relative="path">
-            {/* onClick={() => alert(DOMPurify.sanitize(i.label))} */}
-          <Button
-          >
+          <Link to={'/home'} relative="path">
+            <Button>
               <strong>Select</strong>
-          </Button>
-            </Link>
+            </Button>
+          </Link>
         </>),
       };
     });
@@ -65,12 +70,13 @@ export default function LicenseSelect() {
           onChange={(event) =>
             handleChange(event.target.value)
           }
-          className="max-w-sm mb-4 text-[11px] border-cw-offwhite"
+          className={`max-w-sm mb-4 text-[11px] ${inputBorder}`}
         />
         <DataTable
           columns={ACTIVITY_TABLE_COLUMNS}
           data={filtered as []}
           cwStyle={true}
+          dropShadow={dropShadow}
         />
       </CWCard>
     )}

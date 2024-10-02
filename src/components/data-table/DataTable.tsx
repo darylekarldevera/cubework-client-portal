@@ -11,6 +11,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   pageSize?: number;
   cwStyle?: boolean;
+  dropShadow?: boolean;
 }
 
 /**
@@ -31,6 +32,7 @@ function DataTable<TData, TValue>({
   data,
   pageSize = 5,
   cwStyle = false,
+  dropShadow = true,
 }: DataTableProps<TData, TValue>): JSX.Element {
   const table = useReactTable({
     data,
@@ -45,7 +47,10 @@ function DataTable<TData, TValue>({
   });
 
   return (
-    <div className={`rounded-lg border relative flex flex-col ${cwStyle ? `cw-table-wrapper` : ''}`}>
+    <div className={`rounded-lg border relative flex flex-col
+      ${cwStyle ? ` cw-table-wrapper` : ''}
+      ${!dropShadow ? ` cw-table-wrapper--no-shadow` : ''}
+    `}>
       <Table>
         <DataTableHeader table={table} />
         <DataTableBody table={table} columnsLength={columns.length} />

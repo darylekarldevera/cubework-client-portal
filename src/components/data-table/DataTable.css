@@ -5,6 +5,10 @@
     }
 }
 
+.cw-table-wrapper.cw-table-wrapper--no-shadow {
+    @apply shadow-none;
+}
+
 .cw-table-wrapper [role=navigation],
 .cw-style {
   li a {

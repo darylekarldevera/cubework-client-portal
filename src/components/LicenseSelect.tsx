@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import Button from "./shared/Button";
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
 import { Link } from "react-router-dom";
+import { formatCurrency } from "@/lib/utils";
 
 interface LicenseSelectProps {
   dropShadow: boolean;
@@ -29,6 +30,7 @@ export default function LicenseSelect({ dropShadow, variant='default' }: License
     data = q?.data?.data.map(i => {
       return {
         ...i,
+        balance: formatCurrency(i.balance),
         cta: (<>
           <Link to={'/home'} relative="path">
             <Button>

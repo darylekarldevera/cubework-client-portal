@@ -13771,28 +13771,32 @@
         "label": "Unit Transportation - Fresno",
         "unit": "Unit they are renting",
         "property_address": "CA Fresno",
-        "lease_end_date": "Month To Month"
+        "lease_end_date": "Month To Month",
+        "balance": 123456
       },
       {
         "id": 1,
         "label": "Unit Transportation - Wiegman",
         "unit": "Unit they are renting",
         "property_address": "CA Wiegman",
-        "lease_end_date": "Month To Month"
+        "lease_end_date": "Month To Month",
+        "balance": 234242.40
       },
       {
         "id": 2,
         "label": "Unit Transportation - San Francisco",
         "unit": "Unit they are renting",
         "property_address": "CA San Francisco",
-        "lease_end_date": "Month To Month"
+        "lease_end_date": "Month To Month",
+        "balance": 3456
       },
       {
         "id": 3,
         "label": "Unit Transportation - Sacramento",
         "unit": "Unit they are renting",
         "property_address": "CA Sacramento",
-        "lease_end_date": "Month To Month"
+        "lease_end_date": "Month To Month",
+        "balance": 879879
       }
   ]
 }

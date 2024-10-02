@@ -23,3 +23,9 @@
     @apply bg-cw-green opacity-100 text-white border-0;
   }
 }
+
+
+/* TODO:  */
+.cw-table-wrapper tr td {
+  border-bottom: 1px solid #ccc;
+}

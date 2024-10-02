@@ -25,6 +25,11 @@ const ACTIVITY_TABLE_COLUMNS: ColumnDef<ILeaseLicenseSelectCols>[] = [
     accessorKey: 'lease_end_date',
   },
   {
+    header: 'Balance',
+    accessorKey: 'balance',
+    cell: ({ getValue }) => '$' + getValue(),
+  },
+  {
     header: '',
     accessorKey: 'cta',
     cell: ({ getValue }) => getValue(),

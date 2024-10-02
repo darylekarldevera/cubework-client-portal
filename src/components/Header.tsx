@@ -4,16 +4,21 @@ import ProfilesButtons from './ProfileButtons';
 import SidebarBurgerMenu from './SidebarBurgerMenu';
 import { AuthContext } from '@/contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import { AppContext } from '@/contexts/AppContext';
 
 
 export default function Header() {
   const authContext = useContext(AuthContext);
+  const appContext = useContext(AppContext);
+
   return (
     <div className="header shadow-md bg-white/85 justify-between">
       <SidebarBurgerMenu />
       <Logo />
 
-      {authContext.isAuthenticated && (
+      {authContext.isAuthenticated
+        && appContext.experimentalUI > 0
+        && (
         <div className="text-sm border border-slate-300 px-4 py-1 rounded-sm">
           TX Framers Branch | Farmers Branch <small>{/* ▲ */}▼</small>
         </div>

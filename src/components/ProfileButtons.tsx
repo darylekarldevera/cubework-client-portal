@@ -15,6 +15,7 @@ import { AuthContext } from '@/contexts/AuthContext.ts';
 
 export default function ProfilesButtons() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+
   return (
     <div className="flex flex-row gap-4 items-center mr-[12px]">
       <div className="notif-icon-wrapper">

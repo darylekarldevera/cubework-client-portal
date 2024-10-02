@@ -76,12 +76,14 @@ function useUtilityInstanceAndData<DataType>({
       setData(sortedData);
       setOriginalData(sortedData);
     }
+  }, [dataApi.isSuccess, utility, dataApi.data]);
 
+  useEffect(() => {
     if (dataApi.isError) {
       setData([]);
       setOriginalData([]);
     }
-  }, [dataApi.isSuccess, dataApi.isError, utility, dataApi.data]);
+  }, [dataApi.isError]);
 
   // Show error modal on API error
   useEffect(() => {

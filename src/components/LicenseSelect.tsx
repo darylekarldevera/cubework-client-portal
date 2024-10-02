@@ -12,11 +12,11 @@ import { Link } from "react-router-dom";
 import { formatCurrency } from "@/lib/utils";
 
 interface LicenseSelectProps {
-  dropShadow: boolean;
-  variant: 'login' | 'default';
+  dropShadow?: boolean;
+  variant?: 'login' | 'default';
 }
 
-export default function LicenseSelect({ dropShadow, variant='default' }: LicenseSelectProps) {
+export default function LicenseSelect({ dropShadow=true, variant='default' }: LicenseSelectProps) {
   let data: ILicense[] = [];
   let [searchFilter, setSearchFilter] = useState('');
 

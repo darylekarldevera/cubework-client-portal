@@ -1,9 +1,7 @@
 import { AUTHENTICATED_ROUTES } from '@/constants/restrictedRoute';
+import { AuthContext } from '@/contexts/AuthContext';
+import { useContext } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-
-interface IPublicRouteProps {
-  isAuthenticated: boolean;
-}
 
 /**
  * A component that restricts access to public routes based on authentication status.
@@ -23,10 +21,11 @@ interface IPublicRouteProps {
  * ```
  */
 
-function PublicRoute({ isAuthenticated }: IPublicRouteProps): JSX.Element {
+function PublicRoute() {
   const { pathname } = useLocation();
+  const authContext = useContext(AuthContext);
 
-  if (isAuthenticated && !AUTHENTICATED_ROUTES.includes(pathname)) {
+  if (authContext.isAuthenticated && !AUTHENTICATED_ROUTES.includes(pathname)) {
     return <Navigate to="/home" />;
   }
 

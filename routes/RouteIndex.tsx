@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import MainLayout from '@/layouts/MainLayout';
 import DummyComponent from '@/components/DummyComponent';
@@ -11,7 +11,6 @@ import LeaseProfileRoute from './LeaseProfileRoute';
 import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
 import ServicesRoute from './ServicesRoute';
 
-import Home from '@/components/Home';
 import Login from '@/components/Login';
 import ForgotPassword from '@/views/auth/ForgotPassword.tsx';
 import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
@@ -19,9 +18,6 @@ import PublicLayout from '@/layouts/PublicLayout.tsx';
 import HomeV2 from '@/components/HomeV2';
 import LicenseSelect from '@/components/LicenseSelect';
 import LicenseSelectLogin from '@/components/LicenseSelectLogin';
-
-// Temporary logic for authentication, to be replaced with actual authentication logic
-const isAuthenticated = false;
 
 /**
  * This setup defines the route structure for the application using `react-router-dom`.
@@ -45,8 +41,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <React.Fragment>
       {/* Public Routes */}
-      <Route element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<PublicLayout isAuthenticated={isAuthenticated} />}>
+      <Route element={<PublicRoute />}>
+        <Route path="/" element={<PublicLayout />}>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -56,7 +52,7 @@ const router = createBrowserRouter(
       </Route>
 
       {/* Private Routes */}
-      <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+      <Route element={<PrivateRoute />}>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomeV2 />} />

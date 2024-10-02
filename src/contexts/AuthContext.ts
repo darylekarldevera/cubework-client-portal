@@ -10,3 +10,4 @@ export const AuthContext = createContext<IAuthContext>({
   isAuthenticated: true,
   setIsAuthenticated: () => {},
 });
+

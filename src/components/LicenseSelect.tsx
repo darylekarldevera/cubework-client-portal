@@ -32,11 +32,11 @@ export default function LicenseSelect({ dropShadow=true, variant='default' }: Li
         ...i,
         balance: formatCurrency(i.balance),
         cta: (<>
-          <Link to={'/home'} relative="path">
+          {/* <Link to={'/home'} relative="path"> */}
             <Button>
               <strong>Select</strong>
             </Button>
-          </Link>
+          {/* </Link> */}
         </>),
       };
     });

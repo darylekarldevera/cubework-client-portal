@@ -12,9 +12,20 @@ import {
 } from '@/components/ui/dropdown-menu.tsx';
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContext.ts';
+import { ILicense, ILicenseItems } from '@/types/lease';
+import { licenseSelectQuery } from '@/queries/LeaseQuery';
+import { AppContext } from '@/contexts/AppContext';
 
 export default function ProfilesButtons() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const appContext = useContext(AppContext);
+
+  let data: ILicense[] = [];
+  const q = licenseSelectQuery<ILicenseItems>(1, 50);
+
+  if (q.isSuccess) {
+    data = q?.data?.data;
+  }
 
   return (
     <div className="flex flex-row gap-4 items-center mr-[12px]">
@@ -32,13 +43,21 @@ export default function ProfilesButtons() {
           <DropdownMenuTrigger className="arrow-down-wrapper">
             <img src={ArrowDown} alt="" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white">
-            <DropdownMenuItem>CA Fresco - Unis Transportation</DropdownMenuItem>
-            <DropdownMenuItem>CA Wiegman - Unis Transportation</DropdownMenuItem>
-            <DropdownMenuItem>CA West Sacramento - Unis Transportation</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => setIsAuthenticated(!isAuthenticated)}>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
+
+            <DropdownMenuContent className="bg-white">
+              {!appContext.experimentalUI && (
+                data && data.map(i => (
+                  <DropdownMenuItem key={i.id}>{i.label}</DropdownMenuItem>
+                ))
+              )}
+
+              {!appContext.experimentalUI && (
+                (<DropdownMenuSeparator />)
+              )}
+
+              <DropdownMenuItem onClick={() => setIsAuthenticated(!isAuthenticated)}>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+
         </DropdownMenu>
       </div>
     </div>

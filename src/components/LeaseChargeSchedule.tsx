@@ -5,7 +5,6 @@ import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseChargeScheduleItem, ILeaseChargeScheduleItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
-import WrappedContent from "./WrappedContent";
 import { LEASE_TABS } from "@/constants/tabs";
 import CWCard from "./CWCard";
 import { formatCurrency } from "@/lib/utils";

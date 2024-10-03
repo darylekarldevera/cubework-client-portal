@@ -4,7 +4,7 @@ interface ILicense {
   unit: string,
   property_address: string,
   lease_end_date: string,
-  amount: number,
+  balance: number | string,
   cta?: React.ReactNode,
 }
 

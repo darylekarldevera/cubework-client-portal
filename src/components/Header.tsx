@@ -3,34 +3,63 @@ import Logo from './Logo';
 import ProfilesButtons from './ProfileButtons';
 import SidebarBurgerMenu from './SidebarBurgerMenu';
 import { AuthContext } from '@/contexts/AuthContext';
-import { Link } from 'react-router-dom';
 import { AppContext } from '@/contexts/AppContext';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu.tsx';
+import Button from './shared/Button';
+import { licenseSelectQuery } from '@/queries/LeaseQuery';
+import { ILicense, ILicenseItems } from '@/types/lease';
 
 
 export default function Header() {
   const authContext = useContext(AuthContext);
   const appContext = useContext(AppContext);
 
+  let data: ILicense[] = [];
+  const q = licenseSelectQuery<ILicenseItems>(1, 50);
+
+  if (q.isSuccess) {
+    data = q?.data?.data;
+  }
+
   return (
     <div className="header shadow-md bg-white/85 justify-between">
       <SidebarBurgerMenu />
       <Logo />
 
-      {authContext.isAuthenticated
-        && appContext.experimentalUI > 0
-        && (
-        <div className="text-sm border border-slate-300 px-4 py-1 rounded-sm">
-          TX Framers Branch | Farmers Branch <small>{/* ▲ */}▼</small>
-        </div>
+      {(authContext.isAuthenticated && appContext.experimentalUI > 0) && (
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button
+              variant="outline"
+              className="!w-auto !bg-transparent !text-cw-charcoal"
+            >{ data && data?.[0]?.label?.replace('-', '|') } <small className="ml-2">▼</small></Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="w-full bg-white">
+          {data && data.map((i, indx) => (
+            <DropdownMenuCheckboxItem
+              checked={indx === 0}
+              onCheckedChange={() => {alert()}}
+              key={i.id}
+              className="text-[11px]"
+            >
+              {i.label}
+            </DropdownMenuCheckboxItem>
+          ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       )}
 
       <div className="flex flex-row gap-2">
         {authContext.isAuthenticated && <ProfilesButtons />}
         {authContext.isAuthenticated && (
-          <button className="text-sm">
-            <Link to={'..' + '/login'} relative="path">
-              Logout
-            </Link>
+          <button className="text-sm" onClick={() => authContext.setIsAuthenticated(false)}>
+            Logout
           </button>
         )}
 
@@ -38,7 +67,7 @@ export default function Header() {
           onClick={() => {authContext.setIsAuthenticated(!authContext.isAuthenticated)}}
           className="text-sm bg-blue-600 text-white px-2 rounded-sm"
         >
-          { authContext.isAuthenticated ? 'Logged' : 'Logout' }
+          { authContext.isAuthenticated ? 'Logged' : 'Logged out' }
         </button>
 
       </div>

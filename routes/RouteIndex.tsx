@@ -56,7 +56,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomeV2 />} />
-          <Route path="/license-select" element={<LicenseSelect />} />
+          <Route path="/license-select" element={<LicenseSelect dropShadow={false} variant='login' />} />
           <Route path="/license-profile/*" element={<LeaseProfileRoute />} />
           <Route path="/payments/*" element={<PaymentsRoute />} />
           <Route path="/license-documents/*" element={<LeaseDocumentsRoutes />} />

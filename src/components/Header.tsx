@@ -33,14 +33,6 @@ export default function Header() {
           </button>
         )}
 
-        <button
-          className="text-sm bg-blue-600 text-white px-2 rounded-sm"
-          onClick={() => {
-            authContext.setIsAuthenticated(!authContext.isAuthenticated);
-          }}
-        >
-          { authContext.isAuthenticated ? 'Logged' : 'Logged out' }
-        </button>
       </div>
     </div>
   );

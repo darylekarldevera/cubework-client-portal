@@ -1,3 +1,4 @@
+import { localStorageKeys } from '@/constants/localStorageKeys';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -18,4 +19,8 @@ export function formatCurrency(amount: number | string) {
 
   return dollarUSLocale.format(amount);
 
+}
+
+export function cleanUp() {
+  localStorage.clear();
 }

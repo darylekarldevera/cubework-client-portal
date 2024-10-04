@@ -13,6 +13,8 @@ import {
 import Button from './shared/Button';
 import { licenseSelectQuery } from '@/queries/LeaseQuery';
 import { ILicense, ILicenseItems } from '@/types/lease';
+import { cleanUp } from '@/lib/utils';
+import { localStorageKeys } from '@/constants/localStorageKeys';
 
 
 export default function Header() {
@@ -31,7 +33,8 @@ export default function Header() {
       <SidebarBurgerMenu />
       <Logo />
 
-      {(authContext.isAuthenticated && appContext.experimentalUI > 0) && (
+      {((authContext.isAuthenticated && appContext.experimentalUI)
+          && appContext.experimentalUI > 0) && (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Button
@@ -44,7 +47,7 @@ export default function Header() {
           <DropdownMenuContent className="w-full bg-white">
           {data && data.map((i, indx) => (
             <DropdownMenuCheckboxItem
-              checked={indx === 0}
+              checked={i.id === appContext.activeLicense}
               onCheckedChange={() => { appContext.setActiveLicense(i.id) }}
               key={i.id}
               className="text-[11px]"
@@ -65,7 +68,9 @@ export default function Header() {
         )}
 
         <button
-          onClick={() => {authContext.setIsAuthenticated(!authContext.isAuthenticated)}}
+          onClick={() => {
+            authContext.setIsAuthenticated(!authContext.isAuthenticated);
+          }}
           className="text-sm bg-blue-600 text-white px-2 rounded-sm"
         >
           { authContext.isAuthenticated ? 'Logged' : 'Logged out' }

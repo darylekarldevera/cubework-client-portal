@@ -1,5 +1,6 @@
 import React, { act, useState } from 'react';
 import { AppContext } from './AppContext';
+import { localStorageKeys } from '@/constants/localStorageKeys';
 
 interface AppProviderProps {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ export function AppContextProvider({ children }: AppProviderProps) {
         activeLicense: activeLicense,
         setActiveLicense: (id: number) => {
           setActiveLicense(id);
-          localStorage.setItem('activeLicense', id.toString());
+          localStorage.setItem(localStorageKeys.ACTIVE_LICENSE, id.toString());
         }
       }}
     >

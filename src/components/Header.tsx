@@ -37,14 +37,15 @@ export default function Header() {
             <Button
               variant="outline"
               className="!w-auto !bg-transparent !text-cw-charcoal"
-            >{ data && data?.[0]?.label?.replace('-', '|') } <small className="ml-2">▼</small></Button>
+            // >{ data && data?.[0]?.label?.replace('-', '|') } <small className="ml-2">▼</small></Button>
+            >{ data && data?.filter(i => i.id === appContext.activeLicense)?.[0]?.label } <small className="ml-2">▼</small></Button>
           </DropdownMenuTrigger>
 
           <DropdownMenuContent className="w-full bg-white">
           {data && data.map((i, indx) => (
             <DropdownMenuCheckboxItem
               checked={indx === 0}
-              onCheckedChange={() => {alert()}}
+              onCheckedChange={() => { appContext.setActiveLicense(i.id) }}
               key={i.id}
               className="text-[11px]"
             >

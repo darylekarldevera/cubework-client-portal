@@ -6,11 +6,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export function formatCurrency(amount: number) {
+export function formatCurrency(amount: number | string) {
   const dollarUSLocale = Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+
+  if (typeof amount === 'string') {
+    return dollarUSLocale.format(parseFloat(amount));
+  }
 
   return dollarUSLocale.format(amount);
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { act, useState } from 'react';
 import { AppContext } from './AppContext';
 
 interface AppProviderProps {
@@ -6,7 +6,9 @@ interface AppProviderProps {
 }
 
 export function AppContextProvider({ children }: AppProviderProps) {
+  const _activeLicense = localStorage.getItem('activeLicense') || null;
   const [experimentalUI, setExperimentalUI] = useState(1);
+  const [activeLicense, setActiveLicense] = useState<number | null>(_activeLicense);
 
   return (
     <AppContext.Provider
@@ -15,6 +17,11 @@ export function AppContextProvider({ children }: AppProviderProps) {
         setExperimentalUI: (flag: number) => {
           setExperimentalUI(flag);
         },
+        activeLicense: activeLicense,
+        setActiveLicense: (id: number) => {
+          setActiveLicense(id);
+          localStorage.setItem('activeLicense', id.toString());
+        }
       }}
     >
       {children}

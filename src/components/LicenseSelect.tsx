@@ -5,11 +5,12 @@ import { ILicense, ILicenseItems } from "@/types/lease";
 import CWCard from "./CWCard";
 import { licenseSelectQuery } from "@/queries/LeaseQuery";
 import { Input } from "./ui/input";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import Button from "./shared/Button";
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "@/lib/utils";
+import { AppContext } from "@/contexts/AppContext";
 
 interface LicenseSelectProps {
   dropShadow?: boolean;
@@ -19,6 +20,7 @@ interface LicenseSelectProps {
 export default function LicenseSelect({ dropShadow=true, variant='default' }: LicenseSelectProps) {
   let data: ILicense[] = [];
   let [searchFilter, setSearchFilter] = useState('');
+  const appContext = useContext(AppContext);
 
   const q = licenseSelectQuery<ILicenseItems>(1, 50);
 
@@ -32,11 +34,13 @@ export default function LicenseSelect({ dropShadow=true, variant='default' }: Li
         ...i,
         balance: formatCurrency(i.balance),
         cta: (<>
-          {/* <Link to={'/home'} relative="path"> */}
-            <Button>
-              <strong>Select</strong>
-            </Button>
-          {/* </Link> */}
+          <Button
+            onClick={() => { appContext.setActiveLicense(i.id) }}
+            className={ i.id === appContext.activeLicense ? '!bg-blue-600' : '' }
+          >
+            { i.id === appContext.activeLicense && (<strong>Active</strong>) }
+            { i.id !== appContext.activeLicense && (<strong>Select</strong>) }
+          </Button>
         </>),
       };
     });

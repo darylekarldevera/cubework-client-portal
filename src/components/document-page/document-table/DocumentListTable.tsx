@@ -35,7 +35,9 @@ function DocumentListTable({ data, documentType }: IDocumentListTableTableProps)
         nextPage={() => handleChangePage(currentPage + 1)}
         paginationNumbers={paginationNumbers}
         setPage={handleChangePage}
-        cwStyle={true}
+        cwStyle={true} 
+        requestPageSize={''} 
+        setRequestPageSize={() => {}}        
       />
     </div>
   );

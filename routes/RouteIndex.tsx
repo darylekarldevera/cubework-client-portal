@@ -10,12 +10,12 @@ import PaymentsRoute from './PaymentsRoute';
 import LeaseProfileRoute from './LeaseProfileRoute';
 import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
 import ServicesRoute from './ServicesRoute';
-
-import Home from '@/components/Home';
 import Login from '@/components/Login';
 import ForgotPassword from '@/views/auth/ForgotPassword.tsx';
 import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
 import PublicLayout from '@/layouts/PublicLayout.tsx';
+import HomeV2 from '@/components/HomeV2';
+import LicenseSelect from '@/components/LicenseSelect';
 
 // Temporary logic for authentication, to be replaced with actual authentication logic
 const isAuthenticated = true;
@@ -53,9 +53,10 @@ const router = createBrowserRouter(
 
       {/* Private Routes */}
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<MainLayout isAuthenticated={isAuthenticated} />}>
           <Route index element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<HomeV2 />} />
+          <Route path="/license-select" element={<LicenseSelect />} />
           <Route path="/license-profile/*" element={<LeaseProfileRoute />} />
           <Route path="/payments/*" element={<PaymentsRoute />} />
           <Route path="/license-documents/*" element={<LeaseDocumentsRoutes />} />

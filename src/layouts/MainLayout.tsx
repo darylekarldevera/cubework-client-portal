@@ -5,14 +5,18 @@ import ErrorModalProvider from '@/components/providers/ErrorModalProvider';
 import ContentFullWidthWSidebar from './ContentFullWSidebar';
 import SidebarMobileMenu from '@/components/SidebarMobileMenu';
 
-function MainLayout() {
+interface MainLayoutProps {
+  isAuthenticated: boolean;
+}
+
+function MainLayout({ isAuthenticated }: MainLayoutProps) {
   return (
-    <div className="main flex flex-col h-full">
+    <div className="flex flex-col h-full">
       <ErrorModalProvider>
         <SidebarProvider>
           <ErrorMessage />
           <section>
-            <Header />
+            <Header isAuthenticated={isAuthenticated} />
           </section>
           <ContentFullWidthWSidebar />
           <SidebarMobileMenu />

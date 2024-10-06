@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 app.use((req, res, next) => {
-    if (/(.ico|.js|.css|.jpg|.png|.map)$/i.test(req.path)) {
+    if (/(.ico|.js|.css|.jpg|.png|.map|.svg)$/i.test(req.path)) {
         next();
     } else {
         res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');

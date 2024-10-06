@@ -21,7 +21,7 @@ function Login() {
           <Input />
         </div>
         <Link to={'/forgot-password'}>
-          <p className="font-bold text-xs">Forgot Password</p>
+          <p className="font-bold text-xs w-fit border-b border-black">Forgot Password</p>
         </Link>
         <button
           className="bg-[#4DB850] font-bold hover:bg-[#4FA04C] text-[11px] leading-relaxed text-white rounded-[6px] py-1.5 w-3/4 text-center self-center"

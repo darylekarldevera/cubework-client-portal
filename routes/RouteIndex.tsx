@@ -10,7 +10,6 @@ import PaymentsRoute from './PaymentsRoute';
 import LeaseProfileRoute from './LeaseProfileRoute';
 import LeaseDocumentsRoutes from './LeaseDocumentsRoute';
 import ServicesRoute from './ServicesRoute';
-
 import Login from '@/components/Login';
 import ForgotPassword from '@/views/auth/ForgotPassword.tsx';
 import VerifyPassword from '@/views/auth/VerifyPassword.tsx';

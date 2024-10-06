@@ -49,27 +49,23 @@ class BaseDataSorterAndFilter<DataType> implements ITableUtility<DataType, IChec
   }
 
   filterByDate = (data: DataType[]) => {
-    let toUpdateData = data?.length ? [...data] : [];
+    const toUpdateData = data?.length ? [...data] : [];
     const startDate = this?.checkbox?.filter?.pickDate?.startDate;
     const endDate = this?.checkbox?.filter?.pickDate?.endDate;
 
-    if (startDate && endDate) {
-      toUpdateData = toUpdateData.filter((item) => {
-        const itemDate = new Date((item as any).date);
+    return toUpdateData.filter((item) => {
+      const itemDate = new Date((item as any).date);
 
-        if (startDate && endDate) {
-          return itemDate >= startDate && itemDate <= endDate;
-        }
+      if (startDate && endDate) {
+        return itemDate >= startDate && itemDate <= endDate;
+      }
 
-        if (startDate) {
-          return itemDate >= startDate;
-        }
+      if (startDate) {
+        return itemDate >= startDate;
+      }
 
-        return false;
-      });
-    }
-
-    return toUpdateData;
+      return false;
+    });
   };
 }
 

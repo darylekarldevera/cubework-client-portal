@@ -47,7 +47,13 @@ export default function ProfilesButtons() {
             <DropdownMenuContent className="bg-white">
               {!appContext.experimentalUI && (
                 data && data.map(i => (
-                  <DropdownMenuItem key={i.id}>{i.label}</DropdownMenuItem>
+                  <DropdownMenuItem
+                    key={i.id}>
+                    <button
+                      className={`${appContext.activeLicense === i.id && 'font-bold'} text-cb-text`}
+                      onClick={() => appContext.setActiveLicense(i.id)}
+                    >{i.label}</button>
+                  </DropdownMenuItem>
                 ))
               )}
 
@@ -55,7 +61,11 @@ export default function ProfilesButtons() {
                 (<DropdownMenuSeparator />)
               )}
 
-              <DropdownMenuItem onClick={() => setIsAuthenticated(!isAuthenticated)}>Logout</DropdownMenuItem>
+              <DropdownMenuItem
+              ><button
+                onClick={() => setIsAuthenticated(!isAuthenticated)}
+                className="text-cb-text"
+              >Logout</button></DropdownMenuItem>
             </DropdownMenuContent>
 
         </DropdownMenu>

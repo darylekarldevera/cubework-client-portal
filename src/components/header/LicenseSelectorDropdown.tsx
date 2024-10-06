@@ -4,7 +4,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu.tsx';
-import Button from '../shared/Button';
 import { licenseSelectQuery } from '@/queries/LeaseQuery';
 import { ILicense, ILicenseItems } from '@/types/lease';
 import { useContext } from 'react';
@@ -23,10 +22,9 @@ export default function LicenseSelectorDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Button
-          variant="outline"
-          className="!w-auto !bg-transparent !text-cw-charcoal"
-        >{ data && data?.filter(i => i.id === appContext.activeLicense)?.[0]?.label } <small className="ml-2">▼</small></Button>
+        <span
+          className="!w-auto !bg-transparent !text-cw-charcoal text-[11px]"
+        >{ data && data?.filter(i => i.id === appContext.activeLicense)?.[0]?.label } <small className="ml-2">▼</small></span>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-full bg-white">
@@ -35,9 +33,12 @@ export default function LicenseSelectorDropdown() {
           checked={i.id === appContext.activeLicense}
           onCheckedChange={() => { appContext.setActiveLicense(i.id) }}
           key={i.id}
-          className="text-[11px]"
         >
-          {i.label}
+          <button
+            className="text-[11px]"
+          >
+            {i.label}
+          </button>
         </DropdownMenuCheckboxItem>
       ))}
       </DropdownMenuContent>

@@ -21,8 +21,10 @@ import {
   TITLE_TERMS_CONDITIONS,
 } from '@/__mocks__/termsConditions.ts';
 import TermsConditions from '@/components/TermsConditions.tsx';
+import { useState } from 'react';
 
 const AutoPayVerify = () => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   return (
     <>
       <div className="py-[14px] pl-[10px]">
@@ -88,6 +90,8 @@ const AutoPayVerify = () => {
       <div className="mt-5 flex items-center justify-between px-[10px]">
         <div className="flex gap-1">
           <TermsConditions
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
             text={TERMS_CONDITIONS}
             title={TITLE_TERMS_CONDITIONS}
             title2={TITLE_CC_TERMS_CONDITIONS}
@@ -98,7 +102,7 @@ const AutoPayVerify = () => {
         </div>
         <div className="flex gap-4">
           <Button variant="secondary">Cancel</Button>
-          <Button>
+          <Button isDisabled={!isChecked}>
             <Link to={'..' + '/details'} relative="path">
               Setup Auto Pay
             </Link>

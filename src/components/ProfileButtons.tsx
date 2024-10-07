@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import AvatarLogo from '@/assets/avatar-icon.png';
+import AvatarLogo from '@/assets/avatar-icon.svg';
 import ArrowDown from '@/assets/arrow-down-icon.svg';
 import NotifIcon from '@/assets/notif-icon.svg';
 import BadgeComponent from '@/components/header/BadgeComponent.tsx';
@@ -12,11 +12,21 @@ import {
 } from '@/components/ui/dropdown-menu.tsx';
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContext.ts';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion.tsx';
-import { Link } from 'react-router-dom';
+import { ILicense, ILicenseItems } from '@/types/lease';
+import { licenseSelectQuery } from '@/queries/LeaseQuery';
+import { AppContext } from '@/contexts/AppContext';
 
 export default function ProfilesButtons() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const appContext = useContext(AppContext);
+
+  let data: ILicense[] = [];
+  const q = licenseSelectQuery<ILicenseItems>(1, 50);
+
+  if (q.isSuccess) {
+    data = q?.data?.data;
+  }
+
   return (
     <div className="flex flex-row gap-4 items-center mr-[12px]">
       <div className="notif-icon-wrapper">
@@ -33,26 +43,31 @@ export default function ProfilesButtons() {
           <DropdownMenuTrigger className="arrow-down-wrapper">
             <img src={ArrowDown} alt="" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white text-xs px-3">
-            <Accordion type="single" collapsible className="w-[250px]">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Switch Location</AccordionTrigger>
-                <AccordionContent>
-                  <DropdownMenuItem className="text-xs">CA Fresco - Unis Transportation</DropdownMenuItem>
-                  <DropdownMenuItem className="text-xs">CA Wiegman - Unis Transportation</DropdownMenuItem>
-                  <DropdownMenuItem className="text-xs">CA West Sacramento - Unis Transportation</DropdownMenuItem>
-                  <DropdownMenuItem className="text-xs">
-                    <Link to={'.' + '/license-select'}>View All Locations</Link>
-                  </DropdownMenuItem>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
 
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-xs" onClick={() => setIsAuthenticated(!isAuthenticated)}>
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+            <DropdownMenuContent className="bg-white">
+              {!appContext.experimentalUI && (
+                data && data.map(i => (
+                  <DropdownMenuItem
+                    key={i.id}>
+                    <button
+                      className={`${appContext.activeLicense === i.id && 'font-bold'} text-cb-text`}
+                      onClick={() => appContext.setActiveLicense(i.id)}
+                    >{i.label}</button>
+                  </DropdownMenuItem>
+                ))
+              )}
+
+              {!appContext.experimentalUI && (
+                (<DropdownMenuSeparator />)
+              )}
+
+              <DropdownMenuItem
+              ><button
+                onClick={() => setIsAuthenticated(!isAuthenticated)}
+                className="text-cb-text"
+              >Logout</button></DropdownMenuItem>
+            </DropdownMenuContent>
+
         </DropdownMenu>
       </div>
     </div>

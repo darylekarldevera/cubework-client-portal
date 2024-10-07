@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import MainLayout from '@/layouts/MainLayout';
 import DummyComponent from '@/components/DummyComponent';
@@ -16,9 +16,7 @@ import VerifyPassword from '@/views/auth/VerifyPassword.tsx';
 import PublicLayout from '@/layouts/PublicLayout.tsx';
 import HomeV2 from '@/components/HomeV2';
 import LicenseSelect from '@/components/LicenseSelect';
-
-// Temporary logic for authentication, to be replaced with actual authentication logic
-const isAuthenticated = true;
+import LicenseSelectLogin from '@/components/LicenseSelectLogin';
 
 /**
  * This setup defines the route structure for the application using `react-router-dom`.
@@ -42,21 +40,22 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <React.Fragment>
       {/* Public Routes */}
-      <Route element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<PublicLayout isAuthenticated={isAuthenticated} />}>
+      <Route element={<PublicRoute />}>
+        <Route path="/" element={<PublicLayout />}>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<VerifyPassword />} />
+          <Route path="/license-select-login" element={<LicenseSelectLogin />} />
         </Route>
       </Route>
 
       {/* Private Routes */}
-      <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<MainLayout isAuthenticated={isAuthenticated} />}>
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomeV2 />} />
-          <Route path="/license-select" element={<LicenseSelect />} />
+          <Route path="/license-select" element={<LicenseSelect dropShadow={false} variant='login' />} />
           <Route path="/license-profile/*" element={<LeaseProfileRoute />} />
           <Route path="/payments/*" element={<PaymentsRoute />} />
           <Route path="/license-documents/*" element={<LeaseDocumentsRoutes />} />

@@ -1,4 +1,6 @@
 import { UNAUTHENTICATED_ROUTES } from '@/constants/restrictedRoute';
+import { AuthContext } from '@/contexts/AuthContext';
+import { useContext } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 interface IPrivateRouteProps {
@@ -22,10 +24,11 @@ interface IPrivateRouteProps {
  * ```
  */
 
-function PrivateRoute({ isAuthenticated }: IPrivateRouteProps): JSX.Element {
+function PrivateRoute() {
   const { pathname } = useLocation();
+  const authContext = useContext(AuthContext);
 
-  if (!isAuthenticated && !UNAUTHENTICATED_ROUTES.includes(pathname)) {
+  if (!authContext.isAuthenticated && !UNAUTHENTICATED_ROUTES.includes(pathname)) {
     return <Navigate to="/login" />;
   }
 

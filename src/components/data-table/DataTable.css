@@ -5,6 +5,10 @@
     }
 }
 
+.cw-table-wrapper.cw-table-wrapper--no-shadow {
+    @apply shadow-none;
+}
+
 .cw-table-wrapper [role=navigation],
 .cw-style {
   li a {
@@ -18,4 +22,10 @@
   li a.active {
     @apply bg-cw-green opacity-100 text-white border-0;
   }
+}
+
+
+/* TODO:  */
+.cw-table-wrapper tr td {
+  border-bottom: 1px solid #ccc;
 }

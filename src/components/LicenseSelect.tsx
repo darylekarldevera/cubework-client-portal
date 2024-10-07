@@ -5,25 +5,41 @@ import { ILicense, ILicenseItems } from "@/types/lease";
 import CWCard from "./CWCard";
 import { licenseSelectQuery } from "@/queries/LeaseQuery";
 import { Input } from "./ui/input";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import Button from "./shared/Button";
-import DOMPurify from 'dompurify';
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
+import { Link } from "react-router-dom";
+import { formatCurrency } from "@/lib/utils";
+import { AppContext } from "@/contexts/AppContext";
 
+interface LicenseSelectProps {
+  dropShadow?: boolean;
+  variant?: 'login' | 'default';
+}
 
-export default function LicenseSelect() {
+export default function LicenseSelect({ dropShadow=true, variant='default' }: LicenseSelectProps) {
   let data: ILicense[] = [];
   let [searchFilter, setSearchFilter] = useState('');
+  const appContext = useContext(AppContext);
 
   const q = licenseSelectQuery<ILicenseItems>(1, 50);
+
+  const inputBorder = variant === 'default'
+    ? 'border-cw-offwhite'
+    : 'border-slate-600';
 
   if (q.isSuccess) {
     data = q?.data?.data.map(i => {
       return {
         ...i,
+        balance: formatCurrency(i.balance),
         cta: (<>
-          <Button onClick={() => alert(DOMPurify.sanitize(i.label))}>
-            <strong>Select</strong>
+          <Button
+            onClick={() => { appContext.setActiveLicense(i.id) }}
+            className={ i.id === appContext.activeLicense ? '!bg-blue-600' : '' }
+          >
+            { i.id === appContext.activeLicense && (<strong>Active</strong>) }
+            { i.id !== appContext.activeLicense && (<strong>Select</strong>) }
           </Button>
         </>),
       };
@@ -60,12 +76,13 @@ export default function LicenseSelect() {
           onChange={(event) =>
             handleChange(event.target.value)
           }
-          className="max-w-sm mb-4 text-[11px] border-cw-offwhite"
+          className={`max-w-sm mb-4 text-[11px] ${inputBorder}`}
         />
         <DataTable
           columns={ACTIVITY_TABLE_COLUMNS}
           data={filtered as []}
           cwStyle={true}
+          dropShadow={dropShadow}
         />
       </CWCard>
     )}

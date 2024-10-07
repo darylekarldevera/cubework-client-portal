@@ -7,6 +7,7 @@ interface IAuthContext {
 
 // Provide the initial values with correct types
 export const AuthContext = createContext<IAuthContext>({
-  isAuthenticated: true,
+  isAuthenticated: false,
   setIsAuthenticated: () => {},
 });
+

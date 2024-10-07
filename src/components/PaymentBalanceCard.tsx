@@ -48,7 +48,7 @@ function PaymentBalanceCard() {
         </div>
         <button className="w-[100px] h-[35px] bg-cw-green font-bold rounded-3xl text-xs">Pay Now</button>
       </div>
-      <div className="h-1/3 bg-white text-cw-green font-bold flex text-xs flex-grow w-full items-center py-4 px-7">
+      <div className="h-1/3 bg-white text-cw-green font-bold flex text-xs flex-grow w-full items-center py-4 px-7 justify-end">
         <div className="flex cursor-pointer">
           <img alt="manage_auto_pay" src={manageAutoPayIcon} width="18px" className="mr-1" />
           <p>

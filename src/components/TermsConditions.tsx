@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog.tsx';
 import Button from '@/components/shared/Button.tsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 interface ITermsConditionsProps {
   setCheck?: (b: boolean) => void;
@@ -19,10 +19,20 @@ interface ITermsConditionsProps {
   text2?: string;
   title2?: string;
   checkboxText: string;
+  isChecked?: boolean;
+  setIsChecked: (isChecked: boolean) => void;
 }
 
-const TermsConditions = ({ text, title, variant = 'single', title2, text2, checkboxText }: ITermsConditionsProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+const TermsConditions = ({
+  text,
+  title,
+  variant = 'single',
+  title2,
+  text2,
+  checkboxText,
+  isChecked,
+  setIsChecked,
+}: ITermsConditionsProps) => {
   const handleCheckChange = (event: ChangeEvent<HTMLInputElement>) => setIsChecked(event.target.checked);
   const handleClick = () => setIsChecked(!isChecked);
   return (

@@ -1,11 +1,9 @@
-// import { HOME_ACTIVITY_TABLE_COLUMNS } from "@/constants/homeActivityTableColumns";
 import DataTable from "./data-table/DataTable";
 
 import { Heading1 } from "./ui/headings";
 import { ColumnDef } from "@tanstack/react-table";
 import { ILeaseItem, ILeaseItems, leaseQuery } from "@/queries/LeaseQuery";
 import Tabs from "./Tabs";
-import WrappedContent from "./WrappedContent";
 import { LEASE_TABS } from "@/constants/tabs";
 import CWCard from "./CWCard";
 

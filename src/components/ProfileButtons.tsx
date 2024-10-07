@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import AvatarLogo from '@/assets/avatar-icon.svg';
+import AvatarLogo from '@/assets/avatar-icon.png';
 import ArrowDown from '@/assets/arrow-down-icon.svg';
 import NotifIcon from '@/assets/notif-icon.svg';
 import BadgeComponent from '@/components/header/BadgeComponent.tsx';

@@ -22,9 +22,11 @@ export default function LicenseSelectorDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <span
-          className="!w-auto !bg-transparent !text-cw-charcoal text-[11px]"
-        >{ data && data?.filter(i => i.id === appContext.activeLicense)?.[0]?.label } <small className="ml-2">▼</small></span>
+        <div className="border border-solid px-4 py-1 rounded-sm">
+          <span
+            className="!w-auto !bg-transparent !text-cw-charcoal text-[11px]"
+          >{ data && data?.filter(i => i.id === appContext.activeLicense)?.[0]?.label } <small className="ml-2">▼</small></span>
+        </div>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-full bg-white">

@@ -1,4 +1,3 @@
-import { clsx, type ClassValue } from 'clsx';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { DeepRequired, FieldErrorsImpl, GlobalError } from 'react-hook-form';
@@ -7,7 +6,6 @@ import { addCreditCardSchemaProps } from '@/components/zod/schema.types.ts';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
 
 export function formatCurrency(amount: number | string) {
   const dollarUSLocale = Intl.NumberFormat('en-US', {
@@ -42,4 +40,3 @@ export function isObjectEmpty(
 export function cleanUp() {
   localStorage.clear();
 }
-

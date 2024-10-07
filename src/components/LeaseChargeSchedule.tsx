@@ -1,4 +1,3 @@
-// import { HOME_ACTIVITY_TABLE_COLUMNS } from "@/constants/homeActivityTableColumns";
 import DataTable from "./data-table/DataTable";
 
 import { Heading1 } from "./ui/headings";

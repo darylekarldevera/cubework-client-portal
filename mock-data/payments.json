@@ -1,0 +1,16 @@
+{
+  "make_payments": [
+    {
+      "change_description": "Rent-warehouse",
+      "date": "8/20/2024",
+      "charge_balance": "88.00",
+      "balance": "99.00"
+    },
+    {
+      "change_description": "Forklift",
+      "date": "8/21/2024",
+      "charge_balance": "188.00",
+      "balance": "199.00"
+    }
+  ]
+}

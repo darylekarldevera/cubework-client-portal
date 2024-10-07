@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useDataTablePagination from '@/customHook/useDataTablePagination';
 
@@ -28,7 +28,9 @@ interface ICwDataTablePaginationControllersProps extends IDataTablePaginationCon
   cwStyle: boolean;
 }
 
+// TODO: Check if the props below are still valid
 function DataTablePaginationControllers({
+// @ts-ignore
   requestPageSize,
   cwStyle,
   canNextPage,
@@ -36,9 +38,11 @@ function DataTablePaginationControllers({
   paginationNumbers,
   setPage,
   nextPage,
+// @ts-ignore
   setRequestPageSize,
   previousPage,
 }: ICwDataTablePaginationControllersProps) {
+  // @ts-ignore
   const { pathname } = useLocation();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [previousPageNumber, setPreviousPageNumber] = useState<number>(0);

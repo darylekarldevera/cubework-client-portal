@@ -1,5 +1,5 @@
-import { Button as ShadCNButton } from '@/components/ui/button';
 import { ReactNode } from 'react';
+import { DialogTrigger } from '@/components/ui/dialog.tsx';
 
 type ButtonProps = {
   children: ReactNode;
@@ -26,7 +26,7 @@ const darkObject = {
   'outlined-black': 'hover:bg-[#EEEEEE]',
 };
 
-const Button = ({ children, variant = 'primary', onClick, className, isDisabled, type }: ButtonProps) => {
+const DialogButton = ({ children, variant = 'primary', onClick, className, isDisabled, type }: ButtonProps) => {
   const color =
     variant === 'destructive'
       ? variantObject.destructive
@@ -35,7 +35,7 @@ const Button = ({ children, variant = 'primary', onClick, className, isDisabled,
         : variant === 'outlined'
           ? variantObject.outlined
           : variant === 'outlined-black'
-            ? variantObject.outlined
+            ? variantObject['outlined-black']
             : variantObject.primary;
   const darkHover =
     variant === 'destructive'
@@ -47,17 +47,35 @@ const Button = ({ children, variant = 'primary', onClick, className, isDisabled,
           : variant === 'outlined-black'
             ? darkObject['outlined-black']
             : darkObject.primary;
+  const textColor =
+    variant === 'destructive'
+      ? 'text-white'
+      : variant === 'outlined-black'
+        ? 'text-black'
+        : variant === 'outlined'
+          ? 'text-[#59BA56]'
+          : variant === 'secondary'
+            ? 'text-[#717171]'
+            : 'text-white';
+  const borderColor =
+    variant === 'secondary'
+      ? ' border-[#717171]'
+      : variant === 'outlined'
+        ? ' border-[#59BA56]'
+        : variant === 'outlined-black'
+          ? 'border-black'
+          : '';
   return (
-    <ShadCNButton
-      disabled={isDisabled}
+    <DialogTrigger
+      disabled={isDisabled && false}
       onClick={onClick}
       type={type}
-      className={`text-[11px] leading-relaxed   text-white border rounded-[6px]  h-[35px] ${darkHover} ${className}
-       ${color} ${variant === 'secondary' ? ' border-[#717171] text-[#717171]' : variant === 'outlined' ? ' border-[#59BA56] text-[#59BA56] ' : variant === 'outlined-black' ? 'border-black text-black' : ''} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : variant === 'w-full' ? 'w-3/4' : 'px-[37px] w-[100px]'}`}
+      className={`text-[11px] font-semibold leading-relaxed  border rounded-[6px]  h-[35px] ${textColor} ${borderColor} ${darkHover} ${className}
+       ${color} ${children === 'Setup Auto Pay' ? ' w-[120px]' : variant === 'outlined' ? 'w-[150px]' : variant === 'w-full' ? 'w-3/4' : 'px-[30px]'}`}
     >
       {children}
-    </ShadCNButton>
+    </DialogTrigger>
   );
 };
 
-export default Button;
+export default DialogButton;

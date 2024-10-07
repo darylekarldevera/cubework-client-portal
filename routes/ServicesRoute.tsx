@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navigate, Route } from 'react-router-dom';
 import WrappedRoute from './WrappedRoute';
 import DummyComponent from '../src/components/DummyComponent';

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { HomeQuery } from '@/queries/HomeQuery';
 import { ErrorModalContext } from '@/contexts/ErrorModalContext';
@@ -9,12 +9,6 @@ import CWCard from './CWCard';
 import DataTable from './data-table/DataTable';
 import { Heading1 } from './ui/headings';
 import PaymentBalanceCard from './PaymentBalanceCard';
-import TableUtilities from './document-page/document-table/table-utilities/TableUtilities';
-import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
-import { InvoiceDetails } from '@/types/homeActivityTable';
-import useUtilityInstanceAndData from '@/customHook/useUtilityInstanceAndData';
-import { UseQueryResult } from '@tanstack/react-query';
-
 
 
 function HomeV2(): JSX.Element {

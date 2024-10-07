@@ -1,6 +1,6 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
-import  { IHomeRequestPayload, InvoiceDetails } from '@/types/homeActivityTable';
+import  { IHomeRequestPayload } from '@/types/homeActivityTable';
 import { HOME_ACTIVITY_TABLE_COLUMNS } from '@/constants/homeActivityTableColumns';
 
 import { HomeQuery } from '@/queries/HomeQuery';
@@ -11,10 +11,7 @@ import CWCard from './CWCard';
 import { Heading1 } from './ui/headings';
 import DataTableV2 from './data-table/DataTableV2';
 import PaymentBalanceCard from './PaymentBalanceCard';
-import useUtilityInstanceAndData from '@/customHook/useUtilityInstanceAndData';
-import { UseQueryResult } from '@tanstack/react-query';
-import HomeTableUtility from '@/lib/homeDataSorterAndFilter';
-import TableUtilities from './document-page/document-table/table-utilities/TableUtilities';
+
 
 function Home(): JSX.Element {
   const { showError, setShowError } = useContext(ErrorModalContext);

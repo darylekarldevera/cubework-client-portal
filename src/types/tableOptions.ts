@@ -9,7 +9,6 @@ export interface ISortOption {
 
 export interface IFilterOption {
   name: string;
-  filterType: {
-    [key: string]: string;
-  }
+  filterType: { [key: string]: string, }
+    | string
 }

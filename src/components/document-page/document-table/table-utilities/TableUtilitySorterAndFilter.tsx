@@ -70,6 +70,7 @@ function TableUtilitySorterAndFilter<DataType>({
         ...prev,
         filter: {
           name: lastIndexFilterOption?.name,
+          // @ts-ignore
           filterType: lastIndexFilterOption?.filterType?.all,
           pickDate: {
             startDate: (() => {

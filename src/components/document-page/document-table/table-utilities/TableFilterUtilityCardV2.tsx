@@ -81,13 +81,17 @@ function TableFilterUtilityCardV2({
                       filter: {
                         ...prev.filter,
                         name: option.name,
+                        // @ts-ignore
                         filterType: option?.filterType?.[currentValue],
                       },
                     }));
                   }}
                 >
-                  {capitalizeFirstLetter(option.filterType[type])}
-                  {option.filterType[type] === filter.filterType && filter.name === option.name ? (
+                  { // @ts-ignore
+                    capitalizeFirstLetter(option.filterType[type])
+                  }
+                  { // @ts-ignore
+                  option.filterType[type] === filter.filterType && filter.name === option.name ? (
                     <CheckIcon className={cn('ml-auto h-4 w-4')} />
                   ) : null}
                 </CommandItem>

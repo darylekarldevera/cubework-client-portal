@@ -3,10 +3,6 @@ import { AuthContext } from '@/contexts/AuthContext';
 import { useContext } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-interface IPrivateRouteProps {
-  isAuthenticated: boolean;
-}
-
 /**
  * A component that prevent to have an access to certain routes based on authentication status.
  * If the user is not authenticated and tries to access a restricted route, they will be redirected to the login page.

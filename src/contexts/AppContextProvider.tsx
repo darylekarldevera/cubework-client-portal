@@ -1,4 +1,4 @@
-import React, { act, useState } from 'react';
+import React, { useState } from 'react';
 import { AppContext } from './AppContext';
 import { localStorageKeys } from '@/constants/localStorageKeys';
 
@@ -7,9 +7,9 @@ interface AppProviderProps {
 }
 
 export function AppContextProvider({ children }: AppProviderProps) {
-  const _activeLicense = localStorage.getItem('activeLicense') || null;
+  const _activeLicense = localStorage.getItem(localStorageKeys.ACTIVE_LICENSE);
   const [experimentalUI, setExperimentalUI] = useState(1);
-  const [activeLicense, setActiveLicense] = useState<number | null>(_activeLicense);
+  const [activeLicense, setActiveLicense] = useState<number | null>(_activeLicense ? parseInt(_activeLicense) : null);
 
   return (
     <AppContext.Provider

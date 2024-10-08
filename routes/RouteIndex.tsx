@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import MainLayout from '@/layouts/MainLayout';
 import DummyComponent from '@/components/DummyComponent';

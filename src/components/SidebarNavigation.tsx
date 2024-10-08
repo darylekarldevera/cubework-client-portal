@@ -20,7 +20,7 @@ function SidebarNavigation() {
         className={`h-logoHeight flex bg-cover bg-center object-contain bg-no-repeat`}
         style={{ backgroundImage: `url(${DEFAULT_IMAGE})` }}
       >
-        {appContext?.experimentalUI <= 0 && (
+        {!appContext?.experimentalUI && (
           <div className="py-4 bg-white/[.7] mb-3 text-cb-text leading-relaxed mt-auto relative z-10 w-full">
             <p className="font-bold text-center text-xs">Managed Products Groups Inc</p>
             <p className="text-center ">

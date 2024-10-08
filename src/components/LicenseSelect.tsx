@@ -8,7 +8,6 @@ import { Input } from "./ui/input";
 import { useContext, useMemo, useState } from "react";
 import Button from "./shared/Button";
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/licenseSelectTableColumns";
-import { Link } from "react-router-dom";
 import { formatCurrency } from "@/lib/utils";
 import { AppContext } from "@/contexts/AppContext";
 

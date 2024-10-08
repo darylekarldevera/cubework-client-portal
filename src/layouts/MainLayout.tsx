@@ -4,8 +4,6 @@ import SidebarProvider from '@/components/providers/SidebarProvider';
 import ErrorModalProvider from '@/components/providers/ErrorModalProvider';
 import ContentFullWidthWSidebar from './ContentFullWSidebar';
 import SidebarMobileMenu from '@/components/SidebarMobileMenu';
-import { useContext } from 'react';
-import { AuthContext } from '@/contexts/AuthContext';
 
 
 function MainLayout() {

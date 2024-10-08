@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { getCurrentDate } from '@/lib/utils.ts';
 
 const passwordValidation = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
 const NumberValidation = new RegExp(/^.{10,}$/);
 const routingNumberValidation = new RegExp(/^.{9,}$/);
-const expiryDateValidation = new RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2}|[0-9]{4})$/); // const accountTypeValidation = new RegExp(/^(Checking Account|Savings Account)$/);
+// const expiryDateValidation = new RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2}|[0-9]{4})$/); // const accountTypeValidation = new RegExp(/^(Checking Account|Savings Account)$/);
 export const ACCOUNT_TYPES = ['Checking Account', 'Savings Account'] as const;
 
 const email = {
@@ -13,8 +12,28 @@ const email = {
   }),
 };
 
+const verifyEmail = {
+  verifyEmail: z.string().min(4, { message: 'Must have at least 4 characters' }).email({
+    message: 'Must be a valid email',
+  }),
+};
+
 const password = {
-  password: z.string().min(4, { message: 'Must have at least 8 characters' }).regex(passwordValidation, {
+  password: z.string().min(8, { message: 'Must have at least 8 characters' }).regex(passwordValidation, {
+    message:
+      'Your password must have minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character',
+  }),
+};
+
+const newPassword = {
+  newPassword: z.string().min(8, { message: 'Must have at least 8 characters' }).regex(passwordValidation, {
+    message:
+      'Your password must have minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character',
+  }),
+};
+
+const confirmPassword = {
+  confirmPassword: z.string().min(8, { message: 'Must have at least 8 characters' }).regex(passwordValidation, {
     message:
       'Your password must have minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character',
   }),
@@ -52,11 +71,11 @@ const cvv = {
   }),
 };
 
-const expiryDate = {
-  expiryDate: z.string().date().min(getCurrentDate(), {
-    message: 'expiry date error',
-  }),
-};
+// const expiryDate = {
+//   expiryDate: z.string().date().min(getCurrentDate(), {
+//     message: 'expiry date error',
+//   }),
+// };
 
 export const accountType = {
   accountType: z.enum(ACCOUNT_TYPES, { message: 'Must be Checking or Savings Account' }),
@@ -94,10 +113,20 @@ export const loginSchema = z.object({
 });
 
 export const forgotSchema = z.object({
-  ...email,
+  ...verifyEmail,
 });
 
-export const verifySchema = z.object({
-  ...password,
-  ...password,
-});
+export const verifySchema = z
+  .object({
+    ...newPassword,
+    ...confirmPassword,
+  })
+  .superRefine(({ confirmPassword, newPassword }, ctx) => {
+    if (confirmPassword !== newPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'The passwords did not match',
+        path: ['confirmPassword'],
+      });
+    }
+  });

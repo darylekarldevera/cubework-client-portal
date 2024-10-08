@@ -6,7 +6,6 @@ import { AuthContext } from '@/contexts/AuthContext';
 import { AppContext } from '@/contexts/AppContext';
 import LicenseSelectorDropdown from './header/LicenseSelectorDropdown';
 
-
 export default function Header() {
   const authContext = useContext(AuthContext);
   const appContext = useContext(AppContext);
@@ -17,22 +16,19 @@ export default function Header() {
       <Logo />
 
       <div className="flex flex-row gap-2">
-        {((authContext.isAuthenticated
-          && appContext.experimentalUI)
-          && appContext.experimentalUI > 0) && (
-            <LicenseSelectorDropdown />
+        {authContext.isAuthenticated && appContext.experimentalUI && appContext.experimentalUI > 0 && (
+          <LicenseSelectorDropdown />
         )}
 
         {authContext.isAuthenticated && <ProfilesButtons />}
-        {authContext.isAuthenticated && (
-          <button
-            className="text-sm"
-            onClick={ () => authContext.setIsAuthenticated(false) }
-          >
-            Logout
-          </button>
-        )}
-
+        {/*{authContext.isAuthenticated && (*/}
+        {/*  <button*/}
+        {/*    className="text-sm"*/}
+        {/*    onClick={ () => authContext.setIsAuthenticated(false) }*/}
+        {/*  >*/}
+        {/*    Logout*/}
+        {/*  </button>*/}
+        {/*)}*/}
       </div>
     </div>
   );

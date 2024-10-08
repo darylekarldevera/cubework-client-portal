@@ -2,6 +2,7 @@ import TableHeader from '@/components/shared/TableHeader.tsx';
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import TableItem from '@/components/shared/TableItem.tsx';
 import Verify from '@/components/payments/Verify.tsx';
+import BankIcon from '@/assets/icons/bank-icon.svg';
 
 interface BankTableProps {
   isVerifyShow: boolean;
@@ -25,7 +26,10 @@ const BankTable = ({ isVerifyShow, handleClick }: BankTableProps) => {
       <CardContent className="h-full flex flex-row px-[10px] py-[15px] w-full">
         <div className="w-full flex items-center">
           <div className="w-full  ">
-            <TableItem>Test</TableItem>
+            <TableItem cn="flex gap-2 items-center">
+              <img src={BankIcon} alt="" className="h-4" />
+              Test
+            </TableItem>
           </div>
           <div className="w-full  ">
             <TableItem>Checking-****1234</TableItem>

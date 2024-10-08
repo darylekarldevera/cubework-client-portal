@@ -3,10 +3,11 @@ import { ReactNode } from 'react';
 
 type TableHeaderProps = {
   children: ReactNode;
+  cn?: string;
 };
 
-const TableHeader = ({ children }: TableHeaderProps) => {
-  return <ShadCNLabel className="text-cw-charcoal font-regular text-[10px] leading-5">{children}</ShadCNLabel>;
+const TableHeader = ({ children, cn }: TableHeaderProps) => {
+  return <ShadCNLabel className={`text-cw-charcoal font-regular text-[10px] leading-5 ${cn}`}>{children}</ShadCNLabel>;
 };
 
 export default TableHeader;

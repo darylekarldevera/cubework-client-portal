@@ -4,10 +4,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/components/zod/schema.ts';
 import { loginSchemaProps } from '@/components/zod/schema.types.ts';
+import { useContext } from 'react';
+import { AuthContext } from '@/contexts/AuthContext.ts';
 
 // Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character
 
 function Login() {
+  const authContext = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ function Login() {
 
   const submitForm = () => {
     console.log('submitForm');
+    authContext.setIsAuthenticated(!authContext.isAuthenticated);
   };
 
   return (

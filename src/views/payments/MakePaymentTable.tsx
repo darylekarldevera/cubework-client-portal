@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import InputAmount from '@/components/shared/InputAmount.tsx';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog.tsx';
 import DialogButton from '@/components/shared/DialogButton.tsx';
-import { useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
 const dump = [
   {
@@ -42,16 +42,20 @@ interface IDataProps {
   balance: string;
 }
 
-const overallBalance = (data: IDataProps[]) =>
-  data.reduce((sum, item) => sum + parseFloat(item.balance) + parseFloat(item.charge_balance), 0);
-
 const MakePaymentTable = () => {
   const [data, setData] = useState<IDataProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [balance, setBalance] = useState(0);
   const [paid, setPaid] = useState(false);
-  const [extraPaymentAmount, setExtraPaymentAmount] = useState('');
-  const [paymentAmount, setPaymentAmount] = useState('');
+  const [extraPaymentAmount, setExtraPaymentAmount] = useState(0);
+  const [paymentAmount, setPaymentAmount] = useState(0);
+  const [overallTotal, setOverallTotal] = useState(0);
+
+  const overallBalance = useCallback(
+    (data: IDataProps[]) =>
+      data.reduce((sum, item) => sum + parseFloat(item.balance) + parseFloat(item.charge_balance), 0),
+    []
+  );
 
   const handleGetPayments = async () => {
     try {
@@ -73,6 +77,16 @@ const MakePaymentTable = () => {
       setPaid(true);
     }, 3000);
   };
+
+  useEffect(() => {
+    console.log('extrapayment amount: ', extraPaymentAmount);
+    setOverallTotal(
+      parseFloat(balance.toString()) +
+        parseFloat(String(extraPaymentAmount === 0 ? 0 : extraPaymentAmount)) +
+        parseFloat(String(paymentAmount === 0 ? 0 : paymentAmount))
+    );
+    console.log(overallTotal);
+  }, [extraPaymentAmount, paymentAmount]);
 
   return (
     <>
@@ -149,11 +163,10 @@ const MakePaymentTable = () => {
                 <CheckoutText>Total Payment:</CheckoutText>
                 <CheckoutText>
                   $
-                  {(
-                    parseFloat(balance.toString()) +
-                    parseFloat(extraPaymentAmount) +
-                    parseFloat(paymentAmount)
-                  ).toLocaleString()}
+                  {overallTotal.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </CheckoutText>
               </div>
             </div>
@@ -173,7 +186,16 @@ const MakePaymentTable = () => {
               <DialogHeader>
                 <DialogTitle className="border-b border-black text-md">Payment Confirmation</DialogTitle>
               </DialogHeader>
-              <div className="text-sm">Are you sure you want to pay a total of ${balance}.00?</div>
+              <div className="text-sm">
+                Are you sure you want to pay a total of $
+                <span className="font-bold">
+                  {overallTotal.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
+                ?
+              </div>
               <div className="flex justify-center gap-2">
                 <DialogButton variant="outlined-black">Cancel</DialogButton>
                 <DialogButton onClick={handleClick}>Confirm</DialogButton>
